@@ -326,23 +326,85 @@
       </button>
 
 
-      <!-- NOTES -->
+      <!-- PURCHASE STATUS -->
 
-      <div class="form-group notes-group">
+<div class="form-group">
 
-        <label for="notes">
-          Notes
-          <span class="optional">(optional)</span>
-        </label>
+  <label for="purchaseStatus">
+    Purchase Status
+    <span class="required">*</span>
+  </label>
 
-        <textarea
-          id="notes"
-          name="notes"
-          rows="3"
-          placeholder="Any useful notes about the visit..."
-        ></textarea>
+  <select
+    id="purchaseStatus"
+    name="purchaseStatus"
+  >
 
-      </div>
+    <option value="">
+      Select purchase status
+    </option>
+
+    <option value="Not Decided">
+      Not Decided
+    </option>
+
+    <option value="Purchased">
+      Purchased
+    </option>
+
+    <option value="Not Purchased">
+      Not Purchased
+    </option>
+
+    <option value="Follow-up Required">
+      Follow-up Required
+    </option>
+
+  </select>
+
+  <div
+    class="field-error"
+    id="purchaseStatusError"
+  ></div>
+
+</div>
+
+
+<!-- FOLLOW-UP DATE -->
+
+<div class="form-group">
+
+  <label for="followUpDate">
+    Follow-Up Date
+    <span class="optional">(optional)</span>
+  </label>
+
+  <input
+    type="date"
+    id="followUpDate"
+    name="followUpDate"
+  >
+
+</div>
+
+
+<!-- NOTES -->
+
+<div class="form-group notes-group">
+
+  <label for="notes">
+    Notes
+    <span class="optional">(optional)</span>
+  </label>
+
+  <textarea
+    id="notes"
+    name="notes"
+    rows="3"
+    placeholder="Any useful notes about the visit..."
+  ></textarea>
+
+</div>
 
 
       <!-- SUBMIT -->
