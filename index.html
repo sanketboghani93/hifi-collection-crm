@@ -1,0 +1,481 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title>Hifi Collection — Customer Walk-In</title>
+
+  <meta
+    name="description"
+    content="Hifi Collection customer walk-in management"
+  >
+
+  <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+  <main class="app-shell">
+
+    <!-- HEADER -->
+    <header class="brand-header">
+
+      <div class="brand-mark">
+        HIFI
+      </div>
+
+      <div class="brand-name">
+        COLLECTION
+      </div>
+
+      <div class="brand-subtitle">
+        CUSTOMER WALK-IN
+      </div>
+
+    </header>
+
+
+    <!-- FORM -->
+    <section class="form-card">
+
+      <div class="section-heading">
+        <span class="section-number">01</span>
+
+        <div>
+          <h1>Customer Details</h1>
+          <p>Enter the customer's contact information.</p>
+        </div>
+      </div>
+
+
+      <!-- CUSTOMER NAME -->
+
+      <div class="form-group">
+
+        <label for="customerName">
+          Customer Name
+          <span class="required">*</span>
+        </label>
+
+        <input
+          type="text"
+          id="customerName"
+          name="customerName"
+          placeholder="Enter customer's name"
+          autocomplete="name"
+        >
+
+        <div
+          class="field-error"
+          id="customerNameError"
+        ></div>
+
+      </div>
+
+
+      <!-- CONTACT NUMBER -->
+
+      <div class="form-group">
+
+        <label for="contactNumber">
+          Contact Number
+          <span class="required">*</span>
+        </label>
+
+        <div class="phone-input">
+
+          <div class="country-code">
+            +91
+          </div>
+
+          <input
+            type="tel"
+            id="contactNumber"
+            name="contactNumber"
+            placeholder="10 digit mobile number"
+            maxlength="10"
+            inputmode="numeric"
+            autocomplete="tel"
+          >
+
+        </div>
+
+        <div
+          class="field-error"
+          id="contactNumberError"
+        ></div>
+
+      </div>
+
+
+      <!-- EMAIL -->
+
+      <div class="form-group">
+
+        <label for="email">
+          Email
+          <span class="optional">(optional)</span>
+        </label>
+
+        <input
+          type="email"
+          id="email"
+          name="email"
+          placeholder="customer@email.com"
+          autocomplete="email"
+        >
+
+        <div
+          class="field-error"
+          id="emailError"
+        ></div>
+
+      </div>
+
+
+      <!-- INSTAGRAM -->
+
+      <div class="form-group">
+
+        <label for="instagram">
+          Instagram Handle
+          <span class="optional">(optional)</span>
+        </label>
+
+        <div class="instagram-input">
+
+          <span>@</span>
+
+          <input
+            type="text"
+            id="instagram"
+            name="instagram"
+            placeholder="instagramusername"
+          >
+
+        </div>
+
+      </div>
+
+
+      <!-- VISIT DETAILS -->
+
+      <div class="section-heading second-section">
+
+        <span class="section-number">02</span>
+
+        <div>
+          <h2>Visit Details</h2>
+          <p>Record what the customer was looking for.</p>
+        </div>
+
+      </div>
+
+
+      <!-- CATEGORY -->
+
+      <div class="form-group">
+
+        <label for="category">
+          Product Category
+          <span class="required">*</span>
+        </label>
+
+        <select id="category" name="category">
+
+          <option value="">
+            Select category
+          </option>
+
+          <option value="Indo-western">
+            Indo-western
+          </option>
+
+          <option value="Suit">
+            Suit
+          </option>
+
+          <option value="Chania Choli">
+            Chania Choli
+          </option>
+
+          <option value="Koti Kurta">
+            Koti Kurta
+          </option>
+
+          <option value="Sherwani">
+            Sherwani
+          </option>
+
+          <option value="Safa">
+            Safa
+          </option>
+
+          <option value="Jodhpuri">
+            Jodhpuri
+          </option>
+
+        </select>
+
+        <div
+          class="field-error"
+          id="categoryError"
+        ></div>
+
+      </div>
+
+
+      <!-- STAFF -->
+
+      <div class="form-group">
+
+        <label for="staff">
+          Staff Attended
+          <span class="required">*</span>
+        </label>
+
+        <select id="staff" name="staff">
+
+          <option value="">
+            Select staff member
+          </option>
+
+          <option value="Rajubhai">
+            Rajubhai
+          </option>
+
+          <option value="Shabbirbhai">
+            Shabbirbhai
+          </option>
+
+          <option value="Ketanbhai Owner">
+            Ketanbhai Owner
+          </option>
+
+          <option value="Dollyben Owner">
+            Dollyben Owner
+          </option>
+
+          <option value="Sanketbhai Owner">
+            Sanketbhai Owner
+          </option>
+
+          <option value="Sonalben">
+            Sonalben
+          </option>
+
+        </select>
+
+        <div
+          class="field-error"
+          id="staffError"
+        ></div>
+
+      </div>
+
+
+      <!-- PRODUCTS -->
+
+      <div class="section-heading second-section">
+
+        <span class="section-number">03</span>
+
+        <div>
+          <h2>Products Shortlisted</h2>
+          <p>Add the unique product codes the customer liked.</p>
+        </div>
+
+      </div>
+
+
+      <div
+        id="productsContainer"
+        class="products-container"
+      >
+
+        <div class="product-row">
+
+          <input
+            type="text"
+            class="product-code"
+            placeholder="Product code"
+          >
+
+          <button
+            type="button"
+            class="remove-product"
+            aria-label="Remove product"
+            style="display: none;"
+          >
+            ×
+          </button>
+
+        </div>
+
+      </div>
+
+
+      <button
+        type="button"
+        id="addProduct"
+        class="add-product"
+      >
+        <span>+</span>
+        Add another product
+      </button>
+
+
+      <!-- NOTES -->
+
+      <div class="form-group notes-group">
+
+        <label for="notes">
+          Notes
+          <span class="optional">(optional)</span>
+        </label>
+
+        <textarea
+          id="notes"
+          name="notes"
+          rows="3"
+          placeholder="Any useful notes about the visit..."
+        ></textarea>
+
+      </div>
+
+
+      <!-- SUBMIT -->
+
+      <button
+        type="button"
+        id="submitWalkIn"
+        class="submit-button"
+      >
+
+        <span class="submit-text">
+          Log Walk-In
+        </span>
+
+        <span
+          class="submit-loader"
+          style="display: none;"
+        >
+          Saving...
+        </span>
+
+      </button>
+
+
+      <!-- STATUS -->
+
+      <div
+        id="statusMessage"
+        class="status-message"
+      ></div>
+
+    </section>
+
+
+    <!-- SUCCESS CARD -->
+
+    <section
+      id="successSection"
+      class="success-section"
+      style="display: none;"
+    >
+
+      <div class="success-icon">
+        ✓
+      </div>
+
+      <div class="success-label">
+        WALK-IN LOGGED
+      </div>
+
+      <div class="customer-card">
+
+        <div class="card-brand">
+          HIFI COLLECTION
+        </div>
+
+        <div
+          id="cardCustomerName"
+          class="card-customer-name"
+        ></div>
+
+        <div
+          id="cardContact"
+          class="card-contact"
+        ></div>
+
+        <div
+          id="cardDate"
+          class="card-date"
+        ></div>
+
+
+        <div class="card-divider"></div>
+
+
+        <div class="card-label">
+          INTERESTED IN
+        </div>
+
+        <div
+          id="cardCategory"
+          class="card-category"
+        ></div>
+
+
+        <div class="card-label shortlist-label">
+          SHORTLISTED
+        </div>
+
+        <div
+          id="cardProducts"
+          class="card-products"
+        ></div>
+
+
+        <div class="card-label">
+          ASSISTED BY
+        </div>
+
+        <div
+          id="cardStaff"
+          class="card-staff"
+        ></div>
+
+      </div>
+
+
+      <div class="success-actions">
+
+        <button
+          type="button"
+          id="whatsappButton"
+          class="whatsapp-button"
+        >
+          WhatsApp Customer
+        </button>
+
+        <button
+          type="button"
+          id="newWalkIn"
+          class="secondary-button"
+        >
+          New Walk-In
+        </button>
+
+      </div>
+
+    </section>
+
+  </main>
+
+
+  <script src="app.js"></script>
+
+</body>
+</html>
