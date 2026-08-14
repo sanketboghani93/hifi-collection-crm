@@ -1,21 +1,10 @@
 /* =========================================================
    HIFI COLLECTION — CUSTOMER WALK-IN
-   Main application logic
    ========================================================= */
 
 
 /* ---------------------------------------------------------
-   1. GOOGLE APPS SCRIPT URL
-   ---------------------------------------------------------
-
-   IMPORTANT:
-   Replace the URL below with the Web App URL you received
-   from Google Apps Script.
-
-   It should look something like:
-
-   https://script.google.com/macros/s/XXXXXXXXXXXX/exec
-
+   GOOGLE APPS SCRIPT
    --------------------------------------------------------- */
 
 const GOOGLE_SCRIPT_URL =
@@ -23,7 +12,7 @@ const GOOGLE_SCRIPT_URL =
 
 
 /* ---------------------------------------------------------
-   2. FIXED STORE INFORMATION
+   STORE SETTINGS
    --------------------------------------------------------- */
 
 const STORE_NAME = "Hifi Collection";
@@ -31,7 +20,7 @@ const COUNTRY_CODE = "+91";
 
 
 /* ---------------------------------------------------------
-   3. ALLOWED CATEGORIES
+   ALLOWED CATEGORIES
    --------------------------------------------------------- */
 
 const CATEGORIES = [
@@ -46,7 +35,7 @@ const CATEGORIES = [
 
 
 /* ---------------------------------------------------------
-   4. ALLOWED STAFF
+   ALLOWED STAFF
    --------------------------------------------------------- */
 
 const STAFF = [
@@ -60,7 +49,7 @@ const STAFF = [
 
 
 /* ---------------------------------------------------------
-   5. GET DOM ELEMENTS
+   DOM ELEMENTS
    --------------------------------------------------------- */
 
 const customerNameInput =
@@ -81,14 +70,14 @@ const categoryInput =
 const staffInput =
   document.getElementById("staff");
 
-const notesInput =
-  document.getElementById("notes");
-
 const purchaseStatusInput =
   document.getElementById("purchaseStatus");
 
 const followUpDateInput =
   document.getElementById("followUpDate");
+
+const notesInput =
+  document.getElementById("notes");
 
 const productsContainer =
   document.getElementById("productsContainer");
@@ -122,40 +111,34 @@ const whatsappButton =
 
 
 /* ---------------------------------------------------------
-   6. CURRENT CUSTOMER DATA
+   CURRENT CUSTOMER
    --------------------------------------------------------- */
 
 let currentCustomer = null;
 
 
 /* ---------------------------------------------------------
-   7. PHONE NUMBER VALIDATION
-   ---------------------------------------------------------
-
-   Only numbers are allowed.
-   Maximum 10 digits.
+   PHONE INPUT
    --------------------------------------------------------- */
 
 contactNumberInput.addEventListener(
   "input",
   function () {
 
-    // Remove anything that isn't a number.
-    let value = this.value.replace(/\D/g, "");
+    let value =
+      this.value.replace(/\D/g, "");
 
-    // Keep maximum 10 digits.
-    value = value.substring(0, 10);
+    value =
+      value.substring(0, 10);
 
     this.value = value;
 
-    clearFieldError("contactNumberError");
+    clearFieldError(
+      "contactNumberError"
+    );
   }
 );
 
-
-/* ---------------------------------------------------------
-   8. PREVENT INVALID PHONE KEYS
-   --------------------------------------------------------- */
 
 contactNumberInput.addEventListener(
   "keydown",
@@ -187,7 +170,7 @@ contactNumberInput.addEventListener(
 
 
 /* ---------------------------------------------------------
-   9. ADD PRODUCT
+   ADD PRODUCT BUTTON
    --------------------------------------------------------- */
 
 addProductButton.addEventListener(
@@ -201,7 +184,7 @@ addProductButton.addEventListener(
 
 
 /* ---------------------------------------------------------
-   10. CREATE PRODUCT ROW
+   CREATE PRODUCT ROW
    --------------------------------------------------------- */
 
 function createProductRow(value = "") {
@@ -209,25 +192,34 @@ function createProductRow(value = "") {
   const row =
     document.createElement("div");
 
-  row.className = "product-row";
+  row.className =
+    "product-row";
+
 
   const input =
     document.createElement("input");
 
-  input.type = "text";
+  input.type =
+    "text";
 
-  input.className = "product-code";
+  input.className =
+    "product-code";
 
-  input.placeholder = "Product code";
+  input.placeholder =
+    "Product code";
 
-  input.value = value;
+  input.value =
+    value;
 
-  input.autocomplete = "off";
+  input.autocomplete =
+    "off";
+
 
   const removeButton =
     document.createElement("button");
 
-  removeButton.type = "button";
+  removeButton.type =
+    "button";
 
   removeButton.className =
     "remove-product";
@@ -237,7 +229,9 @@ function createProductRow(value = "") {
     "Remove product"
   );
 
-  removeButton.textContent = "×";
+  removeButton.textContent =
+    "×";
+
 
   removeButton.addEventListener(
     "click",
@@ -249,6 +243,7 @@ function createProductRow(value = "") {
 
     }
   );
+
 
   row.appendChild(input);
 
@@ -263,7 +258,7 @@ function createProductRow(value = "") {
 
 
 /* ---------------------------------------------------------
-   11. SHOW / HIDE REMOVE BUTTONS
+   UPDATE REMOVE BUTTONS
    --------------------------------------------------------- */
 
 function updateRemoveButtons() {
@@ -273,16 +268,26 @@ function updateRemoveButtons() {
       ".product-row"
     );
 
+
   rows.forEach(
-    function (row, index) {
+    function (row) {
 
       const button =
-        row.querySelector(".remove-product");
+        row.querySelector(
+          ".remove-product"
+        );
+
 
       if (rows.length === 1) {
-        button.style.display = "none";
+
+        button.style.display =
+          "none";
+
       } else {
-        button.style.display = "block";
+
+        button.style.display =
+          "block";
+
       }
 
     }
@@ -291,7 +296,7 @@ function updateRemoveButtons() {
 
 
 /* ---------------------------------------------------------
-   12. GET PRODUCT CODES
+   GET PRODUCTS
    --------------------------------------------------------- */
 
 function getProducts() {
@@ -303,6 +308,7 @@ function getProducts() {
 
   const products = [];
 
+
   inputs.forEach(
     function (input) {
 
@@ -310,18 +316,21 @@ function getProducts() {
         input.value.trim();
 
       if (value !== "") {
+
         products.push(value);
+
       }
 
     }
   );
+
 
   return products;
 }
 
 
 /* ---------------------------------------------------------
-   13. VALIDATION HELPERS
+   ERROR FUNCTIONS
    --------------------------------------------------------- */
 
 function showFieldError(
@@ -330,21 +339,33 @@ function showFieldError(
 ) {
 
   const element =
-    document.getElementById(errorId);
+    document.getElementById(
+      errorId
+    );
 
   if (element) {
-    element.textContent = message;
+
+    element.textContent =
+      message;
+
   }
 }
 
 
-function clearFieldError(errorId) {
+function clearFieldError(
+  errorId
+) {
 
   const element =
-    document.getElementById(errorId);
+    document.getElementById(
+      errorId
+    );
 
   if (element) {
-    element.textContent = "";
+
+    element.textContent =
+      "";
+
   }
 }
 
@@ -356,16 +377,20 @@ function clearAllErrors() {
       ".field-error"
     );
 
+
   errors.forEach(
     function (error) {
-      error.textContent = "";
+
+      error.textContent =
+        "";
+
     }
   );
 }
 
 
 /* ---------------------------------------------------------
-   14. VALIDATE FORM
+   VALIDATE FORM
    --------------------------------------------------------- */
 
 function validateForm() {
@@ -374,20 +399,26 @@ function validateForm() {
 
   let isValid = true;
 
+
   const customerName =
     customerNameInput.value.trim();
+
 
   const contactNumber =
     contactNumberInput.value.trim();
 
+
   const email =
     emailInput.value.trim();
+
 
   const category =
     categoryInput.value;
 
-  const staff =
+
+  const selectedStaff =
     staffInput.value;
+
 
   const purchaseStatus =
     purchaseStatusInput.value;
@@ -403,12 +434,17 @@ function validateForm() {
     );
 
     isValid = false;
+
   }
 
 
-  /* Contact number */
+  /* Contact */
 
-  if (!/^\d{10}$/.test(contactNumber)) {
+  if (
+    !/^\d{10}$/.test(
+      contactNumber
+    )
+  ) {
 
     showFieldError(
       "contactNumberError",
@@ -416,6 +452,7 @@ function validateForm() {
     );
 
     isValid = false;
+
   }
 
 
@@ -426,7 +463,10 @@ function validateForm() {
     const emailPattern =
       /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 
-    if (!emailPattern.test(email)) {
+
+    if (
+      !emailPattern.test(email)
+    ) {
 
       showFieldError(
         "emailError",
@@ -434,7 +474,9 @@ function validateForm() {
       );
 
       isValid = false;
+
     }
+
   }
 
 
@@ -442,7 +484,9 @@ function validateForm() {
 
   if (
     category === "" ||
-    !CATEGORIES.includes(category)
+    !CATEGORIES.includes(
+      category
+    )
   ) {
 
     showFieldError(
@@ -451,14 +495,17 @@ function validateForm() {
     );
 
     isValid = false;
+
   }
 
 
   /* Staff */
 
   if (
-    staff === "" ||
-    !STAFF.includes(staff)
+    selectedStaff === "" ||
+    !STAFF.includes(
+      selectedStaff
+    )
   ) {
 
     showFieldError(
@@ -467,12 +514,15 @@ function validateForm() {
     );
 
     isValid = false;
+
   }
 
 
-  /* Purchase Status */
+  /* Purchase status */
 
-  if (purchaseStatus === "") {
+  if (
+    purchaseStatus === ""
+  ) {
 
     showFieldError(
       "purchaseStatusError",
@@ -480,6 +530,7 @@ function validateForm() {
     );
 
     isValid = false;
+
   }
 
 
@@ -488,12 +539,19 @@ function validateForm() {
 
 
 /* ---------------------------------------------------------
-   15. SUBMIT BUTTON
+   SUBMIT BUTTON
    --------------------------------------------------------- */
 
 submitButton.addEventListener(
   "click",
   async function () {
+
+    statusMessage.textContent =
+      "";
+
+    statusMessage.className =
+      "status-message";
+
 
     if (!validateForm()) {
 
@@ -504,6 +562,7 @@ submitButton.addEventListener(
         "status-message error";
 
       return;
+
     }
 
 
@@ -514,12 +573,13 @@ submitButton.addEventListener(
     ) {
 
       statusMessage.textContent =
-        "Google Sheets connection has not been configured yet.";
+        "Google Sheets connection has not been configured.";
 
       statusMessage.className =
         "status-message error";
 
       return;
+
     }
 
 
@@ -530,7 +590,7 @@ submitButton.addEventListener(
 
 
 /* ---------------------------------------------------------
-   16. SUBMIT WALK-IN TO GOOGLE SHEETS
+   SUBMIT WALK-IN
    --------------------------------------------------------- */
 
 async function submitWalkIn() {
@@ -538,74 +598,89 @@ async function submitWalkIn() {
   const customerName =
     customerNameInput.value.trim();
 
+
   const contactNumber =
     contactNumberInput.value.trim();
+
 
   const email =
     emailInput.value.trim();
 
+
   const instagram =
-    instagramInput.value.trim()
+    instagramInput.value
+      .trim()
       .replace(/^@+/, "");
+
 
   const category =
     categoryInput.value;
 
-  const staff =
+
+  const selectedStaff =
     staffInput.value;
+
 
   const products =
     getProducts();
 
+
+  const purchaseStatus =
+    purchaseStatusInput.value;
+
+
+  const followUpDate =
+    followUpDateInput.value;
+
+
   const notes =
     notesInput.value.trim();
-const purchaseStatus =
-  purchaseStatusInput.value;
 
-const followUpDate =
-  followUpDateInput.value;
-
-  /* Build customer object */
 
   currentCustomer = {
 
-  customerName:
-    customerName,
+    customerName:
+      customerName,
 
-  contactNumber:
-    contactNumber,
+    contactNumber:
+      contactNumber,
 
-  email:
-    email,
+    email:
+      email,
 
-  instagram:
-    instagram,
+    instagram:
+      instagram,
 
-  category:
-    category,
+    category:
+      category,
 
-  staff:
-    staff,
+    staff:
+      selectedStaff,
 
-  products:
-    products,
+    products:
+      products,
 
-  purchaseStatus:
-    purchaseStatus,
+    purchaseStatus:
+      purchaseStatus,
 
-  followUpDate:
-    followUpDate,
+    followUpDate:
+      followUpDate,
 
-  notes:
-    notes
-};
+    notes:
+      notes
+
+  };
+
 
   /* Loading state */
 
-  submitButton.disabled = true;
+  submitButton.disabled =
+    true;
+
 
   submitText.style.display =
     "none";
+
 
   submitLoader.style.display =
     "inline";
@@ -614,18 +689,12 @@ const followUpDate =
   statusMessage.textContent =
     "Saving walk-in...";
 
+
   statusMessage.className =
     "status-message";
 
 
   try {
-
-    /*
-      We send the data as text/plain.
-
-      This avoids a browser CORS preflight request and
-      works cleanly with Google Apps Script web apps.
-    */
 
     await fetch(
       GOOGLE_SCRIPT_URL,
@@ -639,52 +708,86 @@ const followUpDate =
             "text/plain;charset=utf-8"
         },
 
-        body: JSON.stringify(
-          currentCustomer
-        )
+        body:
+          JSON.stringify({
+
+            action:
+              "createWalkIn",
+
+            customerName:
+              customerName,
+
+            contactNumber:
+              contactNumber,
+
+            email:
+              email,
+
+            instagram:
+              instagram,
+
+            category:
+              category,
+
+            staff:
+              selectedStaff,
+
+            products:
+              products,
+
+            purchaseStatus:
+              purchaseStatus,
+
+            followUpDate:
+              followUpDate,
+
+            notes:
+              notes
+
+          })
+
       }
     );
 
-
-    /*
-      With no-cors the browser does not allow JavaScript
-      to read Google's response.
-
-      However, the POST request is sent to Apps Script,
-      which writes the data into Google Sheets.
-
-      We therefore move to the success screen after
-      the request completes.
-    */
 
     showSuccessCard();
 
 
   } catch (error) {
 
-    console.error(error);
+    console.error(
+      "Submission error:",
+      error
+    );
+
 
     statusMessage.textContent =
       "Something went wrong. Please try again.";
 
+
     statusMessage.className =
       "status-message error";
 
+
   } finally {
 
-    submitButton.disabled = false;
+    submitButton.disabled =
+      false;
+
 
     submitText.style.display =
       "inline";
 
+
     submitLoader.style.display =
       "none";
+
   }
 }
 
 
 /* ---------------------------------------------------------
-   17. SHOW SUCCESS CARD
+   SHOW SUCCESS CARD
    --------------------------------------------------------- */
 
 function showSuccessCard() {
@@ -692,10 +795,13 @@ function showSuccessCard() {
   formCard.style.display =
     "none";
 
+
   successSection.style.display =
     "block";
 
+
   populateCustomerCard();
+
 
   window.scrollTo({
     top: 0,
@@ -705,7 +811,7 @@ function showSuccessCard() {
 
 
 /* ---------------------------------------------------------
-   18. POPULATE CUSTOMER CARD
+   POPULATE CUSTOMER CARD
    --------------------------------------------------------- */
 
 function populateCustomerCard() {
@@ -749,12 +855,14 @@ function populateCustomerCard() {
     currentCustomer.staff;
 
 
-  const productsContainerCard =
+  const cardProducts =
     document.getElementById(
       "cardProducts"
     );
 
-  productsContainerCard.innerHTML = "";
+
+  cardProducts.innerHTML =
+    "";
 
 
   if (
@@ -762,7 +870,9 @@ function populateCustomerCard() {
   ) {
 
     const empty =
-      document.createElement("div");
+      document.createElement(
+        "div"
+      );
 
     empty.className =
       "card-product-item";
@@ -770,9 +880,11 @@ function populateCustomerCard() {
     empty.textContent =
       "No products recorded";
 
-    productsContainerCard.appendChild(
+
+    cardProducts.appendChild(
       empty
     );
+
 
   } else {
 
@@ -780,7 +892,9 @@ function populateCustomerCard() {
       function (product) {
 
         const item =
-          document.createElement("div");
+          document.createElement(
+            "div"
+          );
 
         item.className =
           "card-product-item";
@@ -788,25 +902,34 @@ function populateCustomerCard() {
         item.textContent =
           product;
 
-        productsContainerCard.appendChild(
+
+        cardProducts.appendChild(
           item
         );
 
       }
     );
+
   }
 }
 
 
 /* ---------------------------------------------------------
-   19. FORMAT PHONE NUMBER
+   FORMAT PHONE
    --------------------------------------------------------- */
 
-function formatPhoneNumber(number) {
+function formatPhoneNumber(
+  number
+) {
 
-  if (number.length !== 10) {
+  if (
+    number.length !== 10
+  ) {
+
     return number;
+
   }
+
 
   return (
     number.substring(0, 5) +
@@ -817,7 +940,7 @@ function formatPhoneNumber(number) {
 
 
 /* ---------------------------------------------------------
-   20. CURRENT DATE
+   FORMAT DATE
    --------------------------------------------------------- */
 
 function formatCurrentDate() {
@@ -825,19 +948,22 @@ function formatCurrentDate() {
   const now =
     new Date();
 
-  return now.toLocaleDateString(
-    "en-IN",
-    {
-      day: "2-digit",
-      month: "long",
-      year: "numeric"
-    }
-  ).toUpperCase();
+
+  return now
+    .toLocaleDateString(
+      "en-IN",
+      {
+        day: "2-digit",
+        month: "long",
+        year: "numeric"
+      }
+    )
+    .toUpperCase();
 }
 
 
 /* ---------------------------------------------------------
-   21. WHATSAPP BUTTON
+   WHATSAPP
    --------------------------------------------------------- */
 
 whatsappButton.addEventListener(
@@ -848,16 +974,18 @@ whatsappButton.addEventListener(
       return;
     }
 
+
     const phone =
       "91" +
       currentCustomer.contactNumber;
 
 
     let message =
-      `Hi ${currentCustomer.customerName}, ` +
-      `thank you for visiting ` +
-      `Hifi Collection today. ` +
-      `It was a pleasure assisting you.`;
+      "Hi " +
+      currentCustomer.customerName +
+      ", thank you for visiting " +
+      "Hifi Collection today. " +
+      "It was a pleasure assisting you.";
 
 
     if (
@@ -865,13 +993,15 @@ whatsappButton.addEventListener(
     ) {
 
       message +=
-        `\n\nHere are the pieces you shortlisted:`;
+        "\n\nHere are the pieces you shortlisted:";
+
 
       currentCustomer.products.forEach(
         function (product) {
 
           message +=
-            `\n• ${product}`;
+            "\n• " +
+            product;
 
         }
       );
@@ -880,28 +1010,31 @@ whatsappButton.addEventListener(
 
 
     message +=
-      `\n\nPlease feel free to reach out to us ` +
-      `if you need any further details.` +
-      `\n\n— Hifi Collection`;
+      "\n\nPlease feel free to reach out to us " +
+      "if you need any further details." +
+      "\n\n— Hifi Collection";
 
 
     const whatsappUrl =
       "https://wa.me/" +
       phone +
       "?text=" +
-      encodeURIComponent(message);
+      encodeURIComponent(
+        message
+      );
 
 
     window.open(
       whatsappUrl,
       "_blank"
     );
+
   }
 );
 
 
 /* ---------------------------------------------------------
-   22. NEW WALK-IN
+   NEW WALK-IN
    --------------------------------------------------------- */
 
 newWalkInButton.addEventListener(
@@ -915,51 +1048,64 @@ newWalkInButton.addEventListener(
 
 
 /* ---------------------------------------------------------
-   23. RESET FORM
+   RESET FORM
    --------------------------------------------------------- */
 
 function resetForm() {
 
-  customerNameInput.value = "";
+  customerNameInput.value =
+    "";
 
-  contactNumberInput.value = "";
+  contactNumberInput.value =
+    "";
 
-  emailInput.value = "";
+  emailInput.value =
+    "";
 
-  instagramInput.value = "";
+  instagramInput.value =
+    "";
 
-  categoryInput.value = "";
+  categoryInput.value =
+    "";
 
-  staffInput.value = "";
+  staffInput.value =
+    "";
 
-  notesInput.value = "";
+  purchaseStatusInput.value =
+    "";
 
-   purchaseStatusInput.value = "";
+  followUpDateInput.value =
+    "";
 
-followUpDateInput.value = "";
-   
+  notesInput.value =
+    "";
+
+
   clearAllErrors();
 
-  statusMessage.textContent = "";
+
+  statusMessage.textContent =
+    "";
+
 
   statusMessage.className =
     "status-message";
 
 
-  /*
-    Reset products to one empty row.
-  */
+  productsContainer.innerHTML =
+    "";
 
-  productsContainer.innerHTML = "";
 
   createProductRow();
 
 
-  currentCustomer = null;
+  currentCustomer =
+    null;
 
 
   formCard.style.display =
     "block";
+
 
   successSection.style.display =
     "none";
@@ -976,7 +1122,7 @@ followUpDateInput.value = "";
 
 
 /* ---------------------------------------------------------
-   24. INITIALIZE
+   INITIALIZE
    --------------------------------------------------------- */
 
 updateRemoveButtons();
