@@ -84,6 +84,12 @@ const staffInput =
 const notesInput =
   document.getElementById("notes");
 
+const purchaseStatusInput =
+  document.getElementById("purchaseStatus");
+
+const followUpDateInput =
+  document.getElementById("followUpDate");
+
 const productsContainer =
   document.getElementById("productsContainer");
 
@@ -383,7 +389,9 @@ function validateForm() {
   const staff =
     staffInput.value;
 
-
+const staff =
+  staffInput.value;
+   
   /* Customer name */
 
   if (customerName === "") {
@@ -459,7 +467,17 @@ function validateForm() {
 
     isValid = false;
   }
+/* Purchase Status */
 
+if (purchaseStatus === "") {
+
+  showFieldError(
+    "purchaseStatusError",
+    "Please select the purchase status."
+  );
+
+  isValid = false;
+}
 
   return isValid;
 }
@@ -537,37 +555,46 @@ async function submitWalkIn() {
 
   const notes =
     notesInput.value.trim();
+const purchaseStatus =
+  purchaseStatusInput.value;
 
+const followUpDate =
+  followUpDateInput.value;
 
   /* Build customer object */
 
   currentCustomer = {
 
-    customerName:
-      customerName,
+  customerName:
+    customerName,
 
-    contactNumber:
-      contactNumber,
+  contactNumber:
+    contactNumber,
 
-    email:
-      email,
+  email:
+    email,
 
-    instagram:
-      instagram,
+  instagram:
+    instagram,
 
-    category:
-      category,
+  category:
+    category,
 
-    staff:
-      staff,
+  staff:
+    staff,
 
-    products:
-      products,
+  products:
+    products,
 
-    notes:
-      notes
-  };
+  purchaseStatus:
+    purchaseStatus,
 
+  followUpDate:
+    followUpDate,
+
+  notes:
+    notes
+};
 
   /* Loading state */
 
@@ -903,6 +930,10 @@ function resetForm() {
 
   notesInput.value = "";
 
+   purchaseStatusInput.value = "";
+
+followUpDateInput.value = "";
+   
   clearAllErrors();
 
   statusMessage.textContent = "";
