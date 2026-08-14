@@ -389,9 +389,10 @@ function validateForm() {
   const staff =
     staffInput.value;
 
-const staff =
-  staffInput.value;
-   
+  const purchaseStatus =
+    purchaseStatusInput.value;
+
+
   /* Customer name */
 
   if (customerName === "") {
@@ -467,17 +468,20 @@ const staff =
 
     isValid = false;
   }
-/* Purchase Status */
 
-if (purchaseStatus === "") {
 
-  showFieldError(
-    "purchaseStatusError",
-    "Please select the purchase status."
-  );
+  /* Purchase Status */
 
-  isValid = false;
-}
+  if (purchaseStatus === "") {
+
+    showFieldError(
+      "purchaseStatusError",
+      "Please select the purchase status."
+    );
+
+    isValid = false;
+  }
+
 
   return isValid;
 }
