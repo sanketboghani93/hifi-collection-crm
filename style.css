@@ -1,13 +1,13 @@
 /* =========================================================
    HIFI COLLECTION
    CUSTOMER WALK-IN CRM
-   PREMIUM STYLE
+   CARD 2.0 — SQUARE WHATSAPP CARD
    ========================================================= */
 
 
-/* ---------------------------------------------------------
+/* =========================================================
    RESET
-   --------------------------------------------------------- */
+   ========================================================= */
 
 * {
   box-sizing: border-box;
@@ -15,21 +15,18 @@
   padding: 0;
 }
 
-
 html {
   scroll-behavior: smooth;
 }
 
-
 body {
-
   min-height: 100vh;
 
   background:
     radial-gradient(
       circle at top,
       #faf7ef 0%,
-      #f3eee3 45%,
+      #f3eee3 48%,
       #eee8dc 100%
     );
 
@@ -41,9 +38,7 @@ body {
     "Helvetica Neue",
     Arial,
     sans-serif;
-
 }
-
 
 button,
 input,
@@ -53,14 +48,12 @@ textarea {
 }
 
 
-/* ---------------------------------------------------------
+/* =========================================================
    APP
-   --------------------------------------------------------- */
+   ========================================================= */
 
 .app-shell {
-
   width: 100%;
-
   max-width: 780px;
 
   margin: 0 auto;
@@ -68,32 +61,25 @@ textarea {
   padding:
     44px 20px
     70px;
-
 }
 
 
-/* ---------------------------------------------------------
+/* =========================================================
    LOGIN
-   --------------------------------------------------------- */
+   ========================================================= */
 
 .login-section {
-
   min-height:
     calc(100vh - 100px);
 
   display: flex;
 
   align-items: center;
-
   justify-content: center;
-
 }
 
-
 .login-card {
-
   width: 100%;
-
   max-width: 470px;
 
   padding:
@@ -110,30 +96,23 @@ textarea {
 
   box-shadow:
     0 30px 80px
-    rgba(35, 45, 37, 0.10);
+    rgba(35,45,37,0.10);
 
   text-align: center;
-
 }
 
-
 .login-logo {
-
   display: block;
 
   width: 210px;
-
   max-width: 80%;
 
   height: auto;
 
   margin: 0 auto;
-
 }
 
-
 .login-tagline {
-
   margin-top: 4px;
 
   color: #a66b16;
@@ -145,12 +124,9 @@ textarea {
   font-style: italic;
 
   font-size: 18px;
-
 }
 
-
 .login-card h1 {
-
   margin-top: 42px;
 
   font-family:
@@ -161,12 +137,9 @@ textarea {
   font-size: 30px;
 
   font-weight: 500;
-
 }
 
-
 .login-card p {
-
   margin:
     10px auto 28px;
 
@@ -177,71 +150,52 @@ textarea {
   font-size: 13px;
 
   line-height: 1.6;
-
 }
-
 
 .google-sign-in-button {
-
   display: flex;
-
   justify-content: center;
-
 }
 
-
 .login-status {
-
   min-height: 20px;
-
   margin-top: 18px;
 
   font-size: 12px;
-
 }
-
 
 .login-status.error {
   color: #9b4438;
 }
-
 
 .login-status.success {
   color: #3d6547;
 }
 
 
-/* ---------------------------------------------------------
+/* =========================================================
    HEADER
-   --------------------------------------------------------- */
+   ========================================================= */
 
 .brand-header {
-
   text-align: center;
 
   padding:
     10px 0 38px;
-
 }
 
-
 .header-logo {
-
   display: block;
 
   width: 220px;
-
   max-width: 70%;
 
   height: auto;
 
   margin: 0 auto;
-
 }
 
-
 .header-tagline {
-
   margin-top: -4px;
 
   color: #a66b16;
@@ -253,12 +207,9 @@ textarea {
   font-size: 17px;
 
   font-style: italic;
-
 }
 
-
 .brand-subtitle {
-
   margin-top: 14px;
 
   font-size: 9px;
@@ -268,16 +219,14 @@ textarea {
   letter-spacing: 0.28em;
 
   color: #31574d;
-
 }
 
 
-/* ---------------------------------------------------------
+/* =========================================================
    FORM CARD
-   --------------------------------------------------------- */
+   ========================================================= */
 
 .form-card {
-
   background:
     rgba(255,255,255,0.96);
 
@@ -293,17 +242,15 @@ textarea {
 
   box-shadow:
     0 24px 70px
-    rgba(36, 47, 40, 0.08);
-
+    rgba(36,47,40,0.08);
 }
 
 
-/* ---------------------------------------------------------
+/* =========================================================
    SECTION HEADINGS
-   --------------------------------------------------------- */
+   ========================================================= */
 
 .section-heading {
-
   display: flex;
 
   align-items: flex-start;
@@ -311,29 +258,21 @@ textarea {
   gap: 15px;
 
   margin-bottom: 30px;
-
 }
-
 
 .section-heading.second-section {
-
   margin-top: 48px;
-
 }
 
-
 .section-number {
-
   display: flex;
 
   align-items: center;
-
   justify-content: center;
 
   flex-shrink: 0;
 
   width: 31px;
-
   height: 31px;
 
   border:
@@ -348,13 +287,10 @@ textarea {
     serif;
 
   font-size: 11px;
-
 }
-
 
 .section-heading h1,
 .section-heading h2 {
-
   font-family:
     Georgia,
     "Times New Roman",
@@ -365,12 +301,9 @@ textarea {
   font-weight: 500;
 
   color: #18352e;
-
 }
 
-
 .section-heading p {
-
   margin-top: 6px;
 
   color: #8b8982;
@@ -378,23 +311,18 @@ textarea {
   font-size: 12px;
 
   line-height: 1.5;
-
 }
 
 
-/* ---------------------------------------------------------
+/* =========================================================
    FORM
-   --------------------------------------------------------- */
+   ========================================================= */
 
 .form-group {
-
   margin-bottom: 25px;
-
 }
 
-
 .form-group label {
-
   display: block;
 
   margin-bottom: 9px;
@@ -408,19 +336,13 @@ textarea {
   letter-spacing: 0.08em;
 
   text-transform: uppercase;
-
 }
-
 
 .required {
-
   color: #b16e15;
-
 }
 
-
 .optional {
-
   margin-left: 4px;
 
   color: #999;
@@ -432,14 +354,11 @@ textarea {
   letter-spacing: 0;
 
   text-transform: none;
-
 }
-
 
 input,
 select,
 textarea {
-
   width: 100%;
 
   border:
@@ -460,23 +379,17 @@ textarea {
   transition:
     border-color .2s,
     box-shadow .2s;
-
 }
-
 
 input,
 select {
-
   height: 51px;
 
   padding:
     0 15px;
-
 }
 
-
 textarea {
-
   min-height: 92px;
 
   padding:
@@ -485,34 +398,25 @@ textarea {
   resize: vertical;
 
   line-height: 1.5;
-
 }
-
 
 input::placeholder,
 textarea::placeholder {
-
   color: #aaa;
-
 }
-
 
 input:focus,
 select:focus,
 textarea:focus {
-
   border-color:
     #8d6b35;
 
   box-shadow:
     0 0 0 3px
     rgba(166,107,22,.08);
-
 }
 
-
 .field-error {
-
   min-height: 17px;
 
   margin-top: 6px;
@@ -520,16 +424,14 @@ textarea:focus {
   color: #a1493c;
 
   font-size: 11px;
-
 }
 
 
-/* ---------------------------------------------------------
+/* =========================================================
    PHONE
-   --------------------------------------------------------- */
+   ========================================================= */
 
 .phone-input {
-
   display: flex;
 
   overflow: hidden;
@@ -537,19 +439,17 @@ textarea:focus {
   border:
     1px solid #d9d2c5;
 
-  border-radius: 5px;
+  border-radius:
+    5px;
 
-  background: #fff;
-
+  background:
+    #fff;
 }
 
-
 .country-code {
-
   display: flex;
 
   align-items: center;
-
   justify-content: center;
 
   min-width: 65px;
@@ -565,34 +465,26 @@ textarea:focus {
   font-size: 14px;
 
   font-weight: 700;
-
 }
 
-
 .phone-input input {
-
   border: none;
 
   border-radius: 0;
-
 }
 
-
 .phone-input input:focus {
-
   border: none;
 
   box-shadow: none;
-
 }
 
 
-/* ---------------------------------------------------------
+/* =========================================================
    INSTAGRAM
-   --------------------------------------------------------- */
+   ========================================================= */
 
 .instagram-input {
-
   display: flex;
 
   align-items: center;
@@ -602,15 +494,14 @@ textarea:focus {
   border:
     1px solid #d9d2c5;
 
-  border-radius: 5px;
+  border-radius:
+    5px;
 
-  background: #fff;
-
+  background:
+    #fff;
 }
 
-
 .instagram-input > span {
-
   width: 42px;
 
   text-align: center;
@@ -618,23 +509,18 @@ textarea:focus {
   color: #8b8982;
 
   font-size: 15px;
-
 }
-
 
 .instagram-input input {
-
   border: none;
-
 }
 
 
-/* ---------------------------------------------------------
+/* =========================================================
    PRODUCTS
-   --------------------------------------------------------- */
+   ========================================================= */
 
 .products-container {
-
   display: flex;
 
   flex-direction: column;
@@ -642,34 +528,26 @@ textarea:focus {
   gap: 10px;
 
   margin-bottom: 13px;
-
 }
 
-
 .product-row {
-
   display: flex;
 
   gap: 8px;
-
 }
-
 
 .product-row input {
-
   flex: 1;
-
 }
 
-
 .remove-product {
-
   width: 50px;
 
   border:
     1px solid #ddd4c4;
 
-  border-radius: 5px;
+  border-radius:
+    5px;
 
   background:
     #faf7f1;
@@ -679,12 +557,9 @@ textarea:focus {
   font-size: 21px;
 
   cursor: pointer;
-
 }
 
-
 .add-product {
-
   display: inline-flex;
 
   align-items: center;
@@ -706,20 +581,15 @@ textarea:focus {
   text-transform: uppercase;
 
   cursor: pointer;
-
 }
 
-
 .add-product span {
-
   display: flex;
 
   align-items: center;
-
   justify-content: center;
 
   width: 21px;
-
   height: 21px;
 
   border:
@@ -730,31 +600,24 @@ textarea:focus {
   color: #9f6b1d;
 
   font-size: 15px;
-
 }
 
 
-/* ---------------------------------------------------------
+/* =========================================================
    SUBMIT
-   --------------------------------------------------------- */
+   ========================================================= */
 
 .notes-group {
-
   margin-top: 32px;
-
 }
 
-
 .submit-button {
-
   display: flex;
 
   align-items: center;
-
   justify-content: center;
 
   width: 100%;
-
   height: 58px;
 
   margin-top: 8px;
@@ -762,7 +625,8 @@ textarea:focus {
   border:
     1px solid #173e34;
 
-  border-radius: 6px;
+  border-radius:
+    6px;
 
   background:
     linear-gradient(
@@ -786,29 +650,20 @@ textarea:focus {
   box-shadow:
     0 8px 22px
     rgba(18,52,44,.18);
-
 }
-
 
 .submit-button:hover {
-
   transform:
     translateY(-1px);
-
 }
 
-
 .submit-button:disabled {
-
   opacity: .65;
 
   cursor: wait;
-
 }
 
-
 .status-message {
-
   min-height: 20px;
 
   margin-top: 15px;
@@ -816,38 +671,30 @@ textarea:focus {
   text-align: center;
 
   font-size: 12px;
-
 }
-
 
 .status-message.error {
   color: #963f35;
 }
 
 
-/* ---------------------------------------------------------
+/* =========================================================
    SUCCESS
-   --------------------------------------------------------- */
+   ========================================================= */
 
 .success-section {
-
   padding-top: 12px;
 
   text-align: center;
-
 }
 
-
 .success-icon {
-
   display: flex;
 
   align-items: center;
-
   justify-content: center;
 
   width: 46px;
-
   height: 46px;
 
   margin: 0 auto 12px;
@@ -860,12 +707,9 @@ textarea:focus {
   color: #3d694e;
 
   font-size: 21px;
-
 }
 
-
 .success-label {
-
   margin-bottom: 20px;
 
   color: #476456;
@@ -875,29 +719,47 @@ textarea:focus {
   font-weight: 800;
 
   letter-spacing: .22em;
-
 }
 
 
 /* =========================================================
-   CUSTOMER CARD
+   =========================================================
+   CUSTOMER CARD 2.0
+   SQUARE 1:1
+   =========================================================
    ========================================================= */
 
 .customer-card {
 
   position: relative;
 
-  width: 100%;
+  /*
+   * THE IMPORTANT PART:
+   * fixed 1:1 canvas.
+   *
+   * On desktop:
+   * 620 x 620
+   *
+   * On mobile:
+   * width becomes available viewport width
+   * and height follows the same 1:1 ratio.
+   */
 
-  max-width: 620px;
+  width: min(
+    620px,
+    calc(100vw - 30px)
+  );
+
+  aspect-ratio: 1 / 1;
+
+  height: auto;
 
   margin: 0 auto;
 
   overflow: hidden;
 
   padding:
-    34px 30px
-    32px;
+    24px 26px;
 
   border:
     1px solid #cfa85b;
@@ -927,10 +789,20 @@ textarea:focus {
     0 28px 80px
     rgba(31,47,40,.16);
 
+  /*
+   * Keeps the card visually compact.
+   */
+
+  display: flex;
+
+  flex-direction: column;
+
 }
 
 
-/* Decorative border */
+/* =========================================================
+   DECORATIVE FRAME
+   ========================================================= */
 
 .customer-card::before {
 
@@ -938,7 +810,7 @@ textarea:focus {
 
   position: absolute;
 
-  inset: 9px;
+  inset: 8px;
 
   pointer-events: none;
 
@@ -948,6 +820,8 @@ textarea:focus {
 
   border-radius:
     12px;
+
+  z-index: 10;
 
 }
 
@@ -962,7 +836,7 @@ textarea:focus {
 
   right: 0;
 
-  height: 7px;
+  height: 6px;
 
   background:
     linear-gradient(
@@ -975,7 +849,9 @@ textarea:focus {
 }
 
 
-/* LOGO */
+/* =========================================================
+   LOGO
+   ========================================================= */
 
 .card-logo-area {
 
@@ -983,8 +859,10 @@ textarea:focus {
 
   z-index: 1;
 
+  flex-shrink: 0;
+
   padding:
-    12px 0 8px;
+    4px 0 0;
 
 }
 
@@ -993,11 +871,15 @@ textarea:focus {
 
   display: block;
 
-  width: 245px;
+  width: 165px;
 
-  max-width: 70%;
+  max-width: 50%;
 
   height: auto;
+
+  max-height: 72px;
+
+  object-fit: contain;
 
   margin: 0 auto;
 
@@ -1006,7 +888,7 @@ textarea:focus {
 
 .card-tagline {
 
-  margin-top: -3px;
+  margin-top: -1px;
 
   color: #153c32;
 
@@ -1014,14 +896,18 @@ textarea:focus {
     Georgia,
     serif;
 
-  font-size: 20px;
+  font-size: 15px;
 
   font-style: italic;
+
+  line-height: 1;
 
 }
 
 
-/* KICKER */
+/* =========================================================
+   CUSTOMER VISIT TITLE
+   ========================================================= */
 
 .card-kicker {
 
@@ -1029,16 +915,18 @@ textarea:focus {
 
   z-index: 1;
 
+  flex-shrink: 0;
+
   margin:
-    24px auto 22px;
+    11px auto 11px;
 
   color: #a36b17;
 
-  font-size: 10px;
+  font-size: 8px;
 
   font-weight: 900;
 
-  letter-spacing: .24em;
+  letter-spacing: .23em;
 
 }
 
@@ -1052,19 +940,21 @@ textarea:focus {
 
   vertical-align: middle;
 
-  width: 52px;
+  width: 36px;
 
   height: 1px;
 
   margin:
-    0 10px;
+    0 8px;
 
   background: #cba75e;
 
 }
 
 
-/* CUSTOMER */
+/* =========================================================
+   CUSTOMER ROW
+   ========================================================= */
 
 .card-customer {
 
@@ -1072,17 +962,22 @@ textarea:focus {
 
   z-index: 1;
 
+  flex-shrink: 0;
+
   display: grid;
 
   grid-template-columns:
-    72px 1fr 115px;
+    52px 1fr 120px;
 
   align-items: center;
 
-  gap: 16px;
+  gap: 12px;
 
   padding:
-    0 4px 26px;
+    0 4px 12px;
+
+  border-bottom:
+    1px solid #d9c18e;
 
 }
 
@@ -1095,9 +990,8 @@ textarea:focus {
 
   justify-content: center;
 
-  width: 64px;
-
-  height: 64px;
+  width: 48px;
+  height: 48px;
 
   border:
     2px solid #c99431;
@@ -1109,11 +1003,7 @@ textarea:focus {
 
   color: #e1b653;
 
-  font-size: 29px;
-
-  box-shadow:
-    0 7px 18px
-    rgba(23,47,40,.18);
+  font-size: 23px;
 
 }
 
@@ -1127,7 +1017,7 @@ textarea:focus {
     "Times New Roman",
     serif;
 
-  font-size: 30px;
+  font-size: 22px;
 
   font-weight: 600;
 
@@ -1140,11 +1030,11 @@ textarea:focus {
 
 .card-contact {
 
-  margin-top: 8px;
+  margin-top: 4px;
 
   color: #495d56;
 
-  font-size: 13px;
+  font-size: 11px;
 
   text-align: left;
 
@@ -1154,7 +1044,7 @@ textarea:focus {
 .visit-date-box {
 
   padding:
-    12px 9px;
+    3px 0 3px 12px;
 
   border-left:
     1px solid #d9c18e;
@@ -1168,29 +1058,31 @@ textarea:focus {
 
   color: #ad741b;
 
-  font-size: 22px;
+  font-size: 16px;
+
+  line-height: 1;
 
 }
 
 
 .visit-date-label {
 
-  margin-top: 4px;
+  margin-top: 2px;
 
   color: #ae761c;
 
-  font-size: 8px;
+  font-size: 6px;
 
   font-weight: 900;
 
-  letter-spacing: .13em;
+  letter-spacing: .12em;
 
 }
 
 
 .visit-date {
 
-  margin-top: 5px;
+  margin-top: 3px;
 
   color: #163a31;
 
@@ -1198,16 +1090,18 @@ textarea:focus {
     Georgia,
     serif;
 
-  font-size: 12px;
+  font-size: 9px;
 
   font-weight: 700;
 
-  line-height: 1.3;
+  line-height: 1.2;
 
 }
 
 
-/* DETAILS */
+/* =========================================================
+   THREE MAIN DETAILS
+   ========================================================= */
 
 .card-details-grid {
 
@@ -1215,21 +1109,24 @@ textarea:focus {
 
   z-index: 1;
 
+  flex-shrink: 0;
+
   display: grid;
 
   grid-template-columns:
     repeat(3, 1fr);
 
   margin:
-    0 0 22px;
+    10px 0;
 
   padding:
-    19px 7px;
+    10px 4px;
 
   border:
     1px solid #cfa85b;
 
-  border-radius: 12px;
+  border-radius:
+    10px;
 
   background:
     rgba(255,255,255,.35);
@@ -1245,12 +1142,12 @@ textarea:focus {
 
   justify-content: center;
 
-  gap: 10px;
+  gap: 7px;
 
   min-width: 0;
 
   padding:
-    0 13px;
+    0 6px;
 
 }
 
@@ -1273,9 +1170,8 @@ textarea:focus {
 
   flex-shrink: 0;
 
-  width: 39px;
-
-  height: 39px;
+  width: 31px;
+  height: 31px;
 
   border-radius: 50%;
 
@@ -1284,7 +1180,7 @@ textarea:focus {
 
   color: #dbaa4a;
 
-  font-size: 18px;
+  font-size: 14px;
 
 }
 
@@ -1293,18 +1189,18 @@ textarea:focus {
 
   color: #a66e17;
 
-  font-size: 8px;
+  font-size: 6px;
 
   font-weight: 900;
 
-  letter-spacing: .13em;
+  letter-spacing: .12em;
 
 }
 
 
 .card-value {
 
-  margin-top: 5px;
+  margin-top: 3px;
 
   color: #163a31;
 
@@ -1312,16 +1208,18 @@ textarea:focus {
     Georgia,
     serif;
 
-  font-size: 14px;
+  font-size: 10px;
 
   font-weight: 600;
 
-  line-height: 1.2;
+  line-height: 1.1;
 
 }
 
 
-/* PRODUCTS */
+/* =========================================================
+   SHORTLISTED PRODUCTS
+   ========================================================= */
 
 .shortlisted-section {
 
@@ -1329,12 +1227,16 @@ textarea:focus {
 
   z-index: 1;
 
-  margin-bottom: 20px;
+  flex-shrink: 0;
+
+  margin:
+    0 0 9px;
 
   padding:
-    20px 18px;
+    10px 13px;
 
-  border-radius: 12px;
+  border-radius:
+    10px;
 
   background:
     linear-gradient(
@@ -1354,7 +1256,7 @@ textarea:focus {
 
   color: #e1b653;
 
-  font-size: 10px;
+  font-size: 7px;
 
   font-weight: 900;
 
@@ -1365,7 +1267,8 @@ textarea:focus {
 
 .shortlisted-title span {
 
-  margin: 0 7px;
+  margin:
+    0 5px;
 
 }
 
@@ -1376,9 +1279,13 @@ textarea:focus {
 
   flex-wrap: wrap;
 
-  gap: 9px;
+  align-items: center;
 
-  margin-top: 14px;
+  justify-content: center;
+
+  gap: 6px;
+
+  margin-top: 7px;
 
 }
 
@@ -1386,12 +1293,13 @@ textarea:focus {
 .card-product-item {
 
   padding:
-    9px 15px;
+    5px 10px;
 
   border:
     1px solid #d3a849;
 
-  border-radius: 6px;
+  border-radius:
+    5px;
 
   background:
     #faf4e7;
@@ -1402,7 +1310,7 @@ textarea:focus {
     "Courier New",
     monospace;
 
-  font-size: 13px;
+  font-size: 9px;
 
   font-weight: 700;
 
@@ -1416,14 +1324,16 @@ textarea:focus {
   content:
     "★";
 
-  margin-right: 7px;
+  margin-right: 5px;
 
   color: #bd8524;
 
 }
 
 
-/* STAFF */
+/* =========================================================
+   STAFF
+   ========================================================= */
 
 .card-bottom-row {
 
@@ -1431,8 +1341,10 @@ textarea:focus {
 
   z-index: 1;
 
+  flex-shrink: 0;
+
   padding:
-    4px 7px 18px;
+    4px 5px 8px;
 
 }
 
@@ -1443,7 +1355,9 @@ textarea:focus {
 
   align-items: center;
 
-  gap: 13px;
+  justify-content: center;
+
+  gap: 9px;
 
 }
 
@@ -1456,9 +1370,8 @@ textarea:focus {
 
   justify-content: center;
 
-  width: 48px;
-
-  height: 48px;
+  width: 34px;
+  height: 34px;
 
   border:
     1px solid #c79636;
@@ -1470,14 +1383,14 @@ textarea:focus {
 
   color: #e0b250;
 
-  font-size: 22px;
+  font-size: 15px;
 
 }
 
 
 .card-staff {
 
-  margin-top: 4px;
+  margin-top: 2px;
 
   color: #173a31;
 
@@ -1485,14 +1398,16 @@ textarea:focus {
     Georgia,
     serif;
 
-  font-size: 17px;
+  font-size: 13px;
 
   font-weight: 700;
 
 }
 
 
-/* FOOTER */
+/* =========================================================
+   FOOTER
+   ========================================================= */
 
 .card-footer {
 
@@ -1500,7 +1415,12 @@ textarea:focus {
 
   z-index: 1;
 
-  padding-top: 17px;
+  flex-shrink: 0;
+
+  margin-top: auto;
+
+  padding:
+    8px 0 2px;
 
   border-top:
     1px solid #d9c18e;
@@ -1516,35 +1436,39 @@ textarea:focus {
     Georgia,
     serif;
 
-  font-size: 23px;
+  font-size: 17px;
 
   font-style: italic;
+
+  line-height: 1.1;
 
 }
 
 
 .footer-message {
 
-  margin-top: 8px;
+  margin-top: 4px;
 
   color: #6c756e;
 
-  font-size: 8px;
+  font-size: 6px;
 
   font-weight: 800;
 
-  letter-spacing: .19em;
+  letter-spacing: .17em;
 
 }
 
 
 .card-bottom-line {
 
+  flex-shrink: 0;
+
   height: 4px;
 
   margin:
-    25px -30px
-    -32px;
+    7px -26px
+    -24px;
 
   background:
     linear-gradient(
@@ -1697,97 +1621,55 @@ textarea:focus {
   }
 
 
-  .card-customer {
+  /*
+   * The card remains square.
+   * We deliberately DON'T stack the
+   * three detail columns on mobile.
+   */
 
-    grid-template-columns:
-      55px 1fr;
+  .customer-card {
 
-    gap: 12px;
+    width:
+      calc(100vw - 30px);
 
-  }
+    aspect-ratio:
+      1 / 1;
 
+    padding:
+      18px 18px;
 
-  .customer-avatar {
-
-    width: 52px;
-
-    height: 52px;
-
-    font-size: 23px;
-
-  }
-
-
-  .card-customer-name {
-
-    font-size: 24px;
-
-  }
-
-
-  .visit-date-box {
-
-    grid-column:
-      1 / -1;
-
-    border-left: none;
-
-    border-top:
-      1px solid #d9c18e;
-
-    margin-top: 5px;
-
-    padding-top: 12px;
-
-  }
-
-
-  .card-details-grid {
-
-    grid-template-columns:
-      1fr;
-
-    gap: 14px;
-
-  }
-
-
-  .card-detail {
-
-    justify-content: flex-start;
-
-  }
-
-
-  .card-detail + .card-detail {
-
-    border-left: none;
-
-    border-top:
-      1px solid #d5bd88;
-
-    padding-top: 13px;
+    border-radius:
+      14px;
 
   }
 
 
   .card-logo {
 
-    width: 220px;
+    width:
+      145px;
+
+    max-height:
+      60px;
 
   }
 
 
   .card-tagline {
 
-    font-size: 17px;
+    font-size:
+      13px;
 
   }
 
 
   .card-kicker {
 
-    font-size: 9px;
+    margin:
+      8px auto;
+
+    font-size:
+      7px;
 
   }
 
@@ -1795,16 +1677,220 @@ textarea:focus {
   .card-kicker::before,
   .card-kicker::after {
 
-    width: 28px;
+    width:
+      25px;
+
+    margin:
+      0 5px;
 
   }
 
 
-  .customer-card {
+  .card-customer {
+
+    grid-template-columns:
+      42px 1fr 92px;
+
+    gap:
+      8px;
+
+    padding-bottom:
+      8px;
+
+  }
+
+
+  .customer-avatar {
+
+    width:
+      40px;
+
+    height:
+      40px;
+
+    font-size:
+      19px;
+
+  }
+
+
+  .card-customer-name {
+
+    font-size:
+      17px;
+
+  }
+
+
+  .card-contact {
+
+    font-size:
+      8px;
+
+  }
+
+
+  .visit-date-box {
+
+    padding-left:
+      7px;
+
+  }
+
+
+  .visit-date-icon {
+
+    font-size:
+      13px;
+
+  }
+
+
+  .visit-date-label {
+
+    font-size:
+      5px;
+
+  }
+
+
+  .visit-date {
+
+    font-size:
+      7px;
+
+  }
+
+
+  .card-details-grid {
+
+    margin:
+      7px 0;
 
     padding:
-      30px 20px
+      7px 2px;
+
+  }
+
+
+  .card-detail {
+
+    gap:
+      4px;
+
+    padding:
+      0 3px;
+
+  }
+
+
+  .detail-icon {
+
+    width:
+      25px;
+
+    height:
+      25px;
+
+    font-size:
+      11px;
+
+  }
+
+
+  .card-label {
+
+    font-size:
+      5px;
+
+  }
+
+
+  .card-value {
+
+    font-size:
+      8px;
+
+  }
+
+
+  .shortlisted-section {
+
+    padding:
+      7px 9px;
+
+  }
+
+
+  .shortlisted-title {
+
+    font-size:
+      5px;
+
+  }
+
+
+  .card-product-item {
+
+    padding:
+      4px 7px;
+
+    font-size:
+      7px;
+
+  }
+
+
+  .card-bottom-row {
+
+    padding:
+      2px 3px 5px;
+
+  }
+
+
+  .staff-icon {
+
+    width:
       28px;
+
+    height:
+      28px;
+
+    font-size:
+      12px;
+
+  }
+
+
+  .card-staff {
+
+    font-size:
+      10px;
+
+  }
+
+
+  .card-footer {
+
+    padding-top:
+      5px;
+
+  }
+
+
+  .thank-you {
+
+    font-size:
+      14px;
+
+  }
+
+
+  .footer-message {
+
+    font-size:
+      4.5px;
 
   }
 
@@ -1812,35 +1898,89 @@ textarea:focus {
   .card-bottom-line {
 
     margin:
-      22px -20px
-      -28px;
+      5px -18px
+      -18px;
 
   }
 
 }
 
 
+/* =========================================================
+   VERY SMALL PHONES
+   ========================================================= */
+
 @media (max-width: 380px) {
 
-  .card-customer-name {
+  .customer-card {
 
-    font-size: 21px;
+    width:
+      calc(100vw - 20px);
+
+    padding:
+      15px 14px;
+
+  }
+
+
+  .card-logo {
+
+    width:
+      130px;
 
   }
 
 
   .card-tagline {
 
-    font-size: 15px;
+    font-size:
+      12px;
 
   }
 
 
-  .form-card {
+  .card-customer-name {
+
+    font-size:
+      15px;
+
+  }
+
+
+  .card-details-grid {
 
     padding:
-      25px 16px
-      30px;
+      6px 1px;
+
+  }
+
+
+  .detail-icon {
+
+    width:
+      22px;
+
+    height:
+      22px;
+
+    font-size:
+      10px;
+
+  }
+
+
+  .card-value {
+
+    font-size:
+      7px;
+
+  }
+
+
+  .thank-you {
+
+    font-size:
+      12px;
 
   }
 
