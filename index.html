@@ -1,8 +1,13 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <meta
+    name="viewport"
+    content="width=device-width, initial-scale=1.0"
+  >
 
   <title>Hifi Collection — Customer Walk-In</title>
 
@@ -11,528 +16,691 @@
     content="Hifi Collection customer walk-in management"
   >
 
-  <link rel="stylesheet" href="style.css">
+  <!-- Google Identity Services -->
+  <script
+    src="https://accounts.google.com/gsi/client"
+    async
+    defer
+  ></script>
+
+  <link
+    rel="stylesheet"
+    href="style.css"
+  >
+
 </head>
+
 
 <body>
 
   <main class="app-shell">
 
-    <!-- HEADER -->
-    <header class="brand-header">
 
-      <div class="brand-mark">
-        HIFI
-      </div>
+    <!-- =====================================================
+         STAFF LOGIN
+         ===================================================== -->
 
-      <div class="brand-name">
-        COLLECTION
-      </div>
+    <section
+      id="loginSection"
+      class="login-section"
+    >
 
-      <div class="brand-subtitle">
-        CUSTOMER WALK-IN
-      </div>
+      <div class="login-card">
 
-    </header>
-
-
-    <!-- FORM -->
-    <section class="form-card">
-
-      <div class="section-heading">
-        <span class="section-number">01</span>
-
-        <div>
-          <h1>Customer Details</h1>
-          <p>Enter the customer's contact information.</p>
+        <div class="login-brand">
+          HIFI
         </div>
-      </div>
 
+        <div class="login-brand-subtitle">
+          COLLECTION
+        </div>
 
-      <!-- CUSTOMER NAME -->
+        <h1>
+          Staff Login
+        </h1>
 
-      <div class="form-group">
-
-        <label for="customerName">
-          Customer Name
-          <span class="required">*</span>
-        </label>
-
-        <input
-          type="text"
-          id="customerName"
-          name="customerName"
-          placeholder="Enter customer's name"
-          autocomplete="name"
-        >
+        <p>
+          Sign in with your authorized
+          Google account to access the CRM.
+        </p>
 
         <div
-          class="field-error"
-          id="customerNameError"
+          id="googleSignInButton"
+          class="google-sign-in-button"
+        ></div>
+
+        <div
+          id="loginStatus"
+          class="login-status"
         ></div>
 
       </div>
 
+    </section>
 
-      <!-- CONTACT NUMBER -->
 
-      <div class="form-group">
+    <!-- =====================================================
+         CRM APPLICATION
+         ===================================================== -->
 
-        <label for="contactNumber">
-          Contact Number
-          <span class="required">*</span>
-        </label>
+    <section
+      id="crmSection"
+      style="display: none;"
+    >
 
-        <div class="phone-input">
 
-          <div class="country-code">
-            +91
+      <!-- HEADER -->
+
+      <header class="brand-header">
+
+        <div class="brand-mark">
+          HIFI
+        </div>
+
+        <div class="brand-name">
+          COLLECTION
+        </div>
+
+        <div class="brand-subtitle">
+          CUSTOMER WALK-IN
+        </div>
+
+      </header>
+
+
+      <!-- FORM -->
+
+      <section class="form-card">
+
+
+        <!-- CUSTOMER DETAILS -->
+
+        <div class="section-heading">
+
+          <span class="section-number">
+            01
+          </span>
+
+          <div>
+
+            <h1>
+              Customer Details
+            </h1>
+
+            <p>
+              Enter the customer's contact information.
+            </p>
+
           </div>
 
+        </div>
+
+
+        <!-- CUSTOMER NAME -->
+
+        <div class="form-group">
+
+          <label for="customerName">
+
+            Customer Name
+
+            <span class="required">
+              *
+            </span>
+
+          </label>
+
           <input
-            type="tel"
-            id="contactNumber"
-            name="contactNumber"
-            placeholder="10 digit mobile number"
-            maxlength="10"
-            inputmode="numeric"
-            autocomplete="tel"
+            type="text"
+            id="customerName"
+            name="customerName"
+            placeholder="Enter customer's name"
+            autocomplete="name"
           >
+
+          <div
+            class="field-error"
+            id="customerNameError"
+          ></div>
 
         </div>
 
+
+        <!-- CONTACT NUMBER -->
+
+        <div class="form-group">
+
+          <label for="contactNumber">
+
+            Contact Number
+
+            <span class="required">
+              *
+            </span>
+
+          </label>
+
+          <div class="phone-input">
+
+            <div class="country-code">
+              +91
+            </div>
+
+            <input
+              type="tel"
+              id="contactNumber"
+              name="contactNumber"
+              placeholder="10 digit mobile number"
+              maxlength="10"
+              inputmode="numeric"
+              autocomplete="tel"
+            >
+
+          </div>
+
+          <div
+            class="field-error"
+            id="contactNumberError"
+          ></div>
+
+        </div>
+
+
+        <!-- EMAIL -->
+
+        <div class="form-group">
+
+          <label for="email">
+
+            Email
+
+            <span class="optional">
+              (optional)
+            </span>
+
+          </label>
+
+          <input
+            type="email"
+            id="email"
+            name="email"
+            placeholder="customer@email.com"
+            autocomplete="email"
+          >
+
+          <div
+            class="field-error"
+            id="emailError"
+          ></div>
+
+        </div>
+
+
+        <!-- INSTAGRAM -->
+
+        <div class="form-group">
+
+          <label for="instagram">
+
+            Instagram Handle
+
+            <span class="optional">
+              (optional)
+            </span>
+
+          </label>
+
+          <div class="instagram-input">
+
+            <span>
+              @
+            </span>
+
+            <input
+              type="text"
+              id="instagram"
+              name="instagram"
+              placeholder="instagramusername"
+            >
+
+          </div>
+
+        </div>
+
+
+        <!-- VISIT DETAILS -->
+
         <div
-          class="field-error"
-          id="contactNumberError"
-        ></div>
-
-      </div>
-
-
-      <!-- EMAIL -->
-
-      <div class="form-group">
-
-        <label for="email">
-          Email
-          <span class="optional">(optional)</span>
-        </label>
-
-        <input
-          type="email"
-          id="email"
-          name="email"
-          placeholder="customer@email.com"
-          autocomplete="email"
+          class="section-heading second-section"
         >
 
+          <span class="section-number">
+            02
+          </span>
+
+          <div>
+
+            <h2>
+              Visit Details
+            </h2>
+
+            <p>
+              Record what the customer was looking for.
+            </p>
+
+          </div>
+
+        </div>
+
+
+        <!-- CATEGORY -->
+
+        <div class="form-group">
+
+          <label for="category">
+
+            Product Category
+
+            <span class="required">
+              *
+            </span>
+
+          </label>
+
+          <select
+            id="category"
+            name="category"
+          >
+
+            <option value="">
+              Select category
+            </option>
+
+            <option value="Indo-western">
+              Indo-western
+            </option>
+
+            <option value="Suit">
+              Suit
+            </option>
+
+            <option value="Chania Choli">
+              Chania Choli
+            </option>
+
+            <option value="Koti Kurta">
+              Koti Kurta
+            </option>
+
+            <option value="Sherwani">
+              Sherwani
+            </option>
+
+            <option value="Safa">
+              Safa
+            </option>
+
+            <option value="Jodhpuri">
+              Jodhpuri
+            </option>
+
+          </select>
+
+          <div
+            class="field-error"
+            id="categoryError"
+          ></div>
+
+        </div>
+
+
+        <!-- STAFF -->
+
+        <div class="form-group">
+
+          <label for="staff">
+
+            Staff Attended
+
+            <span class="required">
+              *
+            </span>
+
+          </label>
+
+          <!--
+            Staff names are now loaded dynamically
+            from the Google Sheet.
+          -->
+
+          <select
+            id="staff"
+            name="staff"
+          >
+
+            <option value="">
+              Loading staff...
+            </option>
+
+          </select>
+
+          <div
+            class="field-error"
+            id="staffError"
+          ></div>
+
+        </div>
+
+
+        <!-- PRODUCTS -->
+
         <div
-          class="field-error"
-          id="emailError"
-        ></div>
+          class="section-heading second-section"
+        >
 
-      </div>
+          <span class="section-number">
+            03
+          </span>
+
+          <div>
+
+            <h2>
+              Products Shortlisted
+            </h2>
+
+            <p>
+              Add the unique product codes the customer liked.
+            </p>
+
+          </div>
+
+        </div>
 
 
-      <!-- INSTAGRAM -->
+        <div
+          id="productsContainer"
+          class="products-container"
+        >
 
-      <div class="form-group">
+          <div class="product-row">
 
-        <label for="instagram">
-          Instagram Handle
-          <span class="optional">(optional)</span>
-        </label>
+            <input
+              type="text"
+              class="product-code"
+              placeholder="Product code"
+            >
 
-        <div class="instagram-input">
+            <button
+              type="button"
+              class="remove-product"
+              aria-label="Remove product"
+              style="display: none;"
+            >
+              ×
+            </button>
 
-          <span>@</span>
+          </div>
+
+        </div>
+
+
+        <button
+          type="button"
+          id="addProduct"
+          class="add-product"
+        >
+
+          <span>
+            +
+          </span>
+
+          Add another product
+
+        </button>
+
+
+        <!-- PURCHASE STATUS -->
+
+        <div class="form-group">
+
+          <label for="purchaseStatus">
+
+            Purchase Status
+
+            <span class="required">
+              *
+            </span>
+
+          </label>
+
+          <select
+            id="purchaseStatus"
+            name="purchaseStatus"
+          >
+
+            <option value="">
+              Select purchase status
+            </option>
+
+            <option value="Not Decided">
+              Not Decided
+            </option>
+
+            <option value="Purchased">
+              Purchased
+            </option>
+
+            <option value="Not Purchased">
+              Not Purchased
+            </option>
+
+            <option value="Follow-up Required">
+              Follow-up Required
+            </option>
+
+          </select>
+
+          <div
+            class="field-error"
+            id="purchaseStatusError"
+          ></div>
+
+        </div>
+
+
+        <!-- FOLLOW-UP DATE -->
+
+        <div class="form-group">
+
+          <label for="followUpDate">
+
+            Follow-Up Date
+
+            <span class="optional">
+              (optional)
+            </span>
+
+          </label>
 
           <input
-            type="text"
-            id="instagram"
-            name="instagram"
-            placeholder="instagramusername"
+            type="date"
+            id="followUpDate"
+            name="followUpDate"
           >
 
         </div>
 
-      </div>
 
+        <!-- NOTES -->
 
-      <!-- VISIT DETAILS -->
+        <div class="form-group notes-group">
 
-      <div class="section-heading second-section">
+          <label for="notes">
 
-        <span class="section-number">02</span>
+            Notes
 
-        <div>
-          <h2>Visit Details</h2>
-          <p>Record what the customer was looking for.</p>
+            <span class="optional">
+              (optional)
+            </span>
+
+          </label>
+
+          <textarea
+            id="notes"
+            name="notes"
+            rows="3"
+            placeholder="Any useful notes about the visit..."
+          ></textarea>
+
         </div>
 
-      </div>
+
+        <!-- SUBMIT -->
+
+        <button
+          type="button"
+          id="submitWalkIn"
+          class="submit-button"
+        >
+
+          <span class="submit-text">
+            Log Walk-In
+          </span>
+
+          <span
+            class="submit-loader"
+            style="display: none;"
+          >
+            Saving...
+          </span>
+
+        </button>
 
 
-      <!-- CATEGORY -->
-
-      <div class="form-group">
-
-        <label for="category">
-          Product Category
-          <span class="required">*</span>
-        </label>
-
-        <select id="category" name="category">
-
-          <option value="">
-            Select category
-          </option>
-
-          <option value="Indo-western">
-            Indo-western
-          </option>
-
-          <option value="Suit">
-            Suit
-          </option>
-
-          <option value="Chania Choli">
-            Chania Choli
-          </option>
-
-          <option value="Koti Kurta">
-            Koti Kurta
-          </option>
-
-          <option value="Sherwani">
-            Sherwani
-          </option>
-
-          <option value="Safa">
-            Safa
-          </option>
-
-          <option value="Jodhpuri">
-            Jodhpuri
-          </option>
-
-        </select>
+        <!-- STATUS -->
 
         <div
-          class="field-error"
-          id="categoryError"
+          id="statusMessage"
+          class="status-message"
         ></div>
 
-      </div>
+
+      </section>
 
 
-      <!-- STAFF -->
+      <!-- ===================================================
+           SUCCESS CARD
+           =================================================== -->
 
-      <div class="form-group">
-
-        <label for="staff">
-          Staff Attended
-          <span class="required">*</span>
-        </label>
-
-        <select id="staff" name="staff">
-
-          <option value="">
-            Select staff member
-          </option>
-
-          <option value="Rajubhai">
-            Rajubhai
-          </option>
-
-          <option value="Shabbirbhai">
-            Shabbirbhai
-          </option>
-
-          <option value="Ketanbhai Owner">
-            Ketanbhai Owner
-          </option>
-
-          <option value="Dollyben Owner">
-            Dollyben Owner
-          </option>
-
-          <option value="Sanketbhai Owner">
-            Sanketbhai Owner
-          </option>
-
-          <option value="Sonalben">
-            Sonalben
-          </option>
-
-        </select>
-
-        <div
-          class="field-error"
-          id="staffError"
-        ></div>
-
-      </div>
-
-
-      <!-- PRODUCTS -->
-
-      <div class="section-heading second-section">
-
-        <span class="section-number">03</span>
-
-        <div>
-          <h2>Products Shortlisted</h2>
-          <p>Add the unique product codes the customer liked.</p>
-        </div>
-
-      </div>
-
-
-      <div
-        id="productsContainer"
-        class="products-container"
+      <section
+        id="successSection"
+        class="success-section"
+        style="display: none;"
       >
 
-        <div class="product-row">
+        <div class="success-icon">
+          ✓
+        </div>
 
-          <input
-            type="text"
-            class="product-code"
-            placeholder="Product code"
+        <div class="success-label">
+          WALK-IN LOGGED
+        </div>
+
+
+        <div class="customer-card">
+
+          <div class="card-brand">
+            HIFI COLLECTION
+          </div>
+
+
+          <div
+            id="cardCustomerName"
+            class="card-customer-name"
+          ></div>
+
+
+          <div
+            id="cardContact"
+            class="card-contact"
+          ></div>
+
+
+          <div
+            id="cardDate"
+            class="card-date"
+          ></div>
+
+
+          <div class="card-divider"></div>
+
+
+          <div class="card-label">
+            INTERESTED IN
+          </div>
+
+
+          <div
+            id="cardCategory"
+            class="card-category"
+          ></div>
+
+
+          <div
+            class="card-label shortlist-label"
           >
+            SHORTLISTED
+          </div>
+
+
+          <div
+            id="cardProducts"
+            class="card-products"
+          ></div>
+
+
+          <div class="card-label">
+            ASSISTED BY
+          </div>
+
+
+          <div
+            id="cardStaff"
+            class="card-staff"
+          ></div>
+
+        </div>
+
+
+        <!-- SUCCESS ACTIONS -->
+
+        <div class="success-actions">
 
           <button
             type="button"
-            class="remove-product"
-            aria-label="Remove product"
-            style="display: none;"
+            id="whatsappButton"
+            class="whatsapp-button"
           >
-            ×
+            WhatsApp Customer
+          </button>
+
+
+          <button
+            type="button"
+            id="newWalkIn"
+            class="secondary-button"
+          >
+            New Walk-In
           </button>
 
         </div>
 
-      </div>
 
+      </section>
 
-      <button
-        type="button"
-        id="addProduct"
-        class="add-product"
-      >
-        <span>+</span>
-        Add another product
-      </button>
-
-
-      <!-- PURCHASE STATUS -->
-
-<div class="form-group">
-
-  <label for="purchaseStatus">
-    Purchase Status
-    <span class="required">*</span>
-  </label>
-
-  <select
-    id="purchaseStatus"
-    name="purchaseStatus"
-  >
-
-    <option value="">
-      Select purchase status
-    </option>
-
-    <option value="Not Decided">
-      Not Decided
-    </option>
-
-    <option value="Purchased">
-      Purchased
-    </option>
-
-    <option value="Not Purchased">
-      Not Purchased
-    </option>
-
-    <option value="Follow-up Required">
-      Follow-up Required
-    </option>
-
-  </select>
-
-  <div
-    class="field-error"
-    id="purchaseStatusError"
-  ></div>
-
-</div>
-
-
-<!-- FOLLOW-UP DATE -->
-
-<div class="form-group">
-
-  <label for="followUpDate">
-    Follow-Up Date
-    <span class="optional">(optional)</span>
-  </label>
-
-  <input
-    type="date"
-    id="followUpDate"
-    name="followUpDate"
-  >
-
-</div>
-
-
-<!-- NOTES -->
-
-<div class="form-group notes-group">
-
-  <label for="notes">
-    Notes
-    <span class="optional">(optional)</span>
-  </label>
-
-  <textarea
-    id="notes"
-    name="notes"
-    rows="3"
-    placeholder="Any useful notes about the visit..."
-  ></textarea>
-
-</div>
-
-
-      <!-- SUBMIT -->
-
-      <button
-        type="button"
-        id="submitWalkIn"
-        class="submit-button"
-      >
-
-        <span class="submit-text">
-          Log Walk-In
-        </span>
-
-        <span
-          class="submit-loader"
-          style="display: none;"
-        >
-          Saving...
-        </span>
-
-      </button>
-
-
-      <!-- STATUS -->
-
-      <div
-        id="statusMessage"
-        class="status-message"
-      ></div>
 
     </section>
 
-
-    <!-- SUCCESS CARD -->
-
-    <section
-      id="successSection"
-      class="success-section"
-      style="display: none;"
-    >
-
-      <div class="success-icon">
-        ✓
-      </div>
-
-      <div class="success-label">
-        WALK-IN LOGGED
-      </div>
-
-      <div class="customer-card">
-
-        <div class="card-brand">
-          HIFI COLLECTION
-        </div>
-
-        <div
-          id="cardCustomerName"
-          class="card-customer-name"
-        ></div>
-
-        <div
-          id="cardContact"
-          class="card-contact"
-        ></div>
-
-        <div
-          id="cardDate"
-          class="card-date"
-        ></div>
-
-
-        <div class="card-divider"></div>
-
-
-        <div class="card-label">
-          INTERESTED IN
-        </div>
-
-        <div
-          id="cardCategory"
-          class="card-category"
-        ></div>
-
-
-        <div class="card-label shortlist-label">
-          SHORTLISTED
-        </div>
-
-        <div
-          id="cardProducts"
-          class="card-products"
-        ></div>
-
-
-        <div class="card-label">
-          ASSISTED BY
-        </div>
-
-        <div
-          id="cardStaff"
-          class="card-staff"
-        ></div>
-
-      </div>
-
-
-      <div class="success-actions">
-
-        <button
-          type="button"
-          id="whatsappButton"
-          class="whatsapp-button"
-        >
-          WhatsApp Customer
-        </button>
-
-        <button
-          type="button"
-          id="newWalkIn"
-          class="secondary-button"
-        >
-          New Walk-In
-        </button>
-
-      </div>
-
-    </section>
 
   </main>
 
