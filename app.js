@@ -118,9 +118,9 @@ const purchaseStatusInput =
   );
 
 
-const followUpDateInput =
+const eventDateInput =
   document.getElementById(
-    "followUpDate"
+    "eventDate"
   );
 
 
@@ -336,28 +336,12 @@ function handleGoogleCredential(
 
 
 /* ---------------------------------------------------------
-   7. AUTHORIZE GOOGLE USER WITH APPS SCRIPT
+   7. AUTHORIZE WITH APPS SCRIPT
    --------------------------------------------------------- */
 
 function authorizeWithBackend(
   credential
 ) {
-
-  /*
-   * We use JSONP here because the website is hosted
-   * on GitHub Pages and the backend is Google Apps Script.
-   *
-   * The credential is sent to Apps Script.
-   *
-   * Apps Script:
-   *
-   * 1. Validates the Google ID token.
-   * 2. Gets the verified Google email.
-   * 3. Checks the Staff sheet.
-   * 4. Checks Active = Yes.
-   * 5. Returns authorized true/false.
-   */
-
 
   const callbackName =
     "hifiAuthCallback_" +
@@ -419,10 +403,6 @@ function authorizeWithBackend(
         }
 
 
-        /*
-         * ACCESS GRANTED
-         */
-
         loggedInGoogleEmail =
           result.email ||
           "";
@@ -435,11 +415,6 @@ function authorizeWithBackend(
 
         showCRM();
 
-
-        /*
-         * Load the latest staff list from the
-         * Google Sheet after authentication.
-         */
 
         loadStaffFromGoogleSheet();
 
@@ -1443,29 +1418,12 @@ function validateForm() {
   }
 
 
-  const followUpDate =
-    followUpDateInput.value;
-
-
-  if (
-    purchaseStatus ===
-      "Follow-up Required" &&
-    followUpDate === ""
-  ) {
-
-    statusMessage.textContent =
-      "Please select a follow-up date.";
-
-
-    statusMessage.className =
-      "status-message error";
-
-
-    isValid =
-      false;
-
-  }
-
+  /*
+   * EVENT DATE IS OPTIONAL.
+   *
+   * There is intentionally NO validation tying
+   * Event Date to Purchase Status.
+   */
 
   return isValid;
 
@@ -1550,12 +1508,7 @@ async function submitWalkIn() {
 
 
   /*
-   * IMPORTANT:
-   *
    * Staff Attended remains a MANUAL selection.
-   *
-   * It is NOT based on the Google account that
-   * is currently logged in.
    */
 
   const selectedStaff =
@@ -1570,8 +1523,8 @@ async function submitWalkIn() {
     purchaseStatusInput.value;
 
 
-  const followUpDate =
-    followUpDateInput.value;
+  const eventDate =
+    eventDateInput.value;
 
 
   const notes =
@@ -1604,8 +1557,8 @@ async function submitWalkIn() {
     purchaseStatus:
       purchaseStatus,
 
-    followUpDate:
-      followUpDate,
+    eventDate:
+      eventDate,
 
     notes:
       notes
@@ -1682,8 +1635,8 @@ async function submitWalkIn() {
             purchaseStatus:
               purchaseStatus,
 
-            followUpDate:
-              followUpDate,
+            eventDate:
+              eventDate,
 
             notes:
               notes
@@ -1988,6 +1941,19 @@ whatsappButton.addEventListener(
     }
 
 
+    if (
+      currentCustomer.eventDate
+    ) {
+
+      message +=
+        "\n\nEvent Date: " +
+        formatEventDate(
+          currentCustomer.eventDate
+        );
+
+    }
+
+
     message +=
       "\n\nPlease feel free to reach out to us " +
       "if you need any further details." +
@@ -2014,7 +1980,70 @@ whatsappButton.addEventListener(
 
 
 /* ---------------------------------------------------------
-   30. NEW WALK-IN
+   30. FORMAT EVENT DATE
+   --------------------------------------------------------- */
+
+function formatEventDate(
+  dateValue
+) {
+
+  if (
+    !dateValue
+  ) {
+
+    return "";
+
+  }
+
+
+  const parts =
+    dateValue.split(
+      "-"
+    );
+
+
+  if (
+    parts.length !== 3
+  ) {
+
+    return dateValue;
+
+  }
+
+
+  const date =
+    new Date(
+
+      Number(parts[0]),
+
+      Number(parts[1]) - 1,
+
+      Number(parts[2])
+
+    );
+
+
+  return date.toLocaleDateString(
+    "en-IN",
+    {
+
+      day:
+        "2-digit",
+
+      month:
+        "long",
+
+      year:
+        "numeric"
+
+    }
+  );
+
+}
+
+
+/* ---------------------------------------------------------
+   31. NEW WALK-IN
    --------------------------------------------------------- */
 
 newWalkInButton.addEventListener(
@@ -2028,7 +2057,7 @@ newWalkInButton.addEventListener(
 
 
 /* ---------------------------------------------------------
-   31. RESET FORM
+   32. RESET FORM
    --------------------------------------------------------- */
 
 function resetForm() {
@@ -2053,10 +2082,6 @@ function resetForm() {
     "";
 
 
-  /*
-   * Staff remains manually selected.
-   */
-
   staffInput.value =
     "";
 
@@ -2065,7 +2090,7 @@ function resetForm() {
     "";
 
 
-  followUpDateInput.value =
+  eventDateInput.value =
     "";
 
 
@@ -2120,7 +2145,7 @@ function resetForm() {
 
 
 /* ---------------------------------------------------------
-   32. INITIALIZE
+   33. INITIALIZE
    --------------------------------------------------------- */
 
 updateRemoveButtons();
