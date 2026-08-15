@@ -220,7 +220,7 @@ function initializeGoogleSignIn() {
 
   /*
     Google Identity Services may load slightly after
-    app.js, so we wait and retry if necessary.
+    app.js, so wait and retry if necessary.
   */
 
   if (
@@ -289,6 +289,11 @@ function initializeGoogleSignIn() {
 
   );
 
+
+  console.log(
+    "Google Sign-In initialized successfully."
+  );
+
 }
 
 
@@ -314,7 +319,7 @@ function handleGoogleCredential(
     For this stage, we only confirm that Google Sign-In
     successfully returned a credential.
 
-    The secure backend verification will be added next.
+    Secure backend verification will be added next.
   */
 
   if (
@@ -382,10 +387,6 @@ function showCRM() {
   }
 
 
-  /*
-    Scroll back to the top after login.
-  */
-
   window.scrollTo({
 
     top:
@@ -396,10 +397,6 @@ function showCRM() {
 
   });
 
-
-  /*
-    Focus customer name for convenience.
-  */
 
   setTimeout(
     function () {
@@ -818,17 +815,6 @@ function clearAllErrors() {
 
 /* ---------------------------------------------------------
    19. LOAD STAFF FROM GOOGLE SHEET
-   ---------------------------------------------------------
-
-   IMPORTANT:
-
-   We use JSONP here because a normal browser GET
-   to Google Apps Script can run into CORS restrictions.
-
-   Only active staff names are returned.
-
-   Google email addresses are NOT returned.
-
    --------------------------------------------------------- */
 
 function loadStaffFromGoogleSheet() {
@@ -1083,8 +1069,6 @@ function validateForm() {
     purchaseStatusInput.value;
 
 
-  /* Customer name */
-
   if (
     customerName === ""
   ) {
@@ -1100,8 +1084,6 @@ function validateForm() {
 
   }
 
-
-  /* Contact */
 
   if (
     !/^\d{10}$/.test(
@@ -1120,8 +1102,6 @@ function validateForm() {
 
   }
 
-
-  /* Email */
 
   if (
     email !== ""
@@ -1150,8 +1130,6 @@ function validateForm() {
 
   }
 
-
-  /* Category */
 
   if (
     category === ""
@@ -1185,8 +1163,6 @@ function validateForm() {
   }
 
 
-  /* Staff */
-
   if (
     selectedStaff === ""
   ) {
@@ -1203,8 +1179,6 @@ function validateForm() {
   }
 
 
-  /* Purchase status */
-
   if (
     purchaseStatus === ""
   ) {
@@ -1220,8 +1194,6 @@ function validateForm() {
 
   }
 
-
-  /* Follow-up date */
 
   const followUpDate =
     followUpDateInput.value;
@@ -1281,25 +1253,6 @@ submitButton.addEventListener(
           "Please check the highlighted fields.";
 
       }
-
-
-      statusMessage.className =
-        "status-message error";
-
-
-      return;
-
-    }
-
-
-    if (
-      GOOGLE_SCRIPT_URL.includes(
-        "PASTE_YOUR_GOOGLE"
-      )
-    ) {
-
-      statusMessage.textContent =
-        "Google Sheets connection has not been configured.";
 
 
       statusMessage.className =
@@ -1402,8 +1355,6 @@ async function submitWalkIn() {
 
   };
 
-
-  /* Loading state */
 
   submitButton.disabled =
     true;
