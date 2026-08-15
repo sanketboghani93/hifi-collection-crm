@@ -1713,6 +1713,31 @@ whatsappButton.addEventListener(
     }
 
 
+    /*
+     * ---------------------------------------------------------
+     * EARLY BIRD DEAL
+     * ---------------------------------------------------------
+     *
+     * This is intentionally kept in one place so that the
+     * offer can easily be changed or removed in the future.
+     *
+     * WhatsApp uses *asterisks* to make text bold.
+     */
+
+    const EARLY_BIRD_DEAL =
+
+      "*Early Bird Deal – Get Rs. 250 Off!*" +
+
+      "\n(On rental price of Rs. 2,500 or more) if booking is completed within 1 week of the visit date.";
+
+
+    message +=
+
+      "\n\n" +
+
+      EARLY_BIRD_DEAL;
+
+
     message +=
 
       "\n\nWear. Flaunt. Return." +
@@ -1721,6 +1746,26 @@ whatsappButton.addEventListener(
 
 
     const whatsappUrl =
+
+      "https://wa.me/" +
+
+      phone +
+
+      "?text=" +
+
+      encodeURIComponent(
+        message
+      );
+
+
+    window.open(
+      whatsappUrl,
+      "_blank"
+    );
+
+  }
+);
+const whatsappUrl =
 
       "https://wa.me/" +
 
