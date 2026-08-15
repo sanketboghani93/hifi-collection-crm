@@ -1,214 +1,137 @@
 /* =========================================================
    HIFI COLLECTION
    CUSTOMER WALK-IN CRM
-   FRONTEND JAVASCRIPT
+   APP.JS
    ========================================================= */
 
 
 /* ---------------------------------------------------------
-   1. CONFIGURATION
+   CONFIG
    --------------------------------------------------------- */
 
 const GOOGLE_SCRIPT_URL =
   "https://script.google.com/macros/s/AKfycbz5plc1jea3LUySrbtfAR7sYuG6EPmvbejdChIsd7lNuPyjhkKbOrXPiP4COrZ_S7tp/exec";
 
-
 const GOOGLE_CLIENT_ID =
   "857394054504-9qmrpnhkuicavag1mu96i9b8ko22p6qc.apps.googleusercontent.com";
 
-
 const STORE_NAME =
   "Hifi Collection";
-
 
 const COUNTRY_CODE =
   "+91";
 
 
-/* ---------------------------------------------------------
-   2. ALLOWED CATEGORIES
-   --------------------------------------------------------- */
-
 const CATEGORIES = [
 
   "Indo-western",
-
   "Suit",
-
   "Chania Choli",
-
   "Koti Kurta",
-
   "Sherwani",
-
   "Safa",
-
   "Jodhpuri"
 
 ];
 
 
 /* ---------------------------------------------------------
-   3. DOM ELEMENTS
+   DOM
    --------------------------------------------------------- */
 
 const loginSection =
-  document.getElementById(
-    "loginSection"
-  );
-
+  document.getElementById("loginSection");
 
 const crmSection =
-  document.getElementById(
-    "crmSection"
-  );
-
+  document.getElementById("crmSection");
 
 const googleSignInButton =
-  document.getElementById(
-    "googleSignInButton"
-  );
-
+  document.getElementById("googleSignInButton");
 
 const loginStatus =
-  document.getElementById(
-    "loginStatus"
-  );
-
+  document.getElementById("loginStatus");
 
 const customerNameInput =
-  document.getElementById(
-    "customerName"
-  );
-
+  document.getElementById("customerName");
 
 const contactNumberInput =
-  document.getElementById(
-    "contactNumber"
-  );
-
+  document.getElementById("contactNumber");
 
 const emailInput =
-  document.getElementById(
-    "email"
-  );
-
+  document.getElementById("email");
 
 const instagramInput =
-  document.getElementById(
-    "instagram"
-  );
-
+  document.getElementById("instagram");
 
 const categoryInput =
-  document.getElementById(
-    "category"
-  );
-
+  document.getElementById("category");
 
 const staffInput =
-  document.getElementById(
-    "staff"
-  );
-
+  document.getElementById("staff");
 
 const purchaseStatusInput =
-  document.getElementById(
-    "purchaseStatus"
-  );
-
+  document.getElementById("purchaseStatus");
 
 const eventDateInput =
-  document.getElementById(
-    "eventDate"
-  );
-
+  document.getElementById("eventDate");
 
 const notesInput =
-  document.getElementById(
-    "notes"
-  );
-
+  document.getElementById("notes");
 
 const productsContainer =
-  document.getElementById(
-    "productsContainer"
-  );
-
+  document.getElementById("productsContainer");
 
 const addProductButton =
-  document.getElementById(
-    "addProduct"
-  );
-
+  document.getElementById("addProduct");
 
 const submitButton =
-  document.getElementById(
-    "submitWalkIn"
-  );
-
+  document.getElementById("submitWalkIn");
 
 const submitText =
-  document.querySelector(
-    ".submit-text"
-  );
-
+  document.querySelector(".submit-text");
 
 const submitLoader =
-  document.querySelector(
-    ".submit-loader"
-  );
-
+  document.querySelector(".submit-loader");
 
 const statusMessage =
-  document.getElementById(
-    "statusMessage"
-  );
-
+  document.getElementById("statusMessage");
 
 const formCard =
-  document.querySelector(
-    ".form-card"
-  );
-
+  document.querySelector(".form-card");
 
 const successSection =
-  document.getElementById(
-    "successSection"
-  );
+  document.getElementById("successSection");
 
+const customerCard =
+  document.getElementById("customerCard");
 
 const newWalkInButton =
-  document.getElementById(
-    "newWalkIn"
-  );
-
+  document.getElementById("newWalkIn");
 
 const whatsappButton =
-  document.getElementById(
-    "whatsappButton"
-  );
+  document.getElementById("whatsappButton");
+
+const shareCardButton =
+  document.getElementById("shareCardButton");
+
+const shareStatus =
+  document.getElementById("shareStatus");
 
 
 /* ---------------------------------------------------------
-   4. STATE
+   STATE
    --------------------------------------------------------- */
 
-let currentCustomer =
-  null;
+let currentCustomer = null;
+
+let googleCredential = null;
+
+let loggedInGoogleEmail = null;
 
 
-let googleCredential =
-  null;
-
-
-let loggedInGoogleEmail =
-  null;
-
-
-/* ---------------------------------------------------------
-   5. GOOGLE SIGN-IN INITIALIZATION
-   --------------------------------------------------------- */
+/* =========================================================
+   GOOGLE LOGIN
+   ========================================================= */
 
 function initializeGoogleSignIn() {
 
@@ -228,16 +151,8 @@ function initializeGoogleSignIn() {
   }
 
 
-  if (
-    !googleSignInButton
-  ) {
-
-    console.error(
-      "Google Sign-In button container not found."
-    );
-
+  if (!googleSignInButton) {
     return;
-
   }
 
 
@@ -255,8 +170,7 @@ function initializeGoogleSignIn() {
   });
 
 
-  googleSignInButton.innerHTML =
-    "";
+  googleSignInButton.innerHTML = "";
 
 
   google.accounts.id.renderButton(
@@ -284,26 +198,12 @@ function initializeGoogleSignIn() {
 
   );
 
-
-  console.log(
-    "Google Sign-In initialized."
-  );
-
 }
 
-
-/* ---------------------------------------------------------
-   6. GOOGLE LOGIN CALLBACK
-   --------------------------------------------------------- */
 
 function handleGoogleCredential(
   response
 ) {
-
-  console.log(
-    "Google login successful. Verifying access..."
-  );
-
 
   if (
     !response ||
@@ -335,10 +235,6 @@ function handleGoogleCredential(
 }
 
 
-/* ---------------------------------------------------------
-   7. AUTHORIZE WITH APPS SCRIPT
-   --------------------------------------------------------- */
-
 function authorizeWithBackend(
   credential
 ) {
@@ -348,22 +244,12 @@ function authorizeWithBackend(
     Date.now();
 
 
-  window[
-    callbackName
-  ] =
-    function (result) {
+  window[callbackName] =
+    function(result) {
 
       try {
 
-        console.log(
-          "Authorization response:",
-          result
-        );
-
-
-        if (
-          !result
-        ) {
+        if (!result) {
 
           throw new Error(
             "No authorization response was received."
@@ -393,10 +279,7 @@ function authorizeWithBackend(
             "This Google account is not authorized to use the Hifi Collection CRM."
           );
 
-
-          googleCredential =
-            null;
-
+          googleCredential = null;
 
           return;
 
@@ -404,8 +287,7 @@ function authorizeWithBackend(
 
 
         loggedInGoogleEmail =
-          result.email ||
-          "";
+          result.email || "";
 
 
         setLoginSuccess(
@@ -419,7 +301,7 @@ function authorizeWithBackend(
         loadStaffFromGoogleSheet();
 
 
-      } catch (error) {
+      } catch(error) {
 
         console.error(
           "Authorization error:",
@@ -431,6 +313,7 @@ function authorizeWithBackend(
           error.message ||
           "Unable to verify your account."
         );
+
 
       } finally {
 
@@ -444,9 +327,7 @@ function authorizeWithBackend(
 
 
   const script =
-    document.createElement(
-      "script"
-    );
+    document.createElement("script");
 
 
   script.id =
@@ -469,12 +350,7 @@ function authorizeWithBackend(
 
 
   script.onerror =
-    function () {
-
-      console.error(
-        "Could not contact the authorization server."
-      );
-
+    function() {
 
       setLoginError(
         "Could not verify your account. Please try again."
@@ -495,10 +371,6 @@ function authorizeWithBackend(
 }
 
 
-/* ---------------------------------------------------------
-   8. CLEANUP AUTH SCRIPT
-   --------------------------------------------------------- */
-
 function cleanupAuthScript(
   callbackName
 ) {
@@ -509,12 +381,8 @@ function cleanupAuthScript(
     );
 
 
-  if (
-    script
-  ) {
-
+  if (script) {
     script.remove();
-
   }
 
 
@@ -524,38 +392,28 @@ function cleanupAuthScript(
       callbackName
     ];
 
-  } catch (error) {
+  } catch(error) {
 
     window[
       callbackName
-    ] =
-      undefined;
+    ] = undefined;
 
   }
 
 }
 
 
-/* ---------------------------------------------------------
-   9. LOGIN STATUS
-   --------------------------------------------------------- */
-
 function setLoginLoading(
   message
 ) {
 
-  if (
-    !loginStatus
-  ) {
-
+  if (!loginStatus) {
     return;
-
   }
 
 
   loginStatus.textContent =
     message;
-
 
   loginStatus.className =
     "login-status";
@@ -567,18 +425,13 @@ function setLoginError(
   message
 ) {
 
-  if (
-    !loginStatus
-  ) {
-
+  if (!loginStatus) {
     return;
-
   }
 
 
   loginStatus.textContent =
     message;
-
 
   loginStatus.className =
     "login-status error";
@@ -590,18 +443,13 @@ function setLoginSuccess(
   message
 ) {
 
-  if (
-    !loginStatus
-  ) {
-
+  if (!loginStatus) {
     return;
-
   }
 
 
   loginStatus.textContent =
     message;
-
 
   loginStatus.className =
     "login-status success";
@@ -609,15 +457,9 @@ function setLoginSuccess(
 }
 
 
-/* ---------------------------------------------------------
-   10. SHOW CRM
-   --------------------------------------------------------- */
-
 function showCRM() {
 
-  if (
-    loginSection
-  ) {
+  if (loginSection) {
 
     loginSection.style.display =
       "none";
@@ -625,9 +467,7 @@ function showCRM() {
   }
 
 
-  if (
-    crmSection
-  ) {
+  if (crmSection) {
 
     crmSection.style.display =
       "block";
@@ -637,40 +477,22 @@ function showCRM() {
 
   window.scrollTo({
 
-    top:
-      0,
+    top: 0,
 
-    behavior:
-      "smooth"
+    behavior: "smooth"
 
   });
-
-
-  setTimeout(
-    function () {
-
-      if (
-        customerNameInput
-      ) {
-
-        customerNameInput.focus();
-
-      }
-
-    },
-    300
-  );
 
 }
 
 
-/* ---------------------------------------------------------
-   11. PHONE NUMBER INPUT
-   --------------------------------------------------------- */
+/* =========================================================
+   PHONE VALIDATION
+   ========================================================= */
 
 contactNumberInput.addEventListener(
   "input",
-  function () {
+  function() {
 
     let value =
       this.value.replace(
@@ -698,28 +520,18 @@ contactNumberInput.addEventListener(
 );
 
 
-/* ---------------------------------------------------------
-   12. PREVENT INVALID PHONE KEYS
-   --------------------------------------------------------- */
-
 contactNumberInput.addEventListener(
   "keydown",
-  function (event) {
+  function(event) {
 
     const allowedKeys = [
 
       "Backspace",
-
       "Delete",
-
       "ArrowLeft",
-
       "ArrowRight",
-
       "Tab",
-
       "Home",
-
       "End"
 
     ];
@@ -752,13 +564,13 @@ contactNumberInput.addEventListener(
 );
 
 
-/* ---------------------------------------------------------
-   13. ADD PRODUCT
-   --------------------------------------------------------- */
+/* =========================================================
+   PRODUCTS
+   ========================================================= */
 
 addProductButton.addEventListener(
   "click",
-  function () {
+  function() {
 
     createProductRow();
 
@@ -766,18 +578,12 @@ addProductButton.addEventListener(
 );
 
 
-/* ---------------------------------------------------------
-   14. CREATE PRODUCT ROW
-   --------------------------------------------------------- */
-
 function createProductRow(
   value = ""
 ) {
 
   const row =
-    document.createElement(
-      "div"
-    );
+    document.createElement("div");
 
 
   row.className =
@@ -785,50 +591,39 @@ function createProductRow(
 
 
   const input =
-    document.createElement(
-      "input"
-    );
+    document.createElement("input");
 
 
   input.type =
     "text";
 
-
   input.className =
     "product-code";
-
 
   input.placeholder =
     "Product code";
 
-
   input.value =
     value;
-
 
   input.autocomplete =
     "off";
 
 
   const removeButton =
-    document.createElement(
-      "button"
-    );
+    document.createElement("button");
 
 
   removeButton.type =
     "button";
 
-
   removeButton.className =
     "remove-product";
-
 
   removeButton.setAttribute(
     "aria-label",
     "Remove product"
   );
-
 
   removeButton.textContent =
     "×";
@@ -836,7 +631,7 @@ function createProductRow(
 
   removeButton.addEventListener(
     "click",
-    function () {
+    function() {
 
       row.remove();
 
@@ -846,15 +641,11 @@ function createProductRow(
   );
 
 
-  row.appendChild(
-    input
-  );
-
+  row.appendChild(input);
 
   row.appendChild(
     removeButton
   );
-
 
   productsContainer.appendChild(
     row
@@ -869,10 +660,6 @@ function createProductRow(
 }
 
 
-/* ---------------------------------------------------------
-   15. UPDATE PRODUCT REMOVE BUTTONS
-   --------------------------------------------------------- */
-
 function updateRemoveButtons() {
 
   const rows =
@@ -882,7 +669,7 @@ function updateRemoveButtons() {
 
 
   rows.forEach(
-    function (row) {
+    function(row) {
 
       const button =
         row.querySelector(
@@ -890,29 +677,16 @@ function updateRemoveButtons() {
         );
 
 
-      if (
+      button.style.display =
         rows.length === 1
-      ) {
-
-        button.style.display =
-          "none";
-
-      } else {
-
-        button.style.display =
-          "block";
-
-      }
+          ? "none"
+          : "block";
 
     }
   );
 
 }
 
-
-/* ---------------------------------------------------------
-   16. GET PRODUCT CODES
-   --------------------------------------------------------- */
 
 function getProducts() {
 
@@ -922,20 +696,17 @@ function getProducts() {
     );
 
 
-  const products =
-    [];
+  const products = [];
 
 
   inputs.forEach(
-    function (input) {
+    function(input) {
 
       const value =
         input.value.trim();
 
 
-      if (
-        value !== ""
-      ) {
+      if (value !== "") {
 
         products.push(
           value
@@ -952,9 +723,9 @@ function getProducts() {
 }
 
 
-/* ---------------------------------------------------------
-   17. ERROR HELPERS
-   --------------------------------------------------------- */
+/* =========================================================
+   ERRORS
+   ========================================================= */
 
 function showFieldError(
   errorId,
@@ -967,9 +738,7 @@ function showFieldError(
     );
 
 
-  if (
-    element
-  ) {
+  if (element) {
 
     element.textContent =
       message;
@@ -989,9 +758,7 @@ function clearFieldError(
     );
 
 
-  if (
-    element
-  ) {
+  if (element) {
 
     element.textContent =
       "";
@@ -1003,27 +770,25 @@ function clearFieldError(
 
 function clearAllErrors() {
 
-  const errors =
-    document.querySelectorAll(
+  document
+    .querySelectorAll(
       ".field-error"
+    )
+    .forEach(
+      function(error) {
+
+        error.textContent =
+          "";
+
+      }
     );
-
-
-  errors.forEach(
-    function (error) {
-
-      error.textContent =
-        "";
-
-    }
-  );
 
 }
 
 
-/* ---------------------------------------------------------
-   18. LOAD STAFF FROM GOOGLE SHEET
-   --------------------------------------------------------- */
+/* =========================================================
+   STAFF
+   ========================================================= */
 
 function loadStaffFromGoogleSheet() {
 
@@ -1032,10 +797,8 @@ function loadStaffFromGoogleSheet() {
     Date.now();
 
 
-  window[
-    callbackName
-  ] =
-    function (response) {
+  window[callbackName] =
+    function(response) {
 
       try {
 
@@ -1059,7 +822,7 @@ function loadStaffFromGoogleSheet() {
         );
 
 
-      } catch (error) {
+      } catch(error) {
 
         console.error(
           "Staff loading error:",
@@ -1101,15 +864,9 @@ function loadStaffFromGoogleSheet() {
 
 
   script.onerror =
-    function () {
-
-      console.error(
-        "Could not load staff list."
-      );
-
+    function() {
 
       showStaffLoadingError();
-
 
       cleanupStaffScript(
         callbackName
@@ -1124,10 +881,6 @@ function loadStaffFromGoogleSheet() {
 
 }
 
-
-/* ---------------------------------------------------------
-   19. POPULATE STAFF DROPDOWN
-   --------------------------------------------------------- */
 
 function populateStaffDropdown(
   staffList
@@ -1146,7 +899,6 @@ function populateStaffDropdown(
   defaultOption.value =
     "";
 
-
   defaultOption.textContent =
     "Select staff member";
 
@@ -1157,7 +909,7 @@ function populateStaffDropdown(
 
 
   staffList.forEach(
-    function (staffName) {
+    function(staffName) {
 
       const option =
         document.createElement(
@@ -1167,7 +919,6 @@ function populateStaffDropdown(
 
       option.value =
         staffName;
-
 
       option.textContent =
         staffName;
@@ -1182,10 +933,6 @@ function populateStaffDropdown(
 
 }
 
-
-/* ---------------------------------------------------------
-   20. STAFF LOADING ERROR
-   --------------------------------------------------------- */
 
 function showStaffLoadingError() {
 
@@ -1202,7 +949,6 @@ function showStaffLoadingError() {
   option.value =
     "";
 
-
   option.textContent =
     "Unable to load staff list";
 
@@ -1214,10 +960,6 @@ function showStaffLoadingError() {
 }
 
 
-/* ---------------------------------------------------------
-   21. CLEANUP STAFF SCRIPT
-   --------------------------------------------------------- */
-
 function cleanupStaffScript(
   callbackName
 ) {
@@ -1228,12 +970,8 @@ function cleanupStaffScript(
     );
 
 
-  if (
-    script
-  ) {
-
+  if (script) {
     script.remove();
-
   }
 
 
@@ -1243,21 +981,20 @@ function cleanupStaffScript(
       callbackName
     ];
 
-  } catch (error) {
+  } catch(error) {
 
     window[
       callbackName
-    ] =
-      undefined;
+    ] = undefined;
 
   }
 
 }
 
 
-/* ---------------------------------------------------------
-   22. VALIDATE FORM
-   --------------------------------------------------------- */
+/* =========================================================
+   VALIDATION
+   ========================================================= */
 
 function validateForm() {
 
@@ -1292,18 +1029,14 @@ function validateForm() {
     purchaseStatusInput.value;
 
 
-  if (
-    customerName === ""
-  ) {
+  if (!customerName) {
 
     showFieldError(
       "customerNameError",
       "Please enter the customer's name."
     );
 
-
-    isValid =
-      false;
+    isValid = false;
 
   }
 
@@ -1319,16 +1052,12 @@ function validateForm() {
       "Please enter exactly 10 digits."
     );
 
-
-    isValid =
-      false;
+    isValid = false;
 
   }
 
 
-  if (
-    email !== ""
-  ) {
+  if (email) {
 
     const emailPattern =
       /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
@@ -1345,28 +1074,21 @@ function validateForm() {
         "Please enter a valid email address."
       );
 
-
-      isValid =
-        false;
+      isValid = false;
 
     }
 
   }
 
 
-  if (
-    category === ""
-  ) {
+  if (!category) {
 
     showFieldError(
       "categoryError",
       "Please select a category."
     );
 
-
-    isValid =
-      false;
-
+    isValid = false;
 
   } else if (
     !CATEGORIES.includes(
@@ -1379,50 +1101,37 @@ function validateForm() {
       "Invalid category."
     );
 
-
-    isValid =
-      false;
+    isValid = false;
 
   }
 
 
-  if (
-    selectedStaff === ""
-  ) {
+  if (!selectedStaff) {
 
     showFieldError(
       "staffError",
       "Please select the staff member."
     );
 
-
-    isValid =
-      false;
+    isValid = false;
 
   }
 
 
-  if (
-    purchaseStatus === ""
-  ) {
+  if (!purchaseStatus) {
 
     showFieldError(
       "purchaseStatusError",
       "Please select the purchase status."
     );
 
-
-    isValid =
-      false;
+    isValid = false;
 
   }
 
 
   /*
-   * EVENT DATE IS OPTIONAL.
-   *
-   * There is intentionally NO validation tying
-   * Event Date to Purchase Status.
+   * Event Date remains optional.
    */
 
   return isValid;
@@ -1430,40 +1139,28 @@ function validateForm() {
 }
 
 
-/* ---------------------------------------------------------
-   23. SUBMIT BUTTON
-   --------------------------------------------------------- */
+/* =========================================================
+   SUBMIT
+   ========================================================= */
 
 submitButton.addEventListener(
   "click",
-  async function () {
+  async function() {
 
     statusMessage.textContent =
       "";
-
 
     statusMessage.className =
       "status-message";
 
 
-    if (
-      !validateForm()
-    ) {
+    if (!validateForm()) {
 
-      if (
-        statusMessage.textContent ===
-        ""
-      ) {
-
-        statusMessage.textContent =
-          "Please check the highlighted fields.";
-
-      }
-
+      statusMessage.textContent =
+        "Please check the highlighted fields.";
 
       statusMessage.className =
         "status-message error";
-
 
       return;
 
@@ -1475,10 +1172,6 @@ submitButton.addEventListener(
   }
 );
 
-
-/* ---------------------------------------------------------
-   24. SUBMIT WALK-IN
-   --------------------------------------------------------- */
 
 async function submitWalkIn() {
 
@@ -1506,10 +1199,6 @@ async function submitWalkIn() {
   const category =
     categoryInput.value;
 
-
-  /*
-   * Staff Attended remains a MANUAL selection.
-   */
 
   const selectedStaff =
     staffInput.value;
@@ -1582,14 +1271,12 @@ async function submitWalkIn() {
     "Saving walk-in...";
 
 
-  statusMessage.className =
-    "status-message";
-
-
   try {
 
     await fetch(
+
       GOOGLE_SCRIPT_URL,
+
       {
 
         method:
@@ -1644,13 +1331,14 @@ async function submitWalkIn() {
           })
 
       }
+
     );
 
 
     showSuccessCard();
 
 
-  } catch (error) {
+  } catch(error) {
 
     console.error(
       "Submission error:",
@@ -1661,7 +1349,6 @@ async function submitWalkIn() {
     statusMessage.textContent =
       "Something went wrong. Please try again.";
 
-
     statusMessage.className =
       "status-message error";
 
@@ -1671,10 +1358,8 @@ async function submitWalkIn() {
     submitButton.disabled =
       false;
 
-
     submitText.style.display =
       "inline";
-
 
     submitLoader.style.display =
       "none";
@@ -1684,9 +1369,9 @@ async function submitWalkIn() {
 }
 
 
-/* ---------------------------------------------------------
-   25. SUCCESS CARD
-   --------------------------------------------------------- */
+/* =========================================================
+   CUSTOMER CARD
+   ========================================================= */
 
 function showSuccessCard() {
 
@@ -1703,29 +1388,19 @@ function showSuccessCard() {
 
   window.scrollTo({
 
-    top:
-      0,
+    top: 0,
 
-    behavior:
-      "smooth"
+    behavior: "smooth"
 
   });
 
 }
 
 
-/* ---------------------------------------------------------
-   26. POPULATE CUSTOMER CARD
-   --------------------------------------------------------- */
-
 function populateCustomerCard() {
 
-  if (
-    !currentCustomer
-  ) {
-
+  if (!currentCustomer) {
     return;
-
   }
 
 
@@ -1748,13 +1423,31 @@ function populateCustomerCard() {
   document.getElementById(
     "cardDate"
   ).textContent =
-    formatCurrentDate();
+    formatVisitDate(
+      new Date()
+    );
 
 
   document.getElementById(
     "cardCategory"
   ).textContent =
     currentCustomer.category;
+
+
+  document.getElementById(
+    "cardPurchaseStatus"
+  ).textContent =
+    currentCustomer.purchaseStatus;
+
+
+  document.getElementById(
+    "cardEventDate"
+  ).textContent =
+    currentCustomer.eventDate
+      ? formatEventDate(
+          currentCustomer.eventDate
+        )
+      : "Not specified";
 
 
   document.getElementById(
@@ -1799,7 +1492,7 @@ function populateCustomerCard() {
   } else {
 
     currentCustomer.products.forEach(
-      function (product) {
+      function(product) {
 
         const item =
           document.createElement(
@@ -1827,9 +1520,9 @@ function populateCustomerCard() {
 }
 
 
-/* ---------------------------------------------------------
-   27. FORMAT PHONE
-   --------------------------------------------------------- */
+/* =========================================================
+   DATE / PHONE FORMATTING
+   ========================================================= */
 
 function formatPhoneNumber(
   number
@@ -1845,161 +1538,60 @@ function formatPhoneNumber(
 
 
   return (
+
     number.substring(
       0,
       5
     ) +
+
     " " +
+
     number.substring(
       5
     )
+
   );
 
 }
 
 
-/* ---------------------------------------------------------
-   28. FORMAT DATE
-   --------------------------------------------------------- */
+function formatVisitDate(
+  date
+) {
 
-function formatCurrentDate() {
+  return date.toLocaleDateString(
 
-  const now =
-    new Date();
+    "en-IN",
 
+    {
 
-  return now
-    .toLocaleDateString(
-      "en-IN",
-      {
+      day:
+        "2-digit",
 
-        day:
-          "2-digit",
+      month:
+        "long",
 
-        month:
-          "long",
+      year:
+        "numeric"
 
-        year:
-          "numeric"
+    }
 
-      }
-    )
-    .toUpperCase();
+  ).toUpperCase();
 
 }
 
-
-/* ---------------------------------------------------------
-   29. WHATSAPP
-   --------------------------------------------------------- */
-
-whatsappButton.addEventListener(
-  "click",
-  function () {
-
-    if (
-      !currentCustomer
-    ) {
-
-      return;
-
-    }
-
-
-    const phone =
-      "91" +
-      currentCustomer.contactNumber;
-
-
-    let message =
-      "Hi " +
-      currentCustomer.customerName +
-      ", thank you for visiting " +
-      STORE_NAME +
-      " today. " +
-      "It was a pleasure assisting you.";
-
-
-    if (
-      currentCustomer.products.length > 0
-    ) {
-
-      message +=
-        "\n\nHere are the pieces you shortlisted:";
-
-
-      currentCustomer.products.forEach(
-        function (product) {
-
-          message +=
-            "\n• " +
-            product;
-
-        }
-      );
-
-    }
-
-
-    if (
-      currentCustomer.eventDate
-    ) {
-
-      message +=
-        "\n\nEvent Date: " +
-        formatEventDate(
-          currentCustomer.eventDate
-        );
-
-    }
-
-
-    message +=
-      "\n\nPlease feel free to reach out to us " +
-      "if you need any further details." +
-      "\n\n— " +
-      STORE_NAME;
-
-
-    const whatsappUrl =
-      "https://wa.me/" +
-      phone +
-      "?text=" +
-      encodeURIComponent(
-        message
-      );
-
-
-    window.open(
-      whatsappUrl,
-      "_blank"
-    );
-
-  }
-);
-
-
-/* ---------------------------------------------------------
-   30. FORMAT EVENT DATE
-   --------------------------------------------------------- */
 
 function formatEventDate(
   dateValue
 ) {
 
-  if (
-    !dateValue
-  ) {
-
+  if (!dateValue) {
     return "";
-
   }
 
 
   const parts =
-    dateValue.split(
-      "-"
-    );
+    dateValue.split("-");
 
 
   if (
@@ -2024,7 +1616,9 @@ function formatEventDate(
 
 
   return date.toLocaleDateString(
+
     "en-IN",
+
     {
 
       day:
@@ -2037,62 +1631,516 @@ function formatEventDate(
         "numeric"
 
     }
-  );
+
+  ).toUpperCase();
 
 }
 
 
-/* ---------------------------------------------------------
-   31. NEW WALK-IN
-   --------------------------------------------------------- */
+/* =========================================================
+   WHATSAPP MESSAGE
+   ========================================================= */
 
-newWalkInButton.addEventListener(
+whatsappButton.addEventListener(
   "click",
-  function () {
+  function() {
 
-    resetForm();
+    if (!currentCustomer) {
+      return;
+    }
+
+
+    const phone =
+      "91" +
+      currentCustomer.contactNumber;
+
+
+    let message =
+
+      "Hi " +
+
+      currentCustomer.customerName +
+
+      ", thank you for visiting " +
+
+      STORE_NAME +
+
+      " today. " +
+
+      "It was a pleasure assisting you.";
+
+
+    message +=
+
+      "\n\nInterested in: " +
+
+      currentCustomer.category;
+
+
+    if (
+      currentCustomer.products.length > 0
+    ) {
+
+      message +=
+        "\n\nShortlisted products:";
+
+
+      currentCustomer.products.forEach(
+        function(product) {
+
+          message +=
+            "\n• " +
+            product;
+
+        }
+      );
+
+    }
+
+
+    if (
+      currentCustomer.eventDate
+    ) {
+
+      message +=
+
+        "\n\nEvent Date: " +
+
+        formatEventDate(
+          currentCustomer.eventDate
+        );
+
+    }
+
+
+    message +=
+
+      "\n\nWear. Flaunt. Return." +
+
+      "\n\n— Hifi Collection";
+
+
+    const whatsappUrl =
+
+      "https://wa.me/" +
+
+      phone +
+
+      "?text=" +
+
+      encodeURIComponent(
+        message
+      );
+
+
+    window.open(
+      whatsappUrl,
+      "_blank"
+    );
 
   }
 );
 
 
+/* =========================================================
+   SHARE VISIT CARD
+   ========================================================= */
+
+shareCardButton.addEventListener(
+  "click",
+  shareVisitCard
+);
+
+
+async function shareVisitCard() {
+
+  if (!currentCustomer) {
+    return;
+  }
+
+
+  shareCardButton.disabled =
+    true;
+
+
+  shareStatus.textContent =
+    "Preparing your Hifi Collection card...";
+
+
+  try {
+
+    /*
+     * Wait briefly so the browser has finished
+     * rendering the card and logo.
+     */
+
+    await wait(150);
+
+
+    if (
+      typeof html2canvas ===
+      "undefined"
+    ) {
+
+      throw new Error(
+        "Card image engine is not available."
+      );
+
+    }
+
+
+    const canvas =
+      await html2canvas(
+
+        customerCard,
+
+        {
+
+          scale:
+            2.5,
+
+          useCORS:
+            true,
+
+          backgroundColor:
+            "#faf5e9",
+
+          logging:
+            false
+
+        }
+
+      );
+
+
+    const blob =
+      await canvasToBlob(
+        canvas
+      );
+
+
+    const file =
+      new File(
+
+        [blob],
+
+        createCardFileName(),
+
+        {
+
+          type:
+            "image/png"
+
+        }
+
+      );
+
+
+    /*
+     * Modern phones:
+     * use the native share sheet.
+     */
+
+    if (
+      navigator.share &&
+      navigator.canShare &&
+      navigator.canShare({
+        files: [file]
+      })
+    ) {
+
+      await navigator.share({
+
+        title:
+          "Hifi Collection — Customer Visit",
+
+        text:
+          createShareText(),
+
+        files:
+          [file]
+
+      });
+
+
+      shareStatus.textContent =
+        "Card ready to share.";
+
+      return;
+
+    }
+
+
+    /*
+     * If native file sharing is not supported,
+     * download the card.
+     */
+
+    downloadCard(
+      blob
+    );
+
+
+    shareStatus.textContent =
+      "Your card was downloaded. You can now share it on WhatsApp.";
+
+  } catch(error) {
+
+    /*
+     * AbortError means the user simply closed
+     * the native share sheet.
+     */
+
+    if (
+      error &&
+      error.name ===
+        "AbortError"
+    ) {
+
+      shareStatus.textContent =
+        "";
+
+      return;
+
+    }
+
+
+    console.error(
+      "Card sharing error:",
+      error
+    );
+
+
+    shareStatus.textContent =
+      "Unable to share automatically. Please try again.";
+
+  } finally {
+
+    shareCardButton.disabled =
+      false;
+
+  }
+
+}
+
+
 /* ---------------------------------------------------------
-   32. RESET FORM
+   SHARE HELPERS
    --------------------------------------------------------- */
+
+function wait(
+  milliseconds
+) {
+
+  return new Promise(
+    function(resolve) {
+
+      setTimeout(
+        resolve,
+        milliseconds
+      );
+
+    }
+  );
+
+}
+
+
+function canvasToBlob(
+  canvas
+) {
+
+  return new Promise(
+    function(resolve, reject) {
+
+      canvas.toBlob(
+
+        function(blob) {
+
+          if (blob) {
+
+            resolve(blob);
+
+          } else {
+
+            reject(
+              new Error(
+                "Could not create card image."
+              )
+            );
+
+          }
+
+        },
+
+        "image/png",
+
+        1
+
+      );
+
+    }
+  );
+
+}
+
+
+function createCardFileName() {
+
+  const safeName =
+    currentCustomer.customerName
+
+      .replace(
+        /[^a-z0-9]+/gi,
+        "-"
+      )
+
+      .replace(
+        /^-|-$/g,
+        ""
+      )
+
+      .toLowerCase();
+
+
+  return (
+
+    "hifi-collection-" +
+
+    (safeName ||
+      "customer") +
+
+    "-visit-card.png"
+
+  );
+
+}
+
+
+function createShareText() {
+
+  let text =
+
+    "Hifi Collection — Customer Visit" +
+
+    "\n\n" +
+
+    currentCustomer.customerName +
+
+    "\n" +
+
+    currentCustomer.category;
+
+
+  if (
+    currentCustomer.eventDate
+  ) {
+
+    text +=
+
+      "\nEvent Date: " +
+
+      formatEventDate(
+        currentCustomer.eventDate
+      );
+
+  }
+
+
+  text +=
+
+    "\n\nWear. Flaunt. Return.";
+
+
+  return text;
+
+}
+
+
+function downloadCard(
+  blob
+) {
+
+  const url =
+    URL.createObjectURL(
+      blob
+    );
+
+
+  const link =
+    document.createElement(
+      "a"
+    );
+
+
+  link.href =
+    url;
+
+
+  link.download =
+    createCardFileName();
+
+
+  document.body.appendChild(
+    link
+  );
+
+
+  link.click();
+
+
+  link.remove();
+
+
+  setTimeout(
+    function() {
+
+      URL.revokeObjectURL(
+        url
+      );
+
+    },
+    1000
+  );
+
+}
+
+
+/* =========================================================
+   NEW WALK-IN
+   ========================================================= */
+
+newWalkInButton.addEventListener(
+  "click",
+  resetForm
+);
+
 
 function resetForm() {
 
   customerNameInput.value =
     "";
 
-
   contactNumberInput.value =
     "";
-
 
   emailInput.value =
     "";
 
-
   instagramInput.value =
     "";
-
 
   categoryInput.value =
     "";
 
-
   staffInput.value =
     "";
-
 
   purchaseStatusInput.value =
     "";
 
-
   eventDateInput.value =
     "";
-
 
   notesInput.value =
     "";
@@ -2104,9 +2152,8 @@ function resetForm() {
   statusMessage.textContent =
     "";
 
-
-  statusMessage.className =
-    "status-message";
+  shareStatus.textContent =
+    "";
 
 
   productsContainer.innerHTML =
@@ -2130,11 +2177,9 @@ function resetForm() {
 
   window.scrollTo({
 
-    top:
-      0,
+    top: 0,
 
-    behavior:
-      "smooth"
+    behavior: "smooth"
 
   });
 
@@ -2144,9 +2189,9 @@ function resetForm() {
 }
 
 
-/* ---------------------------------------------------------
-   33. INITIALIZE
-   --------------------------------------------------------- */
+/* =========================================================
+   INITIALIZE
+   ========================================================= */
 
 updateRemoveButtons();
 
