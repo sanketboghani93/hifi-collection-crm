@@ -1985,3 +1985,49 @@ textarea:focus {
   }
 
 }
+/* =========================================================
+   HIFI LOGO — FINAL SIZE SAFETY FIX
+   Prevents the logo PNG from rendering at its native size.
+   ========================================================= */
+
+/* Login screen logo */
+.login-logo {
+  display: block !important;
+  width: 210px !important;
+  max-width: 80% !important;
+  height: auto !important;
+  max-height: 110px !important;
+  object-fit: contain !important;
+  object-position: center !important;
+  margin: 0 auto !important;
+}
+
+/* Main CRM header logo */
+.header-logo {
+  display: block !important;
+  width: 220px !important;
+  max-width: 70% !important;
+  height: auto !important;
+  max-height: 120px !important;
+  object-fit: contain !important;
+  object-position: center !important;
+  margin: 0 auto !important;
+}
+
+/* Customer visit card logo */
+.card-logo {
+  display: block !important;
+  width: 165px !important;
+  max-width: 50% !important;
+  height: auto !important;
+  max-height: 72px !important;
+  object-fit: contain !important;
+  object-position: center !important;
+  margin: 0 auto !important;
+}
+
+/* Never allow an image to exceed its container */
+img {
+  max-width: 100%;
+  height: auto;
+}
