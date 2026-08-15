@@ -13,7 +13,15 @@ const GOOGLE_SCRIPT_URL =
 
 
 /* ---------------------------------------------------------
-   2. STORE SETTINGS
+   2. GOOGLE SIGN-IN CLIENT ID
+   --------------------------------------------------------- */
+
+const GOOGLE_CLIENT_ID =
+  "857394054504-9qmrpnhkuicavag1mu96i9b8ko22p6qc.apps.googleusercontent.com";
+
+
+/* ---------------------------------------------------------
+   3. STORE SETTINGS
    --------------------------------------------------------- */
 
 const STORE_NAME =
@@ -24,7 +32,7 @@ const COUNTRY_CODE =
 
 
 /* ---------------------------------------------------------
-   3. ALLOWED CATEGORIES
+   4. ALLOWED CATEGORIES
    --------------------------------------------------------- */
 
 const CATEGORIES = [
@@ -47,8 +55,32 @@ const CATEGORIES = [
 
 
 /* ---------------------------------------------------------
-   4. DOM ELEMENTS
+   5. DOM ELEMENTS
    --------------------------------------------------------- */
+
+const loginSection =
+  document.getElementById(
+    "loginSection"
+  );
+
+
+const crmSection =
+  document.getElementById(
+    "crmSection"
+  );
+
+
+const googleSignInButton =
+  document.getElementById(
+    "googleSignInButton"
+  );
+
+
+const loginStatus =
+  document.getElementById(
+    "loginStatus"
+  );
+
 
 const customerNameInput =
   document.getElementById(
@@ -165,7 +197,7 @@ const whatsappButton =
 
 
 /* ---------------------------------------------------------
-   5. CURRENT CUSTOMER
+   6. CURRENT CUSTOMER
    --------------------------------------------------------- */
 
 let currentCustomer =
@@ -173,7 +205,266 @@ let currentCustomer =
 
 
 /* ---------------------------------------------------------
-   6. PHONE NUMBER INPUT
+   7. GOOGLE SIGN-IN STATE
+   --------------------------------------------------------- */
+
+let googleCredential =
+  null;
+
+
+/* ---------------------------------------------------------
+   8. GOOGLE SIGN-IN INITIALIZATION
+   --------------------------------------------------------- */
+
+function initializeGoogleSignIn() {
+
+  /*
+    Google Identity Services may load slightly after
+    app.js, so we wait and retry if necessary.
+  */
+
+  if (
+    typeof google === "undefined" ||
+    !google.accounts ||
+    !google.accounts.id
+  ) {
+
+    setTimeout(
+      initializeGoogleSignIn,
+      500
+    );
+
+    return;
+
+  }
+
+
+  if (!googleSignInButton) {
+
+    console.error(
+      "Google Sign-In button container not found."
+    );
+
+    return;
+
+  }
+
+
+  google.accounts.id.initialize({
+
+    client_id:
+      GOOGLE_CLIENT_ID,
+
+    callback:
+      handleGoogleCredential,
+
+    auto_select:
+      false
+
+  });
+
+
+  google.accounts.id.renderButton(
+
+    googleSignInButton,
+
+    {
+
+      theme:
+        "outline",
+
+      size:
+        "large",
+
+      text:
+        "signin_with",
+
+      shape:
+        "rectangular",
+
+      width:
+        280
+
+    }
+
+  );
+
+}
+
+
+/* ---------------------------------------------------------
+   9. GOOGLE CREDENTIAL CALLBACK
+   --------------------------------------------------------- */
+
+function handleGoogleCredential(
+  response
+) {
+
+  console.log(
+    "Google credential received."
+  );
+
+
+  /*
+    TEMPORARY DEVELOPMENT STEP
+
+    We are NOT yet trusting the email from the browser
+    for access control.
+
+    For this stage, we only confirm that Google Sign-In
+    successfully returned a credential.
+
+    The secure backend verification will be added next.
+  */
+
+  if (
+    !response ||
+    !response.credential
+  ) {
+
+    setLoginError(
+      "Google sign-in did not return a valid credential."
+    );
+
+    return;
+
+  }
+
+
+  googleCredential =
+    response.credential;
+
+
+  setLoginSuccess(
+    "Google sign-in successful."
+  );
+
+
+  /*
+    TEMPORARILY SHOW THE CRM
+
+    This is only to test that the Google authentication
+    flow works correctly.
+
+    We will replace this with verified staff
+    authorization in the next step.
+  */
+
+  showCRM();
+
+
+  console.log(
+    "Google credential received successfully."
+  );
+
+}
+
+
+/* ---------------------------------------------------------
+   10. SHOW CRM
+   --------------------------------------------------------- */
+
+function showCRM() {
+
+  if (loginSection) {
+
+    loginSection.style.display =
+      "none";
+
+  }
+
+
+  if (crmSection) {
+
+    crmSection.style.display =
+      "block";
+
+  }
+
+
+  /*
+    Scroll back to the top after login.
+  */
+
+  window.scrollTo({
+
+    top:
+      0,
+
+    behavior:
+      "smooth"
+
+  });
+
+
+  /*
+    Focus customer name for convenience.
+  */
+
+  setTimeout(
+    function () {
+
+      if (customerNameInput) {
+
+        customerNameInput.focus();
+
+      }
+
+    },
+    300
+  );
+
+}
+
+
+/* ---------------------------------------------------------
+   11. LOGIN STATUS HELPERS
+   --------------------------------------------------------- */
+
+function setLoginError(
+  message
+) {
+
+  if (!loginStatus) {
+
+    return;
+
+  }
+
+
+  loginStatus.textContent =
+    message;
+
+
+  loginStatus.className =
+    "login-status error";
+
+}
+
+
+function setLoginSuccess(
+  message
+) {
+
+  if (!loginStatus) {
+
+    return;
+
+  }
+
+
+  loginStatus.textContent =
+    message;
+
+
+  loginStatus.className =
+    "login-status success";
+
+}
+
+
+/* ---------------------------------------------------------
+   12. PHONE NUMBER INPUT
    --------------------------------------------------------- */
 
 contactNumberInput.addEventListener(
@@ -207,7 +498,7 @@ contactNumberInput.addEventListener(
 
 
 /* ---------------------------------------------------------
-   7. PREVENT INVALID PHONE KEYS
+   13. PREVENT INVALID PHONE KEYS
    --------------------------------------------------------- */
 
 contactNumberInput.addEventListener(
@@ -261,7 +552,7 @@ contactNumberInput.addEventListener(
 
 
 /* ---------------------------------------------------------
-   8. ADD PRODUCT
+   14. ADD PRODUCT
    --------------------------------------------------------- */
 
 addProductButton.addEventListener(
@@ -275,7 +566,7 @@ addProductButton.addEventListener(
 
 
 /* ---------------------------------------------------------
-   9. CREATE PRODUCT ROW
+   15. CREATE PRODUCT ROW
    --------------------------------------------------------- */
 
 function createProductRow(
@@ -378,7 +669,7 @@ function createProductRow(
 
 
 /* ---------------------------------------------------------
-   10. UPDATE PRODUCT REMOVE BUTTONS
+   16. UPDATE PRODUCT REMOVE BUTTONS
    --------------------------------------------------------- */
 
 function updateRemoveButtons() {
@@ -419,7 +710,7 @@ function updateRemoveButtons() {
 
 
 /* ---------------------------------------------------------
-   11. GET PRODUCT CODES
+   17. GET PRODUCT CODES
    --------------------------------------------------------- */
 
 function getProducts() {
@@ -461,7 +752,7 @@ function getProducts() {
 
 
 /* ---------------------------------------------------------
-   12. ERROR HELPERS
+   18. ERROR HELPERS
    --------------------------------------------------------- */
 
 function showFieldError(
@@ -526,7 +817,7 @@ function clearAllErrors() {
 
 
 /* ---------------------------------------------------------
-   13. LOAD STAFF FROM GOOGLE SHEET
+   19. LOAD STAFF FROM GOOGLE SHEET
    ---------------------------------------------------------
 
    IMPORTANT:
@@ -537,6 +828,7 @@ function clearAllErrors() {
    Only active staff names are returned.
 
    Google email addresses are NOT returned.
+
    --------------------------------------------------------- */
 
 function loadStaffFromGoogleSheet() {
@@ -633,7 +925,7 @@ function loadStaffFromGoogleSheet() {
 
 
 /* ---------------------------------------------------------
-   14. POPULATE STAFF DROPDOWN
+   20. POPULATE STAFF DROPDOWN
    --------------------------------------------------------- */
 
 function populateStaffDropdown(
@@ -691,7 +983,7 @@ function populateStaffDropdown(
 
 
 /* ---------------------------------------------------------
-   15. STAFF LOADING ERROR
+   21. STAFF LOADING ERROR
    --------------------------------------------------------- */
 
 function showStaffLoadingError() {
@@ -722,7 +1014,7 @@ function showStaffLoadingError() {
 
 
 /* ---------------------------------------------------------
-   16. CLEANUP STAFF SCRIPT
+   22. CLEANUP STAFF SCRIPT
    --------------------------------------------------------- */
 
 function cleanupStaffScript() {
@@ -755,7 +1047,7 @@ function cleanupStaffScript() {
 
 
 /* ---------------------------------------------------------
-   17. VALIDATE FORM
+   23. VALIDATE FORM
    --------------------------------------------------------- */
 
 function validateForm() {
@@ -874,6 +1166,7 @@ function validateForm() {
     isValid =
       false;
 
+
   } else if (
     !CATEGORIES.includes(
       category
@@ -943,6 +1236,7 @@ function validateForm() {
     statusMessage.textContent =
       "Please select a follow-up date.";
 
+
     statusMessage.className =
       "status-message error";
 
@@ -959,7 +1253,7 @@ function validateForm() {
 
 
 /* ---------------------------------------------------------
-   18. SUBMIT BUTTON
+   24. SUBMIT BUTTON
    --------------------------------------------------------- */
 
 submitButton.addEventListener(
@@ -1024,7 +1318,7 @@ submitButton.addEventListener(
 
 
 /* ---------------------------------------------------------
-   19. SUBMIT WALK-IN
+   25. SUBMIT WALK-IN
    --------------------------------------------------------- */
 
 async function submitWalkIn() {
@@ -1230,7 +1524,7 @@ async function submitWalkIn() {
 
 
 /* ---------------------------------------------------------
-   20. SUCCESS CARD
+   26. SUCCESS CARD
    --------------------------------------------------------- */
 
 function showSuccessCard() {
@@ -1260,7 +1554,7 @@ function showSuccessCard() {
 
 
 /* ---------------------------------------------------------
-   21. POPULATE CUSTOMER CARD
+   27. POPULATE CUSTOMER CARD
    --------------------------------------------------------- */
 
 function populateCustomerCard() {
@@ -1373,7 +1667,7 @@ function populateCustomerCard() {
 
 
 /* ---------------------------------------------------------
-   22. FORMAT PHONE
+   28. FORMAT PHONE
    --------------------------------------------------------- */
 
 function formatPhoneNumber(
@@ -1404,7 +1698,7 @@ function formatPhoneNumber(
 
 
 /* ---------------------------------------------------------
-   23. FORMAT DATE
+   29. FORMAT DATE
    --------------------------------------------------------- */
 
 function formatCurrentDate() {
@@ -1435,7 +1729,7 @@ function formatCurrentDate() {
 
 
 /* ---------------------------------------------------------
-   24. WHATSAPP
+   30. WHATSAPP
    --------------------------------------------------------- */
 
 whatsappButton.addEventListener(
@@ -1460,7 +1754,8 @@ whatsappButton.addEventListener(
       "Hi " +
       currentCustomer.customerName +
       ", thank you for visiting " +
-      "Hifi Collection today. " +
+      STORE_NAME +
+      " today. " +
       "It was a pleasure assisting you.";
 
 
@@ -1488,7 +1783,8 @@ whatsappButton.addEventListener(
     message +=
       "\n\nPlease feel free to reach out to us " +
       "if you need any further details." +
-      "\n\n— Hifi Collection";
+      "\n\n— " +
+      STORE_NAME;
 
 
     const whatsappUrl =
@@ -1510,7 +1806,7 @@ whatsappButton.addEventListener(
 
 
 /* ---------------------------------------------------------
-   25. NEW WALK-IN
+   31. NEW WALK-IN
    --------------------------------------------------------- */
 
 newWalkInButton.addEventListener(
@@ -1524,7 +1820,7 @@ newWalkInButton.addEventListener(
 
 
 /* ---------------------------------------------------------
-   26. RESET FORM
+   32. RESET FORM
    --------------------------------------------------------- */
 
 function resetForm() {
@@ -1612,9 +1908,11 @@ function resetForm() {
 
 
 /* ---------------------------------------------------------
-   27. INITIALIZE
+   33. INITIALIZE
    --------------------------------------------------------- */
 
 updateRemoveButtons();
 
 loadStaffFromGoogleSheet();
+
+initializeGoogleSignIn();
