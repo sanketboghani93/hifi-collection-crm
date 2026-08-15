@@ -25,6 +25,12 @@
     defer
   ></script>
 
+  <!-- html2canvas for sharing the customer card as an image -->
+
+  <script
+    src="https://cdn.jsdelivr.net/npm/html2canvas@1.4.1/dist/html2canvas.min.js"
+  ></script>
+
   <link
     rel="stylesheet"
     href="style.css"
@@ -39,7 +45,7 @@
 
 
     <!-- =====================================================
-         STAFF LOGIN
+         LOGIN
          ===================================================== -->
 
     <section
@@ -49,12 +55,14 @@
 
       <div class="login-card">
 
-        <div class="login-brand">
-          HIFI
-        </div>
+        <img
+          src="hifi-logo.PNG"
+          alt="Hifi Collection"
+          class="login-logo"
+        >
 
-        <div class="login-brand-subtitle">
-          COLLECTION
+        <div class="login-tagline">
+          Wear. Flaunt. Return.
         </div>
 
         <h1>
@@ -95,12 +103,14 @@
 
       <header class="brand-header">
 
-        <div class="brand-mark">
-          HIFI
-        </div>
+        <img
+          src="hifi-logo.PNG"
+          alt="Hifi Collection"
+          class="header-logo"
+        >
 
-        <div class="brand-name">
-          COLLECTION
+        <div class="header-tagline">
+          Wear. Flaunt. Return.
         </div>
 
         <div class="brand-subtitle">
@@ -110,7 +120,9 @@
       </header>
 
 
-      <!-- FORM -->
+      <!-- ===================================================
+           FORM
+           =================================================== -->
 
       <section class="form-card">
 
@@ -168,7 +180,7 @@
         </div>
 
 
-        <!-- CONTACT NUMBER -->
+        <!-- CONTACT -->
 
         <div class="form-group">
 
@@ -272,9 +284,7 @@
 
         <!-- VISIT DETAILS -->
 
-        <div
-          class="section-heading second-section"
-        >
+        <div class="section-heading second-section">
 
           <span class="section-number">
             02
@@ -391,9 +401,7 @@
 
         <!-- PRODUCTS -->
 
-        <div
-          class="section-heading second-section"
-        >
+        <div class="section-heading second-section">
 
           <span class="section-number">
             03
@@ -574,8 +582,6 @@
         </button>
 
 
-        <!-- STATUS -->
-
         <div
           id="statusMessage"
           class="status-message"
@@ -586,7 +592,7 @@
 
 
       <!-- ===================================================
-           SUCCESS CARD
+           SUCCESS / CUSTOMER CARD
            =================================================== -->
 
       <section
@@ -604,62 +610,232 @@
         </div>
 
 
-        <div class="customer-card">
+        <!-- THIS ENTIRE ELEMENT IS CAPTURED AS IMAGE -->
 
-          <div class="card-brand">
-            HIFI COLLECTION
+        <div
+          id="customerCard"
+          class="customer-card"
+        >
+
+          <div class="card-top-line"></div>
+
+
+          <!-- LOGO -->
+
+          <div class="card-logo-area">
+
+            <img
+              src="hifi-logo.PNG"
+              alt="Hifi Collection"
+              class="card-logo"
+            >
+
+            <div class="card-tagline">
+              Wear. Flaunt. Return.
+            </div>
+
           </div>
 
-          <div
-            id="cardCustomerName"
-            class="card-customer-name"
-          ></div>
 
-          <div
-            id="cardContact"
-            class="card-contact"
-          ></div>
-
-          <div
-            id="cardDate"
-            class="card-date"
-          ></div>
-
-
-          <div class="card-divider"></div>
-
-
-          <div class="card-label">
-            INTERESTED IN
+          <div class="card-kicker">
+            CUSTOMER VISIT
           </div>
 
-          <div
-            id="cardCategory"
-            class="card-category"
-          ></div>
 
+          <!-- CUSTOMER -->
 
-          <div class="card-label shortlist-label">
-            SHORTLISTED
+          <div class="card-customer">
+
+            <div class="customer-avatar">
+              <span>
+                ♡
+              </span>
+            </div>
+
+            <div class="customer-main">
+
+              <div
+                id="cardCustomerName"
+                class="card-customer-name"
+              ></div>
+
+              <div
+                id="cardContact"
+                class="card-contact"
+              ></div>
+
+            </div>
+
+            <div class="visit-date-box">
+
+              <div class="visit-date-icon">
+                ◫
+              </div>
+
+              <div class="visit-date-label">
+                VISIT DATE
+              </div>
+
+              <div
+                id="cardDate"
+                class="visit-date"
+              ></div>
+
+            </div>
+
           </div>
 
-          <div
-            id="cardProducts"
-            class="card-products"
-          ></div>
+
+          <!-- MAIN DETAILS -->
+
+          <div class="card-details-grid">
 
 
-          <div class="card-label">
-            ASSISTED BY
+            <div class="card-detail">
+
+              <div class="detail-icon">
+                ◇
+              </div>
+
+              <div>
+
+                <div class="card-label">
+                  INTERESTED IN
+                </div>
+
+                <div
+                  id="cardCategory"
+                  class="card-value"
+                ></div>
+
+              </div>
+
+            </div>
+
+
+            <div class="card-detail">
+
+              <div class="detail-icon">
+                ★
+              </div>
+
+              <div>
+
+                <div class="card-label">
+                  PURCHASE STATUS
+                </div>
+
+                <div
+                  id="cardPurchaseStatus"
+                  class="card-value"
+                ></div>
+
+              </div>
+
+            </div>
+
+
+            <div class="card-detail">
+
+              <div class="detail-icon">
+                ♡
+              </div>
+
+              <div>
+
+                <div class="card-label">
+                  EVENT DATE
+                </div>
+
+                <div
+                  id="cardEventDate"
+                  class="card-value"
+                ></div>
+
+              </div>
+
+            </div>
+
+
           </div>
 
-          <div
-            id="cardStaff"
-            class="card-staff"
-          ></div>
+
+          <!-- PRODUCTS -->
+
+          <div class="shortlisted-section">
+
+            <div class="shortlisted-title">
+
+              <span>
+                ✦
+              </span>
+
+              SHORTLISTED PRODUCTS
+
+              <span>
+                ✦
+              </span>
+
+            </div>
+
+
+            <div
+              id="cardProducts"
+              class="card-products"
+            ></div>
+
+          </div>
+
+
+          <!-- STAFF -->
+
+          <div class="card-bottom-row">
+
+            <div class="assisted-block">
+
+              <div class="staff-icon">
+                ♙
+              </div>
+
+              <div>
+
+                <div class="card-label">
+                  ASSISTED BY
+                </div>
+
+                <div
+                  id="cardStaff"
+                  class="card-staff"
+                ></div>
+
+              </div>
+
+            </div>
+
+          </div>
+
+
+          <!-- FOOTER -->
+
+          <div class="card-footer">
+
+            <div class="thank-you">
+              Thank you for visiting us!
+            </div>
+
+            <div class="footer-message">
+              WE LOOK FORWARD TO STYLING YOU AGAIN.
+            </div>
+
+          </div>
+
+
+          <div class="card-bottom-line"></div>
 
         </div>
 
+
+        <!-- ACTIONS -->
 
         <div class="success-actions">
 
@@ -668,8 +844,28 @@
             id="whatsappButton"
             class="whatsapp-button"
           >
+            <span class="button-icon">
+              ◉
+            </span>
+
             WhatsApp Customer
+
           </button>
+
+
+          <button
+            type="button"
+            id="shareCardButton"
+            class="share-card-button"
+          >
+            <span class="button-icon">
+              ↗
+            </span>
+
+            Share Visit Card
+
+          </button>
+
 
           <button
             type="button"
@@ -680,6 +876,12 @@
           </button>
 
         </div>
+
+
+        <div
+          id="shareStatus"
+          class="share-status"
+        ></div>
 
 
       </section>
@@ -693,7 +895,7 @@
 
   <!-- Cache-busted JavaScript -->
 
-  <script src="app.js?v=4"></script>
+  <script src="app.js?v=5"></script>
 
 </body>
 
