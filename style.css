@@ -1,11 +1,12 @@
 /* =========================================================
-   HIFI COLLECTION — CUSTOMER WALK-IN
-   Main stylesheet
+   HIFI COLLECTION
+   CUSTOMER WALK-IN CRM
+   PREMIUM STYLE
    ========================================================= */
 
 
 /* ---------------------------------------------------------
-   1. RESET
+   RESET
    --------------------------------------------------------- */
 
 * {
@@ -21,128 +22,135 @@ html {
 
 
 body {
+
   min-height: 100vh;
-  background: #f4f1eb;
-  color: #171717;
+
+  background:
+    radial-gradient(
+      circle at top,
+      #faf7ef 0%,
+      #f3eee3 45%,
+      #eee8dc 100%
+    );
+
+  color: #142d27;
+
   font-family:
     -apple-system,
     BlinkMacSystemFont,
     "Helvetica Neue",
     Arial,
     sans-serif;
+
+}
+
+
+button,
+input,
+select,
+textarea {
+  font-family: inherit;
 }
 
 
 /* ---------------------------------------------------------
-   2. APP BACKGROUND
-   --------------------------------------------------------- */
-
-body::before {
-  content: "";
-
-  position: fixed;
-
-  top: 0;
-  left: 0;
-  right: 0;
-
-  height: 6px;
-
-  background: #171717;
-
-  z-index: 1000;
-}
-
-
-/* ---------------------------------------------------------
-   3. MAIN APP CONTAINER
+   APP
    --------------------------------------------------------- */
 
 .app-shell {
+
   width: 100%;
-  max-width: 760px;
+
+  max-width: 780px;
 
   margin: 0 auto;
 
   padding:
-    58px 24px
-    80px;
+    44px 20px
+    70px;
+
 }
 
 
 /* ---------------------------------------------------------
-   4. STAFF LOGIN
+   LOGIN
    --------------------------------------------------------- */
 
 .login-section {
-  min-height: 100vh;
+
+  min-height:
+    calc(100vh - 100px);
 
   display: flex;
 
   align-items: center;
+
   justify-content: center;
 
-  padding:
-    30px 0;
 }
 
 
 .login-card {
+
   width: 100%;
-  max-width: 430px;
+
+  max-width: 470px;
 
   padding:
-    46px 38px
-    48px;
+    48px 40px;
+
+  background:
+    rgba(255,255,255,0.94);
 
   border:
-    1px solid #e2ded6;
+    1px solid #ded4c0;
 
-  border-radius: 4px;
-
-  background: #fff;
+  border-radius:
+    18px;
 
   box-shadow:
-    0 20px 60px rgba(0, 0, 0, 0.05);
+    0 30px 80px
+    rgba(35, 45, 37, 0.10);
 
   text-align: center;
+
 }
 
 
-.login-brand {
+.login-logo {
+
+  display: block;
+
+  width: 210px;
+
+  max-width: 80%;
+
+  height: auto;
+
+  margin: 0 auto;
+
+}
+
+
+.login-tagline {
+
+  margin-top: 4px;
+
+  color: #a66b16;
+
   font-family:
     Georgia,
-    "Times New Roman",
     serif;
 
-  font-size: 38px;
+  font-style: italic;
 
-  font-weight: 700;
+  font-size: 18px;
 
-  letter-spacing: 0.16em;
-
-  line-height: 1;
-
-  color: #111;
-}
-
-
-.login-brand-subtitle {
-  margin-top: 8px;
-
-  font-size: 10px;
-
-  font-weight: 600;
-
-  letter-spacing: 0.48em;
-
-  padding-left: 0.48em;
-
-  color: #555;
 }
 
 
 .login-card h1 {
+
   margin-top: 42px;
 
   font-family:
@@ -150,192 +158,203 @@ body::before {
     "Times New Roman",
     serif;
 
-  font-size: 27px;
+  font-size: 30px;
 
   font-weight: 500;
 
-  line-height: 1.2;
-
-  color: #171717;
 }
 
 
 .login-card p {
-  max-width: 310px;
 
   margin:
-    12px auto
-    30px;
+    10px auto 28px;
 
-  font-size: 12px;
+  max-width: 330px;
+
+  color: #777;
+
+  font-size: 13px;
 
   line-height: 1.6;
 
-  color: #888;
 }
 
 
 .google-sign-in-button {
+
   display: flex;
 
   justify-content: center;
 
-  width: 100%;
-
-  min-height: 44px;
 }
 
 
 .login-status {
+
   min-height: 20px;
 
   margin-top: 18px;
 
   font-size: 12px;
 
-  line-height: 1.5;
-
-  color: #777;
 }
 
 
 .login-status.error {
-  color: #963f35;
+  color: #9b4438;
 }
 
 
 .login-status.success {
-  color: #426044;
+  color: #3d6547;
 }
 
 
 /* ---------------------------------------------------------
-   5. BRAND HEADER
+   HEADER
    --------------------------------------------------------- */
 
 .brand-header {
+
   text-align: center;
 
   padding:
-    18px 0
-    44px;
+    10px 0 38px;
+
 }
 
 
-.brand-mark {
+.header-logo {
+
+  display: block;
+
+  width: 220px;
+
+  max-width: 70%;
+
+  height: auto;
+
+  margin: 0 auto;
+
+}
+
+
+.header-tagline {
+
+  margin-top: -4px;
+
+  color: #a66b16;
+
   font-family:
     Georgia,
-    "Times New Roman",
     serif;
 
-  font-size: 42px;
+  font-size: 17px;
 
-  font-weight: 700;
+  font-style: italic;
 
-  letter-spacing: 0.16em;
-
-  line-height: 1;
-
-  color: #111;
-}
-
-
-.brand-name {
-  margin-top: 8px;
-
-  font-size: 11px;
-
-  font-weight: 600;
-
-  letter-spacing: 0.48em;
-
-  padding-left: 0.48em;
-
-  color: #555;
 }
 
 
 .brand-subtitle {
-  margin-top: 26px;
 
-  font-size: 10px;
+  margin-top: 14px;
 
-  font-weight: 700;
+  font-size: 9px;
 
-  letter-spacing: 0.24em;
+  font-weight: 800;
 
-  color: #777;
+  letter-spacing: 0.28em;
+
+  color: #31574d;
+
 }
 
 
 /* ---------------------------------------------------------
-   6. FORM CARD
+   FORM CARD
    --------------------------------------------------------- */
 
 .form-card {
-  background: #fff;
 
-  border: 1px solid #e2ded6;
+  background:
+    rgba(255,255,255,0.96);
 
-  border-radius: 4px;
+  border:
+    1px solid #ded6c8;
+
+  border-radius:
+    12px;
 
   padding:
     42px 44px
     48px;
 
   box-shadow:
-    0 20px 60px rgba(0, 0, 0, 0.05);
+    0 24px 70px
+    rgba(36, 47, 40, 0.08);
+
 }
 
 
 /* ---------------------------------------------------------
-   7. SECTION HEADINGS
+   SECTION HEADINGS
    --------------------------------------------------------- */
 
 .section-heading {
+
   display: flex;
 
   align-items: flex-start;
 
-  gap: 16px;
+  gap: 15px;
 
   margin-bottom: 30px;
+
 }
 
 
 .section-heading.second-section {
+
   margin-top: 48px;
+
 }
 
 
 .section-number {
+
   display: flex;
 
   align-items: center;
+
   justify-content: center;
 
   flex-shrink: 0;
 
-  width: 30px;
-  height: 30px;
+  width: 31px;
 
-  border: 1px solid #d7d2c9;
+  height: 31px;
+
+  border:
+    1px solid #c9bda7;
 
   border-radius: 50%;
 
+  color: #9b681b;
+
   font-family:
     Georgia,
-    "Times New Roman",
     serif;
 
-  font-size: 12px;
+  font-size: 11px;
 
-  color: #666;
 }
 
 
 .section-heading h1,
 .section-heading h2 {
+
   font-family:
     Georgia,
     "Times New Roman",
@@ -345,57 +364,67 @@ body::before {
 
   font-weight: 500;
 
-  line-height: 1.2;
+  color: #18352e;
 
-  color: #171717;
 }
 
 
 .section-heading p {
+
   margin-top: 6px;
+
+  color: #8b8982;
 
   font-size: 12px;
 
   line-height: 1.5;
 
-  color: #888;
 }
 
 
 /* ---------------------------------------------------------
-   8. FORM GROUP
+   FORM
    --------------------------------------------------------- */
 
 .form-group {
+
   margin-bottom: 25px;
+
 }
 
 
 .form-group label {
+
   display: block;
 
   margin-bottom: 9px;
 
+  color: #3d4a45;
+
   font-size: 11px;
 
-  font-weight: 700;
+  font-weight: 800;
 
   letter-spacing: 0.08em;
 
   text-transform: uppercase;
 
-  color: #444;
 }
 
 
 .required {
-  color: #8c4a3c;
 
-  margin-left: 2px;
+  color: #b16e15;
+
 }
 
 
 .optional {
+
+  margin-left: 4px;
+
+  color: #999;
+
   font-size: 9px;
 
   font-weight: 400;
@@ -404,227 +433,208 @@ body::before {
 
   text-transform: none;
 
-  color: #999;
-
-  margin-left: 4px;
 }
 
-
-/* ---------------------------------------------------------
-   9. INPUTS
-   --------------------------------------------------------- */
 
 input,
 select,
 textarea {
+
   width: 100%;
 
-  border: 1px solid #dcd8d0;
+  border:
+    1px solid #d9d2c5;
 
-  border-radius: 3px;
+  border-radius:
+    5px;
 
-  background: #fff;
+  background:
+    #fff;
 
-  color: #171717;
-
-  font-family: inherit;
+  color: #172f29;
 
   font-size: 14px;
 
   outline: none;
 
   transition:
-    border-color 0.2s ease,
-    box-shadow 0.2s ease,
-    background 0.2s ease;
+    border-color .2s,
+    box-shadow .2s;
+
 }
 
 
 input,
 select {
-  height: 50px;
+
+  height: 51px;
 
   padding:
     0 15px;
+
 }
 
 
 textarea {
+
+  min-height: 92px;
+
   padding:
-    14px 15px;
+    13px 15px;
 
   resize: vertical;
 
-  min-height: 90px;
-
   line-height: 1.5;
+
 }
 
 
 input::placeholder,
 textarea::placeholder {
+
   color: #aaa;
+
 }
 
 
 input:focus,
 select:focus,
 textarea:focus {
-  border-color: #777;
+
+  border-color:
+    #8d6b35;
 
   box-shadow:
-    0 0 0 3px rgba(0, 0, 0, 0.04);
+    0 0 0 3px
+    rgba(166,107,22,.08);
+
 }
 
-
-select {
-  cursor: pointer;
-
-  appearance: auto;
-}
-
-
-/* ---------------------------------------------------------
-   10. PHONE INPUT
-   --------------------------------------------------------- */
-
-.phone-input {
-  display: flex;
-
-  width: 100%;
-
-  border: 1px solid #dcd8d0;
-
-  border-radius: 3px;
-
-  overflow: hidden;
-
-  background: #fff;
-
-  transition:
-    border-color 0.2s ease,
-    box-shadow 0.2s ease;
-}
-
-
-.phone-input:focus-within {
-  border-color: #777;
-
-  box-shadow:
-    0 0 0 3px rgba(0, 0, 0, 0.04);
-}
-
-
-.country-code {
-  display: flex;
-
-  align-items: center;
-  justify-content: center;
-
-  min-width: 64px;
-
-  padding:
-    0 12px;
-
-  border-right: 1px solid #dcd8d0;
-
-  background: #f8f6f2;
-
-  font-size: 14px;
-
-  font-weight: 600;
-
-  color: #333;
-}
-
-
-.phone-input input {
-  border: none;
-
-  border-radius: 0;
-
-  box-shadow: none;
-}
-
-
-.phone-input input:focus {
-  border: none;
-
-  box-shadow: none;
-}
-
-
-/* ---------------------------------------------------------
-   11. INSTAGRAM
-   --------------------------------------------------------- */
-
-.instagram-input {
-  display: flex;
-
-  align-items: center;
-
-  border: 1px solid #dcd8d0;
-
-  border-radius: 3px;
-
-  background: #fff;
-
-  overflow: hidden;
-}
-
-
-.instagram-input > span {
-  display: flex;
-
-  align-items: center;
-  justify-content: center;
-
-  width: 42px;
-
-  font-size: 15px;
-
-  color: #777;
-}
-
-
-.instagram-input input {
-  border: none;
-
-  border-radius: 0;
-
-  box-shadow: none;
-
-  padding-left: 0;
-}
-
-
-.instagram-input input:focus {
-  border: none;
-
-  box-shadow: none;
-}
-
-
-/* ---------------------------------------------------------
-   12. ERROR MESSAGES
-   --------------------------------------------------------- */
 
 .field-error {
+
   min-height: 17px;
 
   margin-top: 6px;
 
+  color: #a1493c;
+
   font-size: 11px;
 
-  color: #9a4638;
 }
 
 
 /* ---------------------------------------------------------
-   13. PRODUCT LIST
+   PHONE
+   --------------------------------------------------------- */
+
+.phone-input {
+
+  display: flex;
+
+  overflow: hidden;
+
+  border:
+    1px solid #d9d2c5;
+
+  border-radius: 5px;
+
+  background: #fff;
+
+}
+
+
+.country-code {
+
+  display: flex;
+
+  align-items: center;
+
+  justify-content: center;
+
+  min-width: 65px;
+
+  border-right:
+    1px solid #d9d2c5;
+
+  background:
+    #f6f0e4;
+
+  color: #39544c;
+
+  font-size: 14px;
+
+  font-weight: 700;
+
+}
+
+
+.phone-input input {
+
+  border: none;
+
+  border-radius: 0;
+
+}
+
+
+.phone-input input:focus {
+
+  border: none;
+
+  box-shadow: none;
+
+}
+
+
+/* ---------------------------------------------------------
+   INSTAGRAM
+   --------------------------------------------------------- */
+
+.instagram-input {
+
+  display: flex;
+
+  align-items: center;
+
+  overflow: hidden;
+
+  border:
+    1px solid #d9d2c5;
+
+  border-radius: 5px;
+
+  background: #fff;
+
+}
+
+
+.instagram-input > span {
+
+  width: 42px;
+
+  text-align: center;
+
+  color: #8b8982;
+
+  font-size: 15px;
+
+}
+
+
+.instagram-input input {
+
+  border: none;
+
+}
+
+
+/* ---------------------------------------------------------
+   PRODUCTS
    --------------------------------------------------------- */
 
 .products-container {
+
   display: flex;
 
   flex-direction: column;
@@ -632,29 +642,37 @@ select {
   gap: 10px;
 
   margin-bottom: 13px;
+
 }
 
 
 .product-row {
+
   display: flex;
 
   gap: 8px;
+
 }
 
 
 .product-row input {
+
   flex: 1;
+
 }
 
 
 .remove-product {
+
   width: 50px;
 
-  border: 1px solid #dedad2;
+  border:
+    1px solid #ddd4c4;
 
-  border-radius: 3px;
+  border-radius: 5px;
 
-  background: #faf9f6;
+  background:
+    #faf7f1;
 
   color: #777;
 
@@ -662,24 +680,11 @@ select {
 
   cursor: pointer;
 
-  transition:
-    background 0.2s ease,
-    color 0.2s ease;
 }
 
-
-.remove-product:hover {
-  background: #eeeae3;
-
-  color: #222;
-}
-
-
-/* ---------------------------------------------------------
-   14. ADD PRODUCT
-   --------------------------------------------------------- */
 
 .add-product {
+
   display: inline-flex;
 
   align-items: center;
@@ -690,70 +695,62 @@ select {
 
   background: transparent;
 
-  padding:
-    3px 0;
-
-  font-family: inherit;
+  color: #5d675f;
 
   font-size: 11px;
 
-  font-weight: 700;
+  font-weight: 800;
 
-  letter-spacing: 0.08em;
+  letter-spacing: .08em;
 
   text-transform: uppercase;
 
-  color: #555;
-
   cursor: pointer;
+
 }
 
 
 .add-product span {
+
   display: flex;
 
   align-items: center;
+
   justify-content: center;
 
-  width: 20px;
-  height: 20px;
+  width: 21px;
 
-  border: 1px solid #aaa;
+  height: 21px;
+
+  border:
+    1px solid #9f8c6b;
 
   border-radius: 50%;
 
+  color: #9f6b1d;
+
   font-size: 15px;
 
-  font-weight: 400;
-}
-
-
-.add-product:hover {
-  color: #000;
 }
 
 
 /* ---------------------------------------------------------
-   15. NOTES
+   SUBMIT
    --------------------------------------------------------- */
 
 .notes-group {
+
   margin-top: 32px;
 
-  margin-bottom: 30px;
 }
 
 
-/* ---------------------------------------------------------
-   16. SUBMIT BUTTON
-   --------------------------------------------------------- */
-
 .submit-button {
-  position: relative;
 
   display: flex;
 
   align-items: center;
+
   justify-content: center;
 
   width: 100%;
@@ -762,54 +759,56 @@ select {
 
   margin-top: 8px;
 
-  border: 1px solid #171717;
+  border:
+    1px solid #173e34;
 
-  border-radius: 3px;
+  border-radius: 6px;
 
-  background: #171717;
+  background:
+    linear-gradient(
+      135deg,
+      #173e34,
+      #0d2d26
+    );
 
   color: #fff;
 
-  font-family: inherit;
-
   font-size: 11px;
 
-  font-weight: 700;
+  font-weight: 800;
 
-  letter-spacing: 0.18em;
+  letter-spacing: .18em;
 
   text-transform: uppercase;
 
   cursor: pointer;
 
-  transition:
-    background 0.2s ease,
-    transform 0.1s ease;
+  box-shadow:
+    0 8px 22px
+    rgba(18,52,44,.18);
+
 }
 
 
 .submit-button:hover {
-  background: #2c2c2c;
-}
 
+  transform:
+    translateY(-1px);
 
-.submit-button:active {
-  transform: translateY(1px);
 }
 
 
 .submit-button:disabled {
-  opacity: 0.65;
+
+  opacity: .65;
 
   cursor: wait;
+
 }
 
 
-/* ---------------------------------------------------------
-   17. STATUS MESSAGE
-   --------------------------------------------------------- */
-
 .status-message {
+
   min-height: 20px;
 
   margin-top: 15px;
@@ -818,7 +817,6 @@ select {
 
   font-size: 12px;
 
-  line-height: 1.5;
 }
 
 
@@ -827,104 +825,303 @@ select {
 }
 
 
-.status-message.success {
-  color: #426044;
-}
-
-
 /* ---------------------------------------------------------
-   18. SUCCESS SECTION
+   SUCCESS
    --------------------------------------------------------- */
 
 .success-section {
+
+  padding-top: 12px;
+
   text-align: center;
 
-  padding-top: 25px;
 }
 
 
 .success-icon {
+
   display: flex;
 
   align-items: center;
+
   justify-content: center;
 
-  width: 48px;
-  height: 48px;
+  width: 46px;
 
-  margin:
-    0 auto
-    15px;
+  height: 46px;
 
-  border: 1px solid #b8c5b8;
+  margin: 0 auto 12px;
+
+  border:
+    1px solid #c7d2c5;
 
   border-radius: 50%;
 
-  color: #4c6b4f;
+  color: #3d694e;
 
-  font-size: 20px;
+  font-size: 21px;
+
 }
 
 
 .success-label {
-  margin-bottom: 24px;
+
+  margin-bottom: 20px;
+
+  color: #476456;
 
   font-size: 10px;
 
-  font-weight: 700;
+  font-weight: 800;
 
-  letter-spacing: 0.2em;
+  letter-spacing: .22em;
 
-  color: #607060;
 }
 
 
-/* ---------------------------------------------------------
-   19. CUSTOMER CARD
-   --------------------------------------------------------- */
+/* =========================================================
+   CUSTOMER CARD
+   ========================================================= */
 
 .customer-card {
+
+  position: relative;
+
   width: 100%;
 
-  max-width: 500px;
+  max-width: 620px;
 
-  margin:
-    0 auto;
+  margin: 0 auto;
+
+  overflow: hidden;
 
   padding:
-    42px 32px
-    44px;
+    34px 30px
+    32px;
 
-  border: 1px solid #d7d0c5;
+  border:
+    1px solid #cfa85b;
+
+  border-radius:
+    18px;
+
+  background:
+
+    radial-gradient(
+      circle at 0% 0%,
+      rgba(196,151,65,.10),
+      transparent 28%
+    ),
+
+    radial-gradient(
+      circle at 100% 100%,
+      rgba(196,151,65,.10),
+      transparent 30%
+    ),
+
+    #faf5e9;
+
+  color: #14352d;
+
+  box-shadow:
+    0 28px 80px
+    rgba(31,47,40,.16);
+
+}
+
+
+/* Decorative border */
+
+.customer-card::before {
+
+  content: "";
+
+  position: absolute;
+
+  inset: 9px;
+
+  pointer-events: none;
+
+  border:
+    1px solid
+    rgba(174,127,40,.35);
+
+  border-radius:
+    12px;
+
+}
+
+
+.card-top-line {
+
+  position: absolute;
+
+  top: 0;
+
+  left: 0;
+
+  right: 0;
+
+  height: 7px;
 
   background:
     linear-gradient(
-      145deg,
-      #fffefa,
-      #f8f4ed
+      90deg,
+      #9d691a,
+      #e0b85e,
+      #9d691a
     );
 
-  box-shadow:
-    0 25px 70px rgba(0, 0, 0, 0.09);
-
-  text-align: center;
 }
 
 
-.card-brand {
-  font-size: 9px;
+/* LOGO */
 
-  font-weight: 700;
+.card-logo-area {
 
-  letter-spacing: 0.32em;
+  position: relative;
 
-  color: #777;
+  z-index: 1;
 
-  margin-bottom: 30px;
+  padding:
+    12px 0 8px;
+
+}
+
+
+.card-logo {
+
+  display: block;
+
+  width: 245px;
+
+  max-width: 70%;
+
+  height: auto;
+
+  margin: 0 auto;
+
+}
+
+
+.card-tagline {
+
+  margin-top: -3px;
+
+  color: #153c32;
+
+  font-family:
+    Georgia,
+    serif;
+
+  font-size: 20px;
+
+  font-style: italic;
+
+}
+
+
+/* KICKER */
+
+.card-kicker {
+
+  position: relative;
+
+  z-index: 1;
+
+  margin:
+    24px auto 22px;
+
+  color: #a36b17;
+
+  font-size: 10px;
+
+  font-weight: 900;
+
+  letter-spacing: .24em;
+
+}
+
+
+.card-kicker::before,
+.card-kicker::after {
+
+  content: "";
+
+  display: inline-block;
+
+  vertical-align: middle;
+
+  width: 52px;
+
+  height: 1px;
+
+  margin:
+    0 10px;
+
+  background: #cba75e;
+
+}
+
+
+/* CUSTOMER */
+
+.card-customer {
+
+  position: relative;
+
+  z-index: 1;
+
+  display: grid;
+
+  grid-template-columns:
+    72px 1fr 115px;
+
+  align-items: center;
+
+  gap: 16px;
+
+  padding:
+    0 4px 26px;
+
+}
+
+
+.customer-avatar {
+
+  display: flex;
+
+  align-items: center;
+
+  justify-content: center;
+
+  width: 64px;
+
+  height: 64px;
+
+  border:
+    2px solid #c99431;
+
+  border-radius: 50%;
+
+  background:
+    #123a30;
+
+  color: #e1b653;
+
+  font-size: 29px;
+
+  box-shadow:
+    0 7px 18px
+    rgba(23,47,40,.18);
+
 }
 
 
 .card-customer-name {
+
+  color: #12382f;
+
   font-family:
     Georgia,
     "Times New Roman",
@@ -932,131 +1129,440 @@ select {
 
   font-size: 30px;
 
-  font-weight: 500;
+  font-weight: 600;
 
-  line-height: 1.15;
+  line-height: 1.05;
 
-  text-transform: uppercase;
+  text-align: left;
 
-  color: #171717;
 }
 
 
 .card-contact {
-  margin-top: 9px;
+
+  margin-top: 8px;
+
+  color: #495d56;
 
   font-size: 13px;
 
-  color: #666;
+  text-align: left;
+
 }
 
 
-.card-date {
-  margin-top: 10px;
+.visit-date-box {
 
-  font-size: 10px;
+  padding:
+    12px 9px;
 
-  letter-spacing: 0.08em;
+  border-left:
+    1px solid #d9c18e;
 
-  color: #999;
+  text-align: center;
+
 }
 
 
-.card-divider {
-  width: 55px;
+.visit-date-icon {
 
-  height: 1px;
+  color: #ad741b;
+
+  font-size: 22px;
+
+}
+
+
+.visit-date-label {
+
+  margin-top: 4px;
+
+  color: #ae761c;
+
+  font-size: 8px;
+
+  font-weight: 900;
+
+  letter-spacing: .13em;
+
+}
+
+
+.visit-date {
+
+  margin-top: 5px;
+
+  color: #163a31;
+
+  font-family:
+    Georgia,
+    serif;
+
+  font-size: 12px;
+
+  font-weight: 700;
+
+  line-height: 1.3;
+
+}
+
+
+/* DETAILS */
+
+.card-details-grid {
+
+  position: relative;
+
+  z-index: 1;
+
+  display: grid;
+
+  grid-template-columns:
+    repeat(3, 1fr);
 
   margin:
-    30px auto;
+    0 0 22px;
 
-  background: #c8c0b4;
+  padding:
+    19px 7px;
+
+  border:
+    1px solid #cfa85b;
+
+  border-radius: 12px;
+
+  background:
+    rgba(255,255,255,.35);
+
+}
+
+
+.card-detail {
+
+  display: flex;
+
+  align-items: center;
+
+  justify-content: center;
+
+  gap: 10px;
+
+  min-width: 0;
+
+  padding:
+    0 13px;
+
+}
+
+
+.card-detail + .card-detail {
+
+  border-left:
+    1px solid #d5bd88;
+
+}
+
+
+.detail-icon {
+
+  display: flex;
+
+  align-items: center;
+
+  justify-content: center;
+
+  flex-shrink: 0;
+
+  width: 39px;
+
+  height: 39px;
+
+  border-radius: 50%;
+
+  background:
+    #123a30;
+
+  color: #dbaa4a;
+
+  font-size: 18px;
+
 }
 
 
 .card-label {
-  margin-top: 22px;
 
-  font-size: 9px;
+  color: #a66e17;
 
-  font-weight: 700;
+  font-size: 8px;
 
-  letter-spacing: 0.18em;
+  font-weight: 900;
 
-  color: #999;
+  letter-spacing: .13em;
+
 }
 
 
-.card-category {
-  margin-top: 8px;
+.card-value {
+
+  margin-top: 5px;
+
+  color: #163a31;
 
   font-family:
     Georgia,
-    "Times New Roman",
     serif;
 
-  font-size: 20px;
+  font-size: 14px;
 
-  color: #222;
+  font-weight: 600;
+
+  line-height: 1.2;
+
 }
 
 
-.shortlist-label {
-  margin-top: 30px;
+/* PRODUCTS */
+
+.shortlisted-section {
+
+  position: relative;
+
+  z-index: 1;
+
+  margin-bottom: 20px;
+
+  padding:
+    20px 18px;
+
+  border-radius: 12px;
+
+  background:
+    linear-gradient(
+      135deg,
+      #123b31,
+      #092b24
+    );
+
+  box-shadow:
+    inset 0 0 0 1px
+    rgba(211,163,69,.18);
+
+}
+
+
+.shortlisted-title {
+
+  color: #e1b653;
+
+  font-size: 10px;
+
+  font-weight: 900;
+
+  letter-spacing: .17em;
+
+}
+
+
+.shortlisted-title span {
+
+  margin: 0 7px;
+
 }
 
 
 .card-products {
+
   display: flex;
 
-  flex-direction: column;
+  flex-wrap: wrap;
 
-  gap: 7px;
+  gap: 9px;
 
-  margin-top: 11px;
+  margin-top: 14px;
+
 }
 
 
 .card-product-item {
-  padding:
-    9px 12px;
 
-  border: 1px solid #ded8ce;
+  padding:
+    9px 15px;
+
+  border:
+    1px solid #d3a849;
+
+  border-radius: 6px;
 
   background:
-    rgba(
-      255,
-      255,
-      255,
-      0.55
-    );
+    #faf4e7;
+
+  color: #163a31;
 
   font-family:
     "Courier New",
     monospace;
 
-  font-size: 12px;
+  font-size: 13px;
 
-  letter-spacing: 0.05em;
+  font-weight: 700;
 
-  color: #333;
+  letter-spacing: .04em;
+
+}
+
+
+.card-product-item::before {
+
+  content:
+    "★";
+
+  margin-right: 7px;
+
+  color: #bd8524;
+
+}
+
+
+/* STAFF */
+
+.card-bottom-row {
+
+  position: relative;
+
+  z-index: 1;
+
+  padding:
+    4px 7px 18px;
+
+}
+
+
+.assisted-block {
+
+  display: flex;
+
+  align-items: center;
+
+  gap: 13px;
+
+}
+
+
+.staff-icon {
+
+  display: flex;
+
+  align-items: center;
+
+  justify-content: center;
+
+  width: 48px;
+
+  height: 48px;
+
+  border:
+    1px solid #c79636;
+
+  border-radius: 50%;
+
+  background:
+    #123a30;
+
+  color: #e0b250;
+
+  font-size: 22px;
+
 }
 
 
 .card-staff {
-  margin-top: 8px;
 
-  font-size: 13px;
+  margin-top: 4px;
 
-  color: #444;
+  color: #173a31;
+
+  font-family:
+    Georgia,
+    serif;
+
+  font-size: 17px;
+
+  font-weight: 700;
+
 }
 
 
-/* ---------------------------------------------------------
-   20. SUCCESS ACTIONS
-   --------------------------------------------------------- */
+/* FOOTER */
+
+.card-footer {
+
+  position: relative;
+
+  z-index: 1;
+
+  padding-top: 17px;
+
+  border-top:
+    1px solid #d9c18e;
+
+}
+
+
+.thank-you {
+
+  color: #173c32;
+
+  font-family:
+    Georgia,
+    serif;
+
+  font-size: 23px;
+
+  font-style: italic;
+
+}
+
+
+.footer-message {
+
+  margin-top: 8px;
+
+  color: #6c756e;
+
+  font-size: 8px;
+
+  font-weight: 800;
+
+  letter-spacing: .19em;
+
+}
+
+
+.card-bottom-line {
+
+  height: 4px;
+
+  margin:
+    25px -30px
+    -32px;
+
+  background:
+    linear-gradient(
+      90deg,
+      #9d691a,
+      #e0b85e,
+      #9d691a
+    );
+
+}
+
+
+/* =========================================================
+   ACTION BUTTONS
+   ========================================================= */
 
 .success-actions {
+
   display: flex;
 
   flex-direction: column;
@@ -1065,312 +1571,277 @@ select {
 
   width: 100%;
 
-  max-width: 500px;
+  max-width: 620px;
 
   margin:
-    22px auto
-    0;
+    20px auto 0;
+
 }
 
 
 .whatsapp-button,
+.share-card-button,
 .secondary-button {
+
   width: 100%;
 
-  height: 54px;
+  min-height: 55px;
 
-  border-radius: 3px;
-
-  font-family: inherit;
+  border-radius: 7px;
 
   font-size: 11px;
 
-  font-weight: 700;
+  font-weight: 900;
 
-  letter-spacing: 0.14em;
+  letter-spacing: .13em;
 
   text-transform: uppercase;
 
   cursor: pointer;
+
 }
 
 
 .whatsapp-button {
-  border: 1px solid #355b3b;
 
-  background: #355b3b;
+  border:
+    1px solid #1e5a40;
+
+  background:
+    #1e5a40;
 
   color: #fff;
 
-  transition:
-    background 0.2s ease;
 }
 
 
-.whatsapp-button:hover {
-  background: #294b30;
+.share-card-button {
+
+  border:
+    1px solid #b77a18;
+
+  background:
+    linear-gradient(
+      135deg,
+      #d69a28,
+      #a86d13
+    );
+
+  color: #fff;
+
+  box-shadow:
+    0 8px 20px
+    rgba(166,107,22,.18);
+
 }
 
 
 .secondary-button {
-  border: 1px solid #cfc9bf;
 
-  background: transparent;
+  border:
+    1px solid #cfc7b8;
 
-  color: #444;
+  background:
+    rgba(255,255,255,.6);
+
+  color: #44534d;
+
 }
 
 
-.secondary-button:hover {
-  background: #ebe7e0;
+.button-icon {
+
+  margin-right: 8px;
+
+  font-size: 16px;
+
 }
 
 
-/* ---------------------------------------------------------
-   21. MOBILE
-   --------------------------------------------------------- */
+.share-status {
 
-@media (max-width: 600px) {
+  min-height: 20px;
 
-  body::before {
-    height: 4px;
-  }
+  margin-top: 10px;
 
+  color: #587067;
+
+  font-size: 11px;
+
+  text-align: center;
+
+}
+
+
+/* =========================================================
+   MOBILE
+   ========================================================= */
+
+@media (max-width: 650px) {
 
   .app-shell {
+
     padding:
-      36px 14px
+      28px 12px
       50px;
-  }
 
-
-  .login-section {
-    min-height: 100vh;
-
-    padding:
-      20px 0;
-  }
-
-
-  .login-card {
-    padding:
-      36px 22px
-      38px;
-  }
-
-
-  .login-brand {
-    font-size: 34px;
-
-    letter-spacing: 0.13em;
-  }
-
-
-  .login-brand-subtitle {
-    font-size: 9px;
-
-    letter-spacing: 0.4em;
-  }
-
-
-  .login-card h1 {
-    margin-top: 34px;
-
-    font-size: 24px;
-  }
-
-
-  .login-card p {
-    font-size: 11px;
-
-    margin-bottom: 26px;
-  }
-
-
-  .brand-header {
-    padding-bottom: 30px;
-  }
-
-
-  .brand-mark {
-    font-size: 34px;
-
-    letter-spacing: 0.13em;
-  }
-
-
-  .brand-name {
-    font-size: 9px;
-
-    letter-spacing: 0.4em;
-  }
-
-
-  .brand-subtitle {
-    margin-top: 20px;
-
-    font-size: 9px;
   }
 
 
   .form-card {
+
     padding:
-      30px 20px
+      30px 19px
       34px;
+
   }
 
 
-  .section-heading {
+  .card-customer {
+
+    grid-template-columns:
+      55px 1fr;
+
     gap: 12px;
 
-    margin-bottom: 25px;
   }
 
 
-  .section-heading.second-section {
-    margin-top: 40px;
-  }
+  .customer-avatar {
 
+    width: 52px;
 
-  .section-heading h1,
-  .section-heading h2 {
-    font-size: 20px;
-  }
-
-
-  .section-heading p {
-    font-size: 11px;
-  }
-
-
-  .section-number {
-    width: 27px;
-    height: 27px;
-
-    font-size: 10px;
-  }
-
-
-  .form-group {
-    margin-bottom: 22px;
-  }
-
-
-  input,
-  select {
     height: 52px;
 
-    font-size: 15px;
-  }
+    font-size: 23px;
 
-
-  .phone-input {
-    height: 52px;
-  }
-
-
-  .phone-input input {
-    height: 50px;
-  }
-
-
-  .country-code {
-    min-width: 62px;
-  }
-
-
-  .customer-card {
-    padding:
-      36px 22px
-      38px;
   }
 
 
   .card-customer-name {
-    font-size: 26px;
-  }
 
-}
+    font-size: 24px;
 
-
-/* ---------------------------------------------------------
-   22. VERY SMALL PHONES
-   --------------------------------------------------------- */
-
-@media (max-width: 380px) {
-
-  .app-shell {
-    padding-left: 10px;
-    padding-right: 10px;
   }
 
 
-  .form-card {
-    padding-left: 16px;
-    padding-right: 16px;
+  .visit-date-box {
+
+    grid-column:
+      1 / -1;
+
+    border-left: none;
+
+    border-top:
+      1px solid #d9c18e;
+
+    margin-top: 5px;
+
+    padding-top: 12px;
+
   }
 
 
-  .login-card {
-    padding-left: 18px;
-    padding-right: 18px;
+  .card-details-grid {
+
+    grid-template-columns:
+      1fr;
+
+    gap: 14px;
+
   }
 
 
-  .brand-mark {
-    font-size: 30px;
+  .card-detail {
+
+    justify-content: flex-start;
+
   }
 
 
-  .login-brand {
-    font-size: 30px;
-  }
+  .card-detail + .card-detail {
 
-}
+    border-left: none;
 
+    border-top:
+      1px solid #d5bd88;
 
-/* ---------------------------------------------------------
-   23. PRINT
-   --------------------------------------------------------- */
+    padding-top: 13px;
 
-@media print {
-
-  body {
-    background: #fff;
   }
 
 
-  body::before {
-    display: none;
+  .card-logo {
+
+    width: 220px;
+
   }
 
 
-  .form-card,
-  .brand-header,
-  .success-actions,
-  .success-icon,
-  .success-label,
-  .login-section {
-    display: none !important;
+  .card-tagline {
+
+    font-size: 17px;
+
   }
 
 
-  .app-shell {
-    max-width: none;
+  .card-kicker {
 
-    padding: 0;
+    font-size: 9px;
+
   }
 
 
-  .success-section {
-    display: block !important;
+  .card-kicker::before,
+  .card-kicker::after {
+
+    width: 28px;
+
   }
 
 
   .customer-card {
-    box-shadow: none;
 
-    margin-top: 30px;
+    padding:
+      30px 20px
+      28px;
+
+  }
+
+
+  .card-bottom-line {
+
+    margin:
+      22px -20px
+      -28px;
+
+  }
+
+}
+
+
+@media (max-width: 380px) {
+
+  .card-customer-name {
+
+    font-size: 21px;
+
+  }
+
+
+  .card-tagline {
+
+    font-size: 15px;
+
+  }
+
+
+  .form-card {
+
+    padding:
+      25px 16px
+      30px;
+
   }
 
 }
