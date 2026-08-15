@@ -1,38 +1,32 @@
 /* =========================================================
    HIFI COLLECTION
-   CUSTOMER WALK-IN WEB APP
+   CUSTOMER WALK-IN CRM
+   FRONTEND JAVASCRIPT
    ========================================================= */
 
 
 /* ---------------------------------------------------------
-   1. GOOGLE APPS SCRIPT URL
+   1. CONFIGURATION
    --------------------------------------------------------- */
 
 const GOOGLE_SCRIPT_URL =
   "https://script.google.com/macros/s/AKfycbz5plc1jea3LUySrbtfAR7sYuG6EPmvbejdChIsd7lNuPyjhkKbOrXPiP4COrZ_S7tp/exec";
 
 
-/* ---------------------------------------------------------
-   2. GOOGLE SIGN-IN CLIENT ID
-   --------------------------------------------------------- */
-
 const GOOGLE_CLIENT_ID =
   "857394054504-9qmrpnhkuicavag1mu96i9b8ko22p6qc.apps.googleusercontent.com";
 
 
-/* ---------------------------------------------------------
-   3. STORE SETTINGS
-   --------------------------------------------------------- */
-
 const STORE_NAME =
   "Hifi Collection";
+
 
 const COUNTRY_CODE =
   "+91";
 
 
 /* ---------------------------------------------------------
-   4. ALLOWED CATEGORIES
+   2. ALLOWED CATEGORIES
    --------------------------------------------------------- */
 
 const CATEGORIES = [
@@ -55,7 +49,7 @@ const CATEGORIES = [
 
 
 /* ---------------------------------------------------------
-   5. DOM ELEMENTS
+   3. DOM ELEMENTS
    --------------------------------------------------------- */
 
 const loginSection =
@@ -197,31 +191,26 @@ const whatsappButton =
 
 
 /* ---------------------------------------------------------
-   6. CURRENT CUSTOMER
+   4. STATE
    --------------------------------------------------------- */
 
 let currentCustomer =
   null;
 
 
-/* ---------------------------------------------------------
-   7. GOOGLE SIGN-IN STATE
-   --------------------------------------------------------- */
-
 let googleCredential =
   null;
 
 
+let loggedInGoogleEmail =
+  null;
+
+
 /* ---------------------------------------------------------
-   8. GOOGLE SIGN-IN INITIALIZATION
+   5. GOOGLE SIGN-IN INITIALIZATION
    --------------------------------------------------------- */
 
 function initializeGoogleSignIn() {
-
-  /*
-    Google Identity Services may load slightly after
-    app.js, so wait and retry if necessary.
-  */
 
   if (
     typeof google === "undefined" ||
@@ -239,7 +228,9 @@ function initializeGoogleSignIn() {
   }
 
 
-  if (!googleSignInButton) {
+  if (
+    !googleSignInButton
+  ) {
 
     console.error(
       "Google Sign-In button container not found."
@@ -262,6 +253,10 @@ function initializeGoogleSignIn() {
       false
 
   });
+
+
+  googleSignInButton.innerHTML =
+    "";
 
 
   google.accounts.id.renderButton(
@@ -291,14 +286,14 @@ function initializeGoogleSignIn() {
 
 
   console.log(
-    "Google Sign-In initialized successfully."
+    "Google Sign-In initialized."
   );
 
 }
 
 
 /* ---------------------------------------------------------
-   9. GOOGLE CREDENTIAL CALLBACK
+   6. GOOGLE LOGIN CALLBACK
    --------------------------------------------------------- */
 
 function handleGoogleCredential(
@@ -306,21 +301,9 @@ function handleGoogleCredential(
 ) {
 
   console.log(
-    "Google credential received."
+    "Google login successful. Verifying access..."
   );
 
-
-  /*
-    TEMPORARY DEVELOPMENT STEP
-
-    We are NOT yet trusting the email from the browser
-    for access control.
-
-    For this stage, we only confirm that Google Sign-In
-    successfully returned a credential.
-
-    Secure backend verification will be added next.
-  */
 
   if (
     !response ||
@@ -340,27 +323,313 @@ function handleGoogleCredential(
     response.credential;
 
 
-  setLoginSuccess(
-    "Google sign-in successful."
+  setLoginLoading(
+    "Verifying your access..."
   );
 
+
+  authorizeWithBackend(
+    googleCredential
+  );
+
+}
+
+
+/* ---------------------------------------------------------
+   7. AUTHORIZE GOOGLE USER WITH APPS SCRIPT
+   --------------------------------------------------------- */
+
+function authorizeWithBackend(
+  credential
+) {
 
   /*
-    TEMPORARILY SHOW THE CRM
+   * We use JSONP here because the website is hosted
+   * on GitHub Pages and the backend is Google Apps Script.
+   *
+   * The credential is sent to Apps Script.
+   *
+   * Apps Script:
+   *
+   * 1. Validates the Google ID token.
+   * 2. Gets the verified Google email.
+   * 3. Checks the Staff sheet.
+   * 4. Checks Active = Yes.
+   * 5. Returns authorized true/false.
+   */
 
-    This is only to test that the Google authentication
-    flow works correctly.
 
-    We will replace this with verified staff
-    authorization in the next step.
-  */
-
-  showCRM();
+  const callbackName =
+    "hifiAuthCallback_" +
+    Date.now();
 
 
-  console.log(
-    "Google credential received successfully."
+  window[
+    callbackName
+  ] =
+    function (result) {
+
+      try {
+
+        console.log(
+          "Authorization response:",
+          result
+        );
+
+
+        if (
+          !result
+        ) {
+
+          throw new Error(
+            "No authorization response was received."
+          );
+
+        }
+
+
+        if (
+          result.success !== true
+        ) {
+
+          throw new Error(
+            result.message ||
+            "Unable to verify your Google account."
+          );
+
+        }
+
+
+        if (
+          result.authorized !== true
+        ) {
+
+          setLoginError(
+            result.message ||
+            "This Google account is not authorized to use the Hifi Collection CRM."
+          );
+
+
+          googleCredential =
+            null;
+
+
+          return;
+
+        }
+
+
+        /*
+         * ACCESS GRANTED
+         */
+
+        loggedInGoogleEmail =
+          result.email ||
+          "";
+
+
+        setLoginSuccess(
+          "Access granted."
+        );
+
+
+        showCRM();
+
+
+        /*
+         * Load the latest staff list from the
+         * Google Sheet after authentication.
+         */
+
+        loadStaffFromGoogleSheet();
+
+
+      } catch (error) {
+
+        console.error(
+          "Authorization error:",
+          error
+        );
+
+
+        setLoginError(
+          error.message ||
+          "Unable to verify your account."
+        );
+
+      } finally {
+
+        cleanupAuthScript(
+          callbackName
+        );
+
+      }
+
+    };
+
+
+  const script =
+    document.createElement(
+      "script"
+    );
+
+
+  script.id =
+    "hifi-auth-loader";
+
+
+  script.src =
+    GOOGLE_SCRIPT_URL +
+    "?action=authorize" +
+    "&credential=" +
+    encodeURIComponent(
+      credential
+    ) +
+    "&callback=" +
+    encodeURIComponent(
+      callbackName
+    ) +
+    "&t=" +
+    Date.now();
+
+
+  script.onerror =
+    function () {
+
+      console.error(
+        "Could not contact the authorization server."
+      );
+
+
+      setLoginError(
+        "Could not verify your account. Please try again."
+      );
+
+
+      cleanupAuthScript(
+        callbackName
+      );
+
+    };
+
+
+  document.body.appendChild(
+    script
   );
+
+}
+
+
+/* ---------------------------------------------------------
+   8. CLEANUP AUTH SCRIPT
+   --------------------------------------------------------- */
+
+function cleanupAuthScript(
+  callbackName
+) {
+
+  const script =
+    document.getElementById(
+      "hifi-auth-loader"
+    );
+
+
+  if (
+    script
+  ) {
+
+    script.remove();
+
+  }
+
+
+  try {
+
+    delete window[
+      callbackName
+    ];
+
+  } catch (error) {
+
+    window[
+      callbackName
+    ] =
+      undefined;
+
+  }
+
+}
+
+
+/* ---------------------------------------------------------
+   9. LOGIN STATUS
+   --------------------------------------------------------- */
+
+function setLoginLoading(
+  message
+) {
+
+  if (
+    !loginStatus
+  ) {
+
+    return;
+
+  }
+
+
+  loginStatus.textContent =
+    message;
+
+
+  loginStatus.className =
+    "login-status";
+
+}
+
+
+function setLoginError(
+  message
+) {
+
+  if (
+    !loginStatus
+  ) {
+
+    return;
+
+  }
+
+
+  loginStatus.textContent =
+    message;
+
+
+  loginStatus.className =
+    "login-status error";
+
+}
+
+
+function setLoginSuccess(
+  message
+) {
+
+  if (
+    !loginStatus
+  ) {
+
+    return;
+
+  }
+
+
+  loginStatus.textContent =
+    message;
+
+
+  loginStatus.className =
+    "login-status success";
 
 }
 
@@ -371,7 +640,9 @@ function handleGoogleCredential(
 
 function showCRM() {
 
-  if (loginSection) {
+  if (
+    loginSection
+  ) {
 
     loginSection.style.display =
       "none";
@@ -379,7 +650,9 @@ function showCRM() {
   }
 
 
-  if (crmSection) {
+  if (
+    crmSection
+  ) {
 
     crmSection.style.display =
       "block";
@@ -401,7 +674,9 @@ function showCRM() {
   setTimeout(
     function () {
 
-      if (customerNameInput) {
+      if (
+        customerNameInput
+      ) {
 
         customerNameInput.focus();
 
@@ -415,53 +690,7 @@ function showCRM() {
 
 
 /* ---------------------------------------------------------
-   11. LOGIN STATUS HELPERS
-   --------------------------------------------------------- */
-
-function setLoginError(
-  message
-) {
-
-  if (!loginStatus) {
-
-    return;
-
-  }
-
-
-  loginStatus.textContent =
-    message;
-
-
-  loginStatus.className =
-    "login-status error";
-
-}
-
-
-function setLoginSuccess(
-  message
-) {
-
-  if (!loginStatus) {
-
-    return;
-
-  }
-
-
-  loginStatus.textContent =
-    message;
-
-
-  loginStatus.className =
-    "login-status success";
-
-}
-
-
-/* ---------------------------------------------------------
-   12. PHONE NUMBER INPUT
+   11. PHONE NUMBER INPUT
    --------------------------------------------------------- */
 
 contactNumberInput.addEventListener(
@@ -495,7 +724,7 @@ contactNumberInput.addEventListener(
 
 
 /* ---------------------------------------------------------
-   13. PREVENT INVALID PHONE KEYS
+   12. PREVENT INVALID PHONE KEYS
    --------------------------------------------------------- */
 
 contactNumberInput.addEventListener(
@@ -549,7 +778,7 @@ contactNumberInput.addEventListener(
 
 
 /* ---------------------------------------------------------
-   14. ADD PRODUCT
+   13. ADD PRODUCT
    --------------------------------------------------------- */
 
 addProductButton.addEventListener(
@@ -563,7 +792,7 @@ addProductButton.addEventListener(
 
 
 /* ---------------------------------------------------------
-   15. CREATE PRODUCT ROW
+   14. CREATE PRODUCT ROW
    --------------------------------------------------------- */
 
 function createProductRow(
@@ -666,7 +895,7 @@ function createProductRow(
 
 
 /* ---------------------------------------------------------
-   16. UPDATE PRODUCT REMOVE BUTTONS
+   15. UPDATE PRODUCT REMOVE BUTTONS
    --------------------------------------------------------- */
 
 function updateRemoveButtons() {
@@ -707,7 +936,7 @@ function updateRemoveButtons() {
 
 
 /* ---------------------------------------------------------
-   17. GET PRODUCT CODES
+   16. GET PRODUCT CODES
    --------------------------------------------------------- */
 
 function getProducts() {
@@ -749,7 +978,7 @@ function getProducts() {
 
 
 /* ---------------------------------------------------------
-   18. ERROR HELPERS
+   17. ERROR HELPERS
    --------------------------------------------------------- */
 
 function showFieldError(
@@ -763,7 +992,9 @@ function showFieldError(
     );
 
 
-  if (element) {
+  if (
+    element
+  ) {
 
     element.textContent =
       message;
@@ -783,7 +1014,9 @@ function clearFieldError(
     );
 
 
-  if (element) {
+  if (
+    element
+  ) {
 
     element.textContent =
       "";
@@ -814,13 +1047,14 @@ function clearAllErrors() {
 
 
 /* ---------------------------------------------------------
-   19. LOAD STAFF FROM GOOGLE SHEET
+   18. LOAD STAFF FROM GOOGLE SHEET
    --------------------------------------------------------- */
 
 function loadStaffFromGoogleSheet() {
 
   const callbackName =
-    "hifiStaffCallback";
+    "hifiStaffCallback_" +
+    Date.now();
 
 
   window[
@@ -863,7 +1097,9 @@ function loadStaffFromGoogleSheet() {
       }
 
 
-      cleanupStaffScript();
+      cleanupStaffScript(
+        callbackName
+      );
 
     };
 
@@ -882,7 +1118,9 @@ function loadStaffFromGoogleSheet() {
     GOOGLE_SCRIPT_URL +
     "?action=getStaff" +
     "&callback=" +
-    callbackName +
+    encodeURIComponent(
+      callbackName
+    ) +
     "&t=" +
     Date.now();
 
@@ -898,7 +1136,9 @@ function loadStaffFromGoogleSheet() {
       showStaffLoadingError();
 
 
-      cleanupStaffScript();
+      cleanupStaffScript(
+        callbackName
+      );
 
     };
 
@@ -911,7 +1151,7 @@ function loadStaffFromGoogleSheet() {
 
 
 /* ---------------------------------------------------------
-   20. POPULATE STAFF DROPDOWN
+   19. POPULATE STAFF DROPDOWN
    --------------------------------------------------------- */
 
 function populateStaffDropdown(
@@ -969,7 +1209,7 @@ function populateStaffDropdown(
 
 
 /* ---------------------------------------------------------
-   21. STAFF LOADING ERROR
+   20. STAFF LOADING ERROR
    --------------------------------------------------------- */
 
 function showStaffLoadingError() {
@@ -1000,10 +1240,12 @@ function showStaffLoadingError() {
 
 
 /* ---------------------------------------------------------
-   22. CLEANUP STAFF SCRIPT
+   21. CLEANUP STAFF SCRIPT
    --------------------------------------------------------- */
 
-function cleanupStaffScript() {
+function cleanupStaffScript(
+  callbackName
+) {
 
   const script =
     document.getElementById(
@@ -1011,7 +1253,9 @@ function cleanupStaffScript() {
     );
 
 
-  if (script) {
+  if (
+    script
+  ) {
 
     script.remove();
 
@@ -1020,11 +1264,15 @@ function cleanupStaffScript() {
 
   try {
 
-    delete window.hifiStaffCallback;
+    delete window[
+      callbackName
+    ];
 
   } catch (error) {
 
-    window.hifiStaffCallback =
+    window[
+      callbackName
+    ] =
       undefined;
 
   }
@@ -1033,7 +1281,7 @@ function cleanupStaffScript() {
 
 
 /* ---------------------------------------------------------
-   23. VALIDATE FORM
+   22. VALIDATE FORM
    --------------------------------------------------------- */
 
 function validateForm() {
@@ -1225,7 +1473,7 @@ function validateForm() {
 
 
 /* ---------------------------------------------------------
-   24. SUBMIT BUTTON
+   23. SUBMIT BUTTON
    --------------------------------------------------------- */
 
 submitButton.addEventListener(
@@ -1271,7 +1519,7 @@ submitButton.addEventListener(
 
 
 /* ---------------------------------------------------------
-   25. SUBMIT WALK-IN
+   24. SUBMIT WALK-IN
    --------------------------------------------------------- */
 
 async function submitWalkIn() {
@@ -1300,6 +1548,15 @@ async function submitWalkIn() {
   const category =
     categoryInput.value;
 
+
+  /*
+   * IMPORTANT:
+   *
+   * Staff Attended remains a MANUAL selection.
+   *
+   * It is NOT based on the Google account that
+   * is currently logged in.
+   */
 
   const selectedStaff =
     staffInput.value;
@@ -1475,7 +1732,7 @@ async function submitWalkIn() {
 
 
 /* ---------------------------------------------------------
-   26. SUCCESS CARD
+   25. SUCCESS CARD
    --------------------------------------------------------- */
 
 function showSuccessCard() {
@@ -1505,7 +1762,7 @@ function showSuccessCard() {
 
 
 /* ---------------------------------------------------------
-   27. POPULATE CUSTOMER CARD
+   26. POPULATE CUSTOMER CARD
    --------------------------------------------------------- */
 
 function populateCustomerCard() {
@@ -1618,7 +1875,7 @@ function populateCustomerCard() {
 
 
 /* ---------------------------------------------------------
-   28. FORMAT PHONE
+   27. FORMAT PHONE
    --------------------------------------------------------- */
 
 function formatPhoneNumber(
@@ -1649,7 +1906,7 @@ function formatPhoneNumber(
 
 
 /* ---------------------------------------------------------
-   29. FORMAT DATE
+   28. FORMAT DATE
    --------------------------------------------------------- */
 
 function formatCurrentDate() {
@@ -1680,7 +1937,7 @@ function formatCurrentDate() {
 
 
 /* ---------------------------------------------------------
-   30. WHATSAPP
+   29. WHATSAPP
    --------------------------------------------------------- */
 
 whatsappButton.addEventListener(
@@ -1757,7 +2014,7 @@ whatsappButton.addEventListener(
 
 
 /* ---------------------------------------------------------
-   31. NEW WALK-IN
+   30. NEW WALK-IN
    --------------------------------------------------------- */
 
 newWalkInButton.addEventListener(
@@ -1771,7 +2028,7 @@ newWalkInButton.addEventListener(
 
 
 /* ---------------------------------------------------------
-   32. RESET FORM
+   31. RESET FORM
    --------------------------------------------------------- */
 
 function resetForm() {
@@ -1795,6 +2052,10 @@ function resetForm() {
   categoryInput.value =
     "";
 
+
+  /*
+   * Staff remains manually selected.
+   */
 
   staffInput.value =
     "";
@@ -1859,11 +2120,9 @@ function resetForm() {
 
 
 /* ---------------------------------------------------------
-   33. INITIALIZE
+   32. INITIALIZE
    --------------------------------------------------------- */
 
 updateRemoveButtons();
-
-loadStaffFromGoogleSheet();
 
 initializeGoogleSignIn();
