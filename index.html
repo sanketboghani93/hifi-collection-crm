@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
 
   <meta charset="UTF-8">
@@ -17,6 +18,7 @@
   >
 
   <!-- Google Identity Services -->
+
   <script
     src="https://accounts.google.com/gsi/client"
     async
@@ -80,7 +82,7 @@
 
 
     <!-- =====================================================
-         CRM APPLICATION
+         CRM
          ===================================================== -->
 
     <section
@@ -368,11 +370,6 @@
 
           </label>
 
-          <!--
-            Staff names are now loaded dynamically
-            from the Google Sheet.
-          -->
-
           <select
             id="staff"
             name="staff"
@@ -508,13 +505,13 @@
         </div>
 
 
-        <!-- FOLLOW-UP DATE -->
+        <!-- EVENT DATE -->
 
         <div class="form-group">
 
-          <label for="followUpDate">
+          <label for="eventDate">
 
-            Follow-Up Date
+            Event Date
 
             <span class="optional">
               (optional)
@@ -524,8 +521,8 @@
 
           <input
             type="date"
-            id="followUpDate"
-            name="followUpDate"
+            id="eventDate"
+            name="eventDate"
           >
 
         </div>
@@ -613,18 +610,15 @@
             HIFI COLLECTION
           </div>
 
-
           <div
             id="cardCustomerName"
             class="card-customer-name"
           ></div>
 
-
           <div
             id="cardContact"
             class="card-contact"
           ></div>
-
 
           <div
             id="cardDate"
@@ -639,19 +633,15 @@
             INTERESTED IN
           </div>
 
-
           <div
             id="cardCategory"
             class="card-category"
           ></div>
 
 
-          <div
-            class="card-label shortlist-label"
-          >
+          <div class="card-label shortlist-label">
             SHORTLISTED
           </div>
-
 
           <div
             id="cardProducts"
@@ -663,7 +653,6 @@
             ASSISTED BY
           </div>
 
-
           <div
             id="cardStaff"
             class="card-staff"
@@ -671,8 +660,6 @@
 
         </div>
 
-
-        <!-- SUCCESS ACTIONS -->
 
         <div class="success-actions">
 
@@ -683,7 +670,6 @@
           >
             WhatsApp Customer
           </button>
-
 
           <button
             type="button"
@@ -705,7 +691,10 @@
   </main>
 
 
-  <script src="app.js?v=3"></script>
+  <!-- Cache-busted JavaScript -->
+
+  <script src="app.js?v=4"></script>
 
 </body>
+
 </html>
