@@ -1,10 +1,11 @@
 /* =========================================================
-   HIFI COLLECTION — CUSTOMER WALK-IN
+   HIFI COLLECTION
+   CUSTOMER WALK-IN WEB APP
    ========================================================= */
 
 
 /* ---------------------------------------------------------
-   GOOGLE APPS SCRIPT
+   1. GOOGLE APPS SCRIPT URL
    --------------------------------------------------------- */
 
 const GOOGLE_SCRIPT_URL =
@@ -12,113 +13,167 @@ const GOOGLE_SCRIPT_URL =
 
 
 /* ---------------------------------------------------------
-   STORE SETTINGS
+   2. STORE SETTINGS
    --------------------------------------------------------- */
 
-const STORE_NAME = "Hifi Collection";
-const COUNTRY_CODE = "+91";
+const STORE_NAME =
+  "Hifi Collection";
+
+const COUNTRY_CODE =
+  "+91";
 
 
 /* ---------------------------------------------------------
-   ALLOWED CATEGORIES
+   3. ALLOWED CATEGORIES
    --------------------------------------------------------- */
 
 const CATEGORIES = [
+
   "Indo-western",
+
   "Suit",
+
   "Chania Choli",
+
   "Koti Kurta",
+
   "Sherwani",
+
   "Safa",
+
   "Jodhpuri"
+
 ];
 
 
 /* ---------------------------------------------------------
-   ALLOWED STAFF
-   --------------------------------------------------------- */
-
-const STAFF = [
-  "Rajubhai",
-  "Shabbirbhai",
-  "Ketanbhai Owner",
-  "Dollyben Owner",
-  "Sanketbhai Owner",
-  "Sonalben"
-];
-
-
-/* ---------------------------------------------------------
-   DOM ELEMENTS
+   4. DOM ELEMENTS
    --------------------------------------------------------- */
 
 const customerNameInput =
-  document.getElementById("customerName");
+  document.getElementById(
+    "customerName"
+  );
+
 
 const contactNumberInput =
-  document.getElementById("contactNumber");
+  document.getElementById(
+    "contactNumber"
+  );
+
 
 const emailInput =
-  document.getElementById("email");
+  document.getElementById(
+    "email"
+  );
+
 
 const instagramInput =
-  document.getElementById("instagram");
+  document.getElementById(
+    "instagram"
+  );
+
 
 const categoryInput =
-  document.getElementById("category");
+  document.getElementById(
+    "category"
+  );
+
 
 const staffInput =
-  document.getElementById("staff");
+  document.getElementById(
+    "staff"
+  );
+
 
 const purchaseStatusInput =
-  document.getElementById("purchaseStatus");
+  document.getElementById(
+    "purchaseStatus"
+  );
+
 
 const followUpDateInput =
-  document.getElementById("followUpDate");
+  document.getElementById(
+    "followUpDate"
+  );
+
 
 const notesInput =
-  document.getElementById("notes");
+  document.getElementById(
+    "notes"
+  );
+
 
 const productsContainer =
-  document.getElementById("productsContainer");
+  document.getElementById(
+    "productsContainer"
+  );
+
 
 const addProductButton =
-  document.getElementById("addProduct");
+  document.getElementById(
+    "addProduct"
+  );
+
 
 const submitButton =
-  document.getElementById("submitWalkIn");
+  document.getElementById(
+    "submitWalkIn"
+  );
+
 
 const submitText =
-  document.querySelector(".submit-text");
+  document.querySelector(
+    ".submit-text"
+  );
+
 
 const submitLoader =
-  document.querySelector(".submit-loader");
+  document.querySelector(
+    ".submit-loader"
+  );
+
 
 const statusMessage =
-  document.getElementById("statusMessage");
+  document.getElementById(
+    "statusMessage"
+  );
+
 
 const formCard =
-  document.querySelector(".form-card");
+  document.querySelector(
+    ".form-card"
+  );
+
 
 const successSection =
-  document.getElementById("successSection");
+  document.getElementById(
+    "successSection"
+  );
+
 
 const newWalkInButton =
-  document.getElementById("newWalkIn");
+  document.getElementById(
+    "newWalkIn"
+  );
+
 
 const whatsappButton =
-  document.getElementById("whatsappButton");
+  document.getElementById(
+    "whatsappButton"
+  );
 
 
 /* ---------------------------------------------------------
-   CURRENT CUSTOMER
+   5. CURRENT CUSTOMER
    --------------------------------------------------------- */
 
-let currentCustomer = null;
+let currentCustomer =
+  null;
 
 
 /* ---------------------------------------------------------
-   PHONE INPUT
+   6. PHONE NUMBER INPUT
    --------------------------------------------------------- */
 
 contactNumberInput.addEventListener(
@@ -126,51 +181,87 @@ contactNumberInput.addEventListener(
   function () {
 
     let value =
-      this.value.replace(/\D/g, "");
+      this.value.replace(
+        /\D/g,
+        ""
+      );
+
 
     value =
-      value.substring(0, 10);
+      value.substring(
+        0,
+        10
+      );
 
-    this.value = value;
+
+    this.value =
+      value;
+
 
     clearFieldError(
       "contactNumberError"
     );
+
   }
 );
 
+
+/* ---------------------------------------------------------
+   7. PREVENT INVALID PHONE KEYS
+   --------------------------------------------------------- */
 
 contactNumberInput.addEventListener(
   "keydown",
   function (event) {
 
     const allowedKeys = [
+
       "Backspace",
+
       "Delete",
+
       "ArrowLeft",
+
       "ArrowRight",
+
       "Tab",
+
       "Home",
+
       "End"
+
     ];
 
+
     if (
-      allowedKeys.includes(event.key) ||
+      allowedKeys.includes(
+        event.key
+      ) ||
       event.ctrlKey ||
       event.metaKey
     ) {
+
       return;
+
     }
 
-    if (!/^\d$/.test(event.key)) {
+
+    if (
+      !/^\d$/.test(
+        event.key
+      )
+    ) {
+
       event.preventDefault();
+
     }
+
   }
 );
 
 
 /* ---------------------------------------------------------
-   ADD PRODUCT BUTTON
+   8. ADD PRODUCT
    --------------------------------------------------------- */
 
 addProductButton.addEventListener(
@@ -184,50 +275,68 @@ addProductButton.addEventListener(
 
 
 /* ---------------------------------------------------------
-   CREATE PRODUCT ROW
+   9. CREATE PRODUCT ROW
    --------------------------------------------------------- */
 
-function createProductRow(value = "") {
+function createProductRow(
+  value = ""
+) {
 
   const row =
-    document.createElement("div");
+    document.createElement(
+      "div"
+    );
+
 
   row.className =
     "product-row";
 
 
   const input =
-    document.createElement("input");
+    document.createElement(
+      "input"
+    );
+
 
   input.type =
     "text";
 
+
   input.className =
     "product-code";
+
 
   input.placeholder =
     "Product code";
 
+
   input.value =
     value;
+
 
   input.autocomplete =
     "off";
 
 
   const removeButton =
-    document.createElement("button");
+    document.createElement(
+      "button"
+    );
+
 
   removeButton.type =
     "button";
 
+
   removeButton.className =
     "remove-product";
+
 
   removeButton.setAttribute(
     "aria-label",
     "Remove product"
   );
+
 
   removeButton.textContent =
     "×";
@@ -245,20 +354,31 @@ function createProductRow(value = "") {
   );
 
 
-  row.appendChild(input);
+  row.appendChild(
+    input
+  );
 
-  row.appendChild(removeButton);
 
-  productsContainer.appendChild(row);
+  row.appendChild(
+    removeButton
+  );
+
+
+  productsContainer.appendChild(
+    row
+  );
+
 
   updateRemoveButtons();
 
+
   input.focus();
+
 }
 
 
 /* ---------------------------------------------------------
-   UPDATE REMOVE BUTTONS
+   10. UPDATE PRODUCT REMOVE BUTTONS
    --------------------------------------------------------- */
 
 function updateRemoveButtons() {
@@ -278,7 +398,9 @@ function updateRemoveButtons() {
         );
 
 
-      if (rows.length === 1) {
+      if (
+        rows.length === 1
+      ) {
 
         button.style.display =
           "none";
@@ -292,11 +414,12 @@ function updateRemoveButtons() {
 
     }
   );
+
 }
 
 
 /* ---------------------------------------------------------
-   GET PRODUCTS
+   11. GET PRODUCT CODES
    --------------------------------------------------------- */
 
 function getProducts() {
@@ -306,7 +429,9 @@ function getProducts() {
       ".product-code"
     );
 
-  const products = [];
+
+  const products =
+    [];
 
 
   inputs.forEach(
@@ -315,9 +440,14 @@ function getProducts() {
       const value =
         input.value.trim();
 
-      if (value !== "") {
 
-        products.push(value);
+      if (
+        value !== ""
+      ) {
+
+        products.push(
+          value
+        );
 
       }
 
@@ -326,11 +456,12 @@ function getProducts() {
 
 
   return products;
+
 }
 
 
 /* ---------------------------------------------------------
-   ERROR FUNCTIONS
+   12. ERROR HELPERS
    --------------------------------------------------------- */
 
 function showFieldError(
@@ -343,12 +474,14 @@ function showFieldError(
       errorId
     );
 
+
   if (element) {
 
     element.textContent =
       message;
 
   }
+
 }
 
 
@@ -361,12 +494,14 @@ function clearFieldError(
       errorId
     );
 
+
   if (element) {
 
     element.textContent =
       "";
 
   }
+
 }
 
 
@@ -386,18 +521,250 @@ function clearAllErrors() {
 
     }
   );
+
 }
 
 
 /* ---------------------------------------------------------
-   VALIDATE FORM
+   13. LOAD STAFF FROM GOOGLE SHEET
+   ---------------------------------------------------------
+
+   IMPORTANT:
+
+   We use JSONP here because a normal browser GET
+   to Google Apps Script can run into CORS restrictions.
+
+   Only active staff names are returned.
+
+   Google email addresses are NOT returned.
+   --------------------------------------------------------- */
+
+function loadStaffFromGoogleSheet() {
+
+  const callbackName =
+    "hifiStaffCallback";
+
+
+  window[
+    callbackName
+  ] =
+    function (response) {
+
+      try {
+
+        if (
+          !response ||
+          !response.success ||
+          !Array.isArray(
+            response.staff
+          )
+        ) {
+
+          throw new Error(
+            "Unable to load staff list."
+          );
+
+        }
+
+
+        populateStaffDropdown(
+          response.staff
+        );
+
+
+      } catch (error) {
+
+        console.error(
+          "Staff loading error:",
+          error
+        );
+
+
+        showStaffLoadingError();
+
+      }
+
+
+      cleanupStaffScript();
+
+    };
+
+
+  const script =
+    document.createElement(
+      "script"
+    );
+
+
+  script.id =
+    "hifi-staff-loader";
+
+
+  script.src =
+    GOOGLE_SCRIPT_URL +
+    "?action=getStaff" +
+    "&callback=" +
+    callbackName +
+    "&t=" +
+    Date.now();
+
+
+  script.onerror =
+    function () {
+
+      console.error(
+        "Could not load staff list."
+      );
+
+
+      showStaffLoadingError();
+
+
+      cleanupStaffScript();
+
+    };
+
+
+  document.body.appendChild(
+    script
+  );
+
+}
+
+
+/* ---------------------------------------------------------
+   14. POPULATE STAFF DROPDOWN
+   --------------------------------------------------------- */
+
+function populateStaffDropdown(
+  staffList
+) {
+
+  staffInput.innerHTML =
+    "";
+
+
+  const defaultOption =
+    document.createElement(
+      "option"
+    );
+
+
+  defaultOption.value =
+    "";
+
+
+  defaultOption.textContent =
+    "Select staff member";
+
+
+  staffInput.appendChild(
+    defaultOption
+  );
+
+
+  staffList.forEach(
+    function (staffName) {
+
+      const option =
+        document.createElement(
+          "option"
+        );
+
+
+      option.value =
+        staffName;
+
+
+      option.textContent =
+        staffName;
+
+
+      staffInput.appendChild(
+        option
+      );
+
+    }
+  );
+
+}
+
+
+/* ---------------------------------------------------------
+   15. STAFF LOADING ERROR
+   --------------------------------------------------------- */
+
+function showStaffLoadingError() {
+
+  staffInput.innerHTML =
+    "";
+
+
+  const option =
+    document.createElement(
+      "option"
+    );
+
+
+  option.value =
+    "";
+
+
+  option.textContent =
+    "Unable to load staff list";
+
+
+  staffInput.appendChild(
+    option
+  );
+
+}
+
+
+/* ---------------------------------------------------------
+   16. CLEANUP STAFF SCRIPT
+   --------------------------------------------------------- */
+
+function cleanupStaffScript() {
+
+  const script =
+    document.getElementById(
+      "hifi-staff-loader"
+    );
+
+
+  if (script) {
+
+    script.remove();
+
+  }
+
+
+  try {
+
+    delete window.hifiStaffCallback;
+
+  } catch (error) {
+
+    window.hifiStaffCallback =
+      undefined;
+
+  }
+
+}
+
+
+/* ---------------------------------------------------------
+   17. VALIDATE FORM
    --------------------------------------------------------- */
 
 function validateForm() {
 
   clearAllErrors();
 
-  let isValid = true;
+
+  let isValid =
+    true;
 
 
   const customerName =
@@ -426,14 +793,18 @@ function validateForm() {
 
   /* Customer name */
 
-  if (customerName === "") {
+  if (
+    customerName === ""
+  ) {
 
     showFieldError(
       "customerNameError",
       "Please enter the customer's name."
     );
 
-    isValid = false;
+
+    isValid =
+      false;
 
   }
 
@@ -451,21 +822,27 @@ function validateForm() {
       "Please enter exactly 10 digits."
     );
 
-    isValid = false;
+
+    isValid =
+      false;
 
   }
 
 
   /* Email */
 
-  if (email !== "") {
+  if (
+    email !== ""
+  ) {
 
     const emailPattern =
       /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 
 
     if (
-      !emailPattern.test(email)
+      !emailPattern.test(
+        email
+      )
     ) {
 
       showFieldError(
@@ -473,7 +850,9 @@ function validateForm() {
         "Please enter a valid email address."
       );
 
-      isValid = false;
+
+      isValid =
+        false;
 
     }
 
@@ -483,10 +862,7 @@ function validateForm() {
   /* Category */
 
   if (
-    category === "" ||
-    !CATEGORIES.includes(
-      category
-    )
+    category === ""
   ) {
 
     showFieldError(
@@ -494,7 +870,24 @@ function validateForm() {
       "Please select a category."
     );
 
-    isValid = false;
+
+    isValid =
+      false;
+
+  } else if (
+    !CATEGORIES.includes(
+      category
+    )
+  ) {
+
+    showFieldError(
+      "categoryError",
+      "Invalid category."
+    );
+
+
+    isValid =
+      false;
 
   }
 
@@ -502,10 +895,7 @@ function validateForm() {
   /* Staff */
 
   if (
-    selectedStaff === "" ||
-    !STAFF.includes(
-      selectedStaff
-    )
+    selectedStaff === ""
   ) {
 
     showFieldError(
@@ -513,7 +903,9 @@ function validateForm() {
       "Please select the staff member."
     );
 
-    isValid = false;
+
+    isValid =
+      false;
 
   }
 
@@ -529,17 +921,45 @@ function validateForm() {
       "Please select the purchase status."
     );
 
-    isValid = false;
+
+    isValid =
+      false;
+
+  }
+
+
+  /* Follow-up date */
+
+  const followUpDate =
+    followUpDateInput.value;
+
+
+  if (
+    purchaseStatus ===
+      "Follow-up Required" &&
+    followUpDate === ""
+  ) {
+
+    statusMessage.textContent =
+      "Please select a follow-up date.";
+
+    statusMessage.className =
+      "status-message error";
+
+
+    isValid =
+      false;
 
   }
 
 
   return isValid;
+
 }
 
 
 /* ---------------------------------------------------------
-   SUBMIT BUTTON
+   18. SUBMIT BUTTON
    --------------------------------------------------------- */
 
 submitButton.addEventListener(
@@ -549,17 +969,29 @@ submitButton.addEventListener(
     statusMessage.textContent =
       "";
 
+
     statusMessage.className =
       "status-message";
 
 
-    if (!validateForm()) {
+    if (
+      !validateForm()
+    ) {
 
-      statusMessage.textContent =
-        "Please check the highlighted fields.";
+      if (
+        statusMessage.textContent ===
+        ""
+      ) {
+
+        statusMessage.textContent =
+          "Please check the highlighted fields.";
+
+      }
+
 
       statusMessage.className =
         "status-message error";
+
 
       return;
 
@@ -575,8 +1007,10 @@ submitButton.addEventListener(
       statusMessage.textContent =
         "Google Sheets connection has not been configured.";
 
+
       statusMessage.className =
         "status-message error";
+
 
       return;
 
@@ -590,7 +1024,7 @@ submitButton.addEventListener(
 
 
 /* ---------------------------------------------------------
-   SUBMIT WALK-IN
+   19. SUBMIT WALK-IN
    --------------------------------------------------------- */
 
 async function submitWalkIn() {
@@ -610,7 +1044,10 @@ async function submitWalkIn() {
   const instagram =
     instagramInput.value
       .trim()
-      .replace(/^@+/, "");
+      .replace(
+        /^@+/,
+        ""
+      );
 
 
   const category =
@@ -699,13 +1136,18 @@ async function submitWalkIn() {
     await fetch(
       GOOGLE_SCRIPT_URL,
       {
-        method: "POST",
 
-        mode: "no-cors",
+        method:
+          "POST",
+
+        mode:
+          "no-cors",
 
         headers: {
+
           "Content-Type":
             "text/plain;charset=utf-8"
+
         },
 
         body:
@@ -783,11 +1225,12 @@ async function submitWalkIn() {
       "none";
 
   }
+
 }
 
 
 /* ---------------------------------------------------------
-   SHOW SUCCESS CARD
+   20. SUCCESS CARD
    --------------------------------------------------------- */
 
 function showSuccessCard() {
@@ -804,20 +1247,30 @@ function showSuccessCard() {
 
 
   window.scrollTo({
-    top: 0,
-    behavior: "smooth"
+
+    top:
+      0,
+
+    behavior:
+      "smooth"
+
   });
+
 }
 
 
 /* ---------------------------------------------------------
-   POPULATE CUSTOMER CARD
+   21. POPULATE CUSTOMER CARD
    --------------------------------------------------------- */
 
 function populateCustomerCard() {
 
-  if (!currentCustomer) {
+  if (
+    !currentCustomer
+  ) {
+
     return;
+
   }
 
 
@@ -874,8 +1327,10 @@ function populateCustomerCard() {
         "div"
       );
 
+
     empty.className =
       "card-product-item";
+
 
     empty.textContent =
       "No products recorded";
@@ -896,8 +1351,10 @@ function populateCustomerCard() {
             "div"
           );
 
+
         item.className =
           "card-product-item";
+
 
         item.textContent =
           product;
@@ -911,11 +1368,12 @@ function populateCustomerCard() {
     );
 
   }
+
 }
 
 
 /* ---------------------------------------------------------
-   FORMAT PHONE
+   22. FORMAT PHONE
    --------------------------------------------------------- */
 
 function formatPhoneNumber(
@@ -932,15 +1390,21 @@ function formatPhoneNumber(
 
 
   return (
-    number.substring(0, 5) +
+    number.substring(
+      0,
+      5
+    ) +
     " " +
-    number.substring(5)
+    number.substring(
+      5
+    )
   );
+
 }
 
 
 /* ---------------------------------------------------------
-   FORMAT DATE
+   23. FORMAT DATE
    --------------------------------------------------------- */
 
 function formatCurrentDate() {
@@ -953,25 +1417,37 @@ function formatCurrentDate() {
     .toLocaleDateString(
       "en-IN",
       {
-        day: "2-digit",
-        month: "long",
-        year: "numeric"
+
+        day:
+          "2-digit",
+
+        month:
+          "long",
+
+        year:
+          "numeric"
+
       }
     )
     .toUpperCase();
+
 }
 
 
 /* ---------------------------------------------------------
-   WHATSAPP
+   24. WHATSAPP
    --------------------------------------------------------- */
 
 whatsappButton.addEventListener(
   "click",
   function () {
 
-    if (!currentCustomer) {
+    if (
+      !currentCustomer
+    ) {
+
       return;
+
     }
 
 
@@ -1034,7 +1510,7 @@ whatsappButton.addEventListener(
 
 
 /* ---------------------------------------------------------
-   NEW WALK-IN
+   25. NEW WALK-IN
    --------------------------------------------------------- */
 
 newWalkInButton.addEventListener(
@@ -1048,7 +1524,7 @@ newWalkInButton.addEventListener(
 
 
 /* ---------------------------------------------------------
-   RESET FORM
+   26. RESET FORM
    --------------------------------------------------------- */
 
 function resetForm() {
@@ -1056,26 +1532,34 @@ function resetForm() {
   customerNameInput.value =
     "";
 
+
   contactNumberInput.value =
     "";
+
 
   emailInput.value =
     "";
 
+
   instagramInput.value =
     "";
+
 
   categoryInput.value =
     "";
 
+
   staffInput.value =
     "";
+
 
   purchaseStatusInput.value =
     "";
 
+
   followUpDateInput.value =
     "";
+
 
   notesInput.value =
     "";
@@ -1112,17 +1596,25 @@ function resetForm() {
 
 
   window.scrollTo({
-    top: 0,
-    behavior: "smooth"
+
+    top:
+      0,
+
+    behavior:
+      "smooth"
+
   });
 
 
   customerNameInput.focus();
+
 }
 
 
 /* ---------------------------------------------------------
-   INITIALIZE
+   27. INITIALIZE
    --------------------------------------------------------- */
 
 updateRemoveButtons();
+
+loadStaffFromGoogleSheet();
